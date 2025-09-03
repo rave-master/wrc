@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Long Tailed Macaque - Wildlife Information</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-shadow { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .hover-lift { transition: transform 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-5px); }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-16 relative overflow-hidden">
+        <!-- Background Macaque Illustration -->
+        <div class="absolute inset-0 flex items-center justify-end pr-12 opacity-20">
+            <svg class="w-96 h-96" viewBox="0 0 400 400" fill="none">
+                <!-- Macaque Body -->
+                <ellipse cx="200" cy="280" rx="60" ry="80" fill="currentColor"/>
+                
+                <!-- Macaque Head -->
+                <circle cx="200" cy="180" r="50" fill="currentColor"/>
+                
+                <!-- Face Details -->
+                <circle cx="185" cy="170" r="3" fill="rgba(255,255,255,0.8)"/>
+                <circle cx="215" cy="170" r="3" fill="rgba(255,255,255,0.8)"/>
+                <ellipse cx="200" cy="185" rx="8" ry="6" fill="rgba(255,255,255,0.6)"/>
+                
+                <!-- Ears -->
+                <circle cx="165" cy="160" r="12" fill="currentColor"/>
+                <circle cx="235" cy="160" r="12" fill="currentColor"/>
+                
+                <!-- Arms -->
+                <ellipse cx="150" cy="250" rx="15" ry="40" fill="currentColor" transform="rotate(-20 150 250)"/>
+                <ellipse cx="250" cy="250" rx="15" ry="40" fill="currentColor" transform="rotate(20 250 250)"/>
+                
+                <!-- Legs -->
+                <ellipse cx="175" cy="340" rx="12" ry="35" fill="currentColor"/>
+                <ellipse cx="225" cy="340" rx="12" ry="35" fill="currentColor"/>
+                
+                <!-- Long Tail (curved) -->
+                <path d="M 240 320 Q 280 300 320 280 Q 360 260 380 240 Q 390 220 385 200" 
+                      stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round"/>
+                
+                <!-- Hands -->
+                <circle cx="135" cy="285" r="8" fill="currentColor"/>
+                <circle cx="265" cy="285" r="8" fill="currentColor"/>
+                
+                <!-- Feet -->
+                <ellipse cx="175" cy="380" rx="10" ry="6" fill="currentColor"/>
+                <ellipse cx="225" cy="380" rx="10" ry="6" fill="currentColor"/>
+                
+                <!-- Facial features -->
+                <path d="M 190 190 Q 200 195 210 190" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none"/>
+            </svg>
+        </div>
+        
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="mb-6">
+                <svg class="w-20 h-20 mx-auto mb-4 text-white opacity-90" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+            </div>
+            <h1 class="text-5xl font-bold mb-4">Long Tailed Macaque</h1>
+            <p class="text-xl opacity-90 mb-2"><em>Macaca fascicularis</em></p>
+            <p class="text-lg opacity-80">Class: Mammalia</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <!-- Quick Stats -->
+        <div class="bg-white rounded-xl card-shadow p-8 mb-12">
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="border-r border-gray-200 last:border-r-0">
+                    <div class="text-3xl font-bold text-green-600 mb-2">5-9kg</div>
+                    <div class="text-gray-600">Male Weight</div>
+                </div>
+                <div class="border-r border-gray-200 last:border-r-0">
+                    <div class="text-3xl font-bold text-purple-600 mb-2">3-6kg</div>
+                    <div class="text-gray-600">Female Weight</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-blue-600 mb-2">🌏</div>
+                    <div class="text-gray-600">Southeast Asia</div>
+                    <div class="text-sm text-gray-500 mt-1">Wide distribution</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Physical Characteristics -->
+        <section class="bg-white rounded-xl card-shadow mb-8 hover-lift">
+            <div class="p-8 cursor-pointer" onclick="toggleDropdown('physical')">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">Physical Characteristics</h2>
+                    </div>
+                    <svg id="physical-arrow" class="w-6 h-6 text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </div>
+            </div>
+            <div id="physical-content" class="hidden px-8 pb-8">
+                <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+                    <p>The Long Tailed Macaque is a <strong>medium-sized Old World monkey</strong> with distinctive features that make it easily recognizable in its natural habitat.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mt-6">
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="font-semibold text-gray-800 mb-3">Body Structure</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li>• Slender body with long limbs</li>
+                                <li>• Tail often as long as body length</li>
+                                <li>• Brownish grey fur with lighter underparts</li>
+                                <li>• Hairless, pinkish face</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="font-semibold text-gray-800 mb-3">Sexual Dimorphism</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li>• Males: 5-9 kg body weight</li>
+                                <li>• Females: 3-6 kg body weight</li>
+                                <li>• Males develop cheek whiskers</li>
+                                <li>• Larger canine teeth in males</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <p class="mt-4">Notable facial features include <strong>distinct brow ridges</strong> and <strong>expressive eyes</strong> that contribute to their complex social communication.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Habitat and Distribution -->
+        <section class="bg-white rounded-xl card-shadow mb-8 hover-lift">
+            <div class="p-8 cursor-pointer" onclick="toggleDropdown('habitat')">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">Habitat & Distribution</h2>
+                    </div>
+                    <svg id="habitat-arrow" class="w-6 h-6 text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </div>
+            </div>
+            <div id="habitat-content" class="hidden px-8 pb-8">
+                <div class="prose prose-lg max-w-none text-gray-700">
+                    <p>Long Tailed Macaques have an <strong>extensive range throughout Southeast Asia</strong>, demonstrating remarkable adaptability to various environments.</p>
+                    
+                    <div class="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg mt-6">
+                        <h3 class="font-semibold text-gray-800 mb-4">Geographic Range</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2">Countries:</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm">Philippines</span>
+                                    <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm">Indonesia</span>
+                                    <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm">Malaysia</span>
+                                    <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm">Thailand</span>
+                                    <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm">Cambodia</span>
+                                    <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm">Vietnam</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2">Habitat Types:</h4>
+                                <ul class="space-y-1 text-gray-600">
+                                    <li>🌊 Mangroves</li>
+                                    <li>🌲 Coastal forests</li>
+                                    <li>🏞️ Riverine areas</li>
+                                    <li>🌾 Plantations</li>
+                                    <li>🏙️ Urban environments</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Diet -->
+        <section class="bg-white rounded-xl card-shadow mb-8 hover-lift">
+            <div class="p-8 cursor-pointer" onclick="toggleDropdown('diet')">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">Diet & Feeding Behavior</h2>
+                    </div>
+                    <svg id="diet-arrow" class="w-6 h-6 text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </div>
+            </div>
+            <div id="diet-content" class="hidden px-8 pb-8">
+                <div class="prose prose-lg max-w-none text-gray-700">
+                    <p>Long Tailed Macaques are <strong>omnivorous and highly opportunistic</strong> feeders, adapting their diet based on seasonal availability and habitat.</p>
+                    
+                    <div class="grid md:grid-cols-3 gap-6 mt-6">
+                        <div class="text-center p-6 bg-yellow-50 rounded-lg">
+                            <div class="text-4xl mb-3">🍎</div>
+                            <h3 class="font-semibold text-gray-800 mb-2">Plant Matter</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>Fruits</li>
+                                <li>Seeds</li>
+                                <li>Leaves</li>
+                                <li>Flowers</li>
+                            </ul>
+                        </div>
+                        <div class="text-center p-6 bg-red-50 rounded-lg">
+                            <div class="text-4xl mb-3">🦐</div>
+                            <h3 class="font-semibold text-gray-800 mb-2">Animal Protein</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>Insects</li>
+                                <li>Crabs</li>
+                                <li>Small vertebrates</li>
+                                <li>Marine invertebrates</li>
+                            </ul>
+                        </div>
+                        <div class="text-center p-6 bg-blue-50 rounded-lg">
+                            <div class="text-4xl mb-3">🍕</div>
+                            <h3 class="font-semibold text-gray-800 mb-2">Human Food</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>Provided food</li>
+                                <li>Agricultural crops</li>
+                                <li>Urban scraps</li>
+                                <li>Tourist offerings</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Danger Warning -->
+        <section class="bg-red-50 border-l-4 border-red-400 rounded-xl mb-8">
+            <div class="p-8 cursor-pointer" onclick="toggleDropdown('safety')">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-bold text-red-800">⚠️ Safety Warning</h2>
+                    </div>
+                    <svg id="safety-arrow" class="w-6 h-6 text-red-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </div>
+            </div>
+            <div id="safety-content" class="hidden px-8 pb-8">
+                <div class="prose prose-lg max-w-none text-red-800">
+                    <p class="font-semibold mb-4">Long Tailed Macaques pose significant risks to human safety and should be approached with extreme caution.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-lg border border-red-200">
+                            <h3 class="font-semibold text-red-800 mb-3">🚨 Aggressive Behavior</h3>
+                            <ul class="space-y-2 text-red-700">
+                                <li>• Can be aggressive when habituated to humans</li>
+                                <li>• Known to bite and scratch when threatened</li>
+                                <li>• Compete aggressively for food resources</li>
+                                <li>• Raid crops and steal food from humans</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg border border-red-200">
+                            <h3 class="font-semibold text-red-800 mb-3">🦠 Disease Transmission</h3>
+                            <ul class="space-y-2 text-red-700">
+                                <li>• Can transmit <strong>Herpes B virus</strong></li>
+                                <li>• Potential carriers of <strong>rabies</strong></li>
+                                <li>• Other zoonotic diseases possible</li>
+                                <li>• Close interactions are health risks</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-red-100 p-4 rounded-lg mt-6">
+                        <p class="font-semibold text-red-800">⚠️ Important: Maintain safe distance and never attempt to feed or interact directly with Long Tailed Macaques.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conservation Status -->
+        <section class="bg-white rounded-xl card-shadow">
+            <div class="p-8 cursor-pointer" onclick="toggleDropdown('conservation')">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">Conservation & Research</h2>
+                    </div>
+                    <svg id="conservation-arrow" class="w-6 h-6 text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </div>
+            </div>
+            <div id="conservation-content" class="hidden px-8 pb-8">
+                <div class="text-center">
+                    <p class="text-gray-600 mb-6">Continued monitoring and conservation efforts are essential for understanding and protecting Long Tailed Macaque populations throughout their range.</p>
+                    
+                    <div class="bg-gradient-to-r from-purple-100 to-blue-100 p-6 rounded-lg">
+                        <p class="text-gray-700 italic">"Understanding the behavior and distribution of Long Tailed Macaques is crucial for both wildlife conservation and human-wildlife conflict management in Southeast Asia."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400">Wildlife Information Database • Long Tailed Macaque (<em>Macaca fascicularis</em>)</p>
+            <p class="text-gray-500 text-sm mt-2">For educational and research purposes</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDropdown(sectionId) {
+            const content = document.getElementById(sectionId + '-content');
+            const arrow = document.getElementById(sectionId + '-arrow');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Optional: Close other dropdowns when opening a new one
+        function toggleDropdownExclusive(sectionId) {
+            const sections = ['physical', 'habitat', 'diet', 'safety', 'conservation'];
+            
+            sections.forEach(section => {
+                const content = document.getElementById(section + '-content');
+                const arrow = document.getElementById(section + '-arrow');
+                
+                if (section === sectionId) {
+                    if (content.classList.contains('hidden')) {
+                        content.classList.remove('hidden');
+                        arrow.style.transform = 'rotate(180deg)';
+                    } else {
+                        content.classList.add('hidden');
+                        arrow.style.transform = 'rotate(0deg)';
+                    }
+                } else {
+                    content.classList.add('hidden');
+                    arrow.style.transform = 'rotate(0deg)';
+                }
+            });
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9793ea3f978dfc92',t:'MTc1Njg4ODU0MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
