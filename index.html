@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wildlife Rescue Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -238,7 +240,9 @@
                     candidateForRelease: row['Candidate for Release'] || '',
                     deceased: row['Deceased'] || '',
                     deathDate: row['Date'] || '',
-                    causeOfDeath: row['Probable Cause of Death'] || ''
+                    causeOfDeath: row['Probable Cause of Death'] || '',
+                    releaseDate: row['Release Date'] || '',
+                    releaseLocation: row['Release Location'] || ''
                 }));
 
                 filteredData = [...allData];
@@ -406,6 +410,14 @@
                                         <span class="text-gray-600">Current Status:</span>
                                         <span class="font-medium ${animal.deceased === 'Yes' ? 'text-red-600' : 'text-green-600'}">${animal.deceased === 'Yes' ? 'Deceased' : 'Alive'}</span>
                                     </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Release Date:</span>
+                                        <span class="font-medium">${animal.releaseDate || 'Not released yet'}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Release Location:</span>
+                                        <span class="font-medium">${animal.releaseLocation || 'Not specified'}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -424,11 +436,77 @@
                             <p><strong>Probable Cause of Death:</strong> ${animal.causeOfDeath || 'N/A'}</p>
                         </div>
                     </div>
+                    
+                    <div class="mt-6 bg-green-50 rounded-lg p-4">
+                        <h3 class="font-semibold text-green-900 mb-3">Release Location</h3>
+                        ${animal.releaseLocation && animal.releaseLocation !== 'Not specified' ? `
+                            <p class="text-sm text-green-700 mb-3"><strong>Location:</strong> ${animal.releaseLocation}</p>
+                            <div class="bg-white rounded-lg overflow-hidden border border-green-200">
+                                <div id="map-${animal.id}" style="height: 200px; width: 100%;"></div>
+                                <div class="p-2 text-xs text-gray-500 bg-gray-50">
+                                    © <a href="https://www.openstreetmap.org/copyright" target="_blank" class="text-blue-600 hover:underline">OpenStreetMap</a> contributors
+                                </div>
+                            </div>
+                        ` : `
+                            <p class="text-sm text-gray-600">No release location recorded yet</p>
+                            <div class="bg-gray-100 rounded-lg p-8 text-center text-gray-400 mt-3">
+                                <p>🗺️</p>
+                                <p class="text-xs mt-2">Map will appear when release location is added</p>
+                            </div>
+                        `}
+                    </div>
                 </div>
             `;
             
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
+            
+            // Initialize map if release location exists
+            if (animal.releaseLocation && animal.releaseLocation !== 'Not specified') {
+                setTimeout(() => {
+                    initializeMap(animal);
+                }, 100);
+            }
+        }
+
+        function initializeMap(animal) {
+            const mapId = `map-${animal.id}`;
+            const mapContainer = document.getElementById(mapId);
+            
+            if (!mapContainer) return;
+            
+            // Parse coordinates from location string
+            let lat = 14.5995; // Default to Manila, Philippines
+            let lng = 120.9842;
+            
+            const location = animal.releaseLocation;
+            
+            // Check if location contains coordinates (format: "lat, lng" or "lat,lng")
+            const coordMatch = location.match(/(-?\d+\.?\d*)\s*,\s*(-?\d+\.?\d*)/);
+            if (coordMatch) {
+                lat = parseFloat(coordMatch[1]);
+                lng = parseFloat(coordMatch[2]);
+            }
+            
+            // Initialize the map
+            const map = L.map(mapId).setView([lat, lng], 10);
+            
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+            
+            // Add marker
+            const marker = L.marker([lat, lng]).addTo(map);
+            
+            // Add popup with location info
+            marker.bindPopup(`
+                <div class="text-center">
+                    <strong>${animal.commonName}</strong><br>
+                    <small>Release Location</small><br>
+                    ${location}
+                </div>
+            `).openPopup();
         }
 
         function closeModal() {
@@ -477,5 +555,5 @@
         // Load data on page load
         loadData();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9792cb25d00dfc92',t:'MTc1Njg3Njc4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9793411ca7c0fc92',t:'MTc1Njg4MTYxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
