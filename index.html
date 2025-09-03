@@ -131,6 +131,18 @@
         </div>
     </div>
 
+    <!-- Species Information Modal -->
+    <div id="speciesModal" class="fixed inset-0 z-60 hidden">
+        <div class="modal-backdrop bg-black/60 absolute inset-0" onclick="closeSpeciesModal()"></div>
+        <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+                <div id="speciesModalContent">
+                    <!-- Species modal content will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         let allData = [];
         let filteredData = [];
@@ -163,15 +175,21 @@
                 const char = line[i];
                 
                 if (char === '"') {
-                    inQuotes = !inQuotes;
+                    if (inQuotes && line[i + 1] === '"') {
+                        // Handle escaped quotes
+                        current += '"';
+                        i++; // Skip next quote
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
                 } else if (char === ',' && !inQuotes) {
-                    result.push(current.trim());
+                    result.push(current.trim().replace(/^"|"$/g, ''));
                     current = '';
                 } else {
                     current += char;
                 }
             }
-            result.push(current.trim());
+            result.push(current.trim().replace(/^"|"$/g, ''));
             return result;
         }
 
@@ -204,25 +222,27 @@
                 // If no data loaded, use comprehensive sample data
                 if (!dataLoaded) {
                     console.log('Using sample data for demonstration');
-                    csvText = `Year Turned-Over,Day-Month Turned-Over,Acceptance Form Number,Sex,Common Name,Scientific Name,Photo,Nickname (if any),Cage No.,Health Status,Remarks,Candidate for Release,Deceased,Date,Probable Cause of Death
-2019,24-May,WRC-D-005-2019-23,Male,Long Tailed Macaque,Macaca fascicularis,https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=300&h=200&fit=crop,Charlie,24,Critical II,Injured left arm from trap,Not Yet,No,,
-2019,2-Aug,WRC-D-008-2019-37,Male,Long Tailed Macaque,Macaca fascicularis,https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=300&h=200&fit=crop,Junjun,26,Critical I,Severe dehydration and malnutrition,Not Yet,No,,
-2020,15-Mar,WRC-D-012-2020-45,Female,Philippine Eagle,Pithecophaga jefferyi,https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=300&h=200&fit=crop,Aguila,12,Stable,Recovering well from wing injury,Yes,No,,
-2020,8-Jun,WRC-D-018-2020-52,Male,Tarsier,Carlito syrichta,https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop,Tiny,8,Recovering,Good progress with eye treatment,Not Yet,No,,
-2021,12-Jan,WRC-D-003-2021-15,Female,Binturong,Arctictis binturong,https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop,Blackie,15,Critical I,Needs intensive care for respiratory issues,Not Yet,No,,
-2021,5-Apr,WRC-D-007-2021-28,Female,Philippine Deer,Rusa marianna,https://images.unsplash.com/photo-1551892374-ecf8754cf8b0?w=300&h=200&fit=crop,Bambi,3,Stable,Orphaned fawn doing well,Yes,No,,
-2021,18-Jul,WRC-D-011-2021-34,Male,Monitor Lizard,Varanus salvator,https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop,Rex,19,Recovering,Tail injury healing nicely,Not Yet,No,,
-2022,3-Feb,WRC-D-002-2022-08,Female,Flying Lemur,Cynocephalus volans,https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop,Glider,7,Critical II,Electrocution from power lines,Not Yet,No,,
-2022,14-May,WRC-D-009-2022-41,Male,Pangolin,Manis javanica,https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop,Armor,22,Stable,Rescued from illegal trade,Yes,No,,
-2022,29-Aug,WRC-D-015-2022-56,Female,Hornbill,Buceros hydrocorax,https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=300&h=200&fit=crop,Bella,11,Recovering,Broken beak repair successful,Not Yet,No,,
-2023,10-Jan,WRC-D-001-2023-03,Male,Civet Cat,Paradoxurus hermaphroditus,https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop,Shadow,16,Critical I,Hit by vehicle severe internal injuries,Not Yet,Yes,15-Jan-2023,Internal bleeding
-2023,22-Mar,WRC-D-006-2023-19,Female,Sea Turtle,Chelonia mydas,https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300&h=200&fit=crop,Marina,1,Stable,Plastic ingestion treated successfully,Yes,No,,
-2023,7-Jun,WRC-D-010-2023-33,Male,Fruit Bat,Pteropus vampyrus,https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop,Batman,5,Recovering,Wing membrane tear healing well,Not Yet,No,,
-2023,19-Sep,WRC-D-014-2023-47,Female,Wild Boar,Sus scrofa,https://images.unsplash.com/photo-1551892374-ecf8754cf8b0?w=300&h=200&fit=crop,Wilma,20,Critical II,Snare trap wounds on legs,Not Yet,No,,
-2024,4-Feb,WRC-D-004-2024-12,Male,Reticulated Python,Malayopython reticulatus,https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop,Monty,25,Stable,Skin infection cleared up,Yes,No,,`;
+                    csvText = `"Year Turned-Over","Day-Month Turned-Over","Acceptance Form Number","Sex","Common Name","Scientific Name","Photo","Nickname (if any)","Cage No.","Health Status","Remarks","Candidate for Release","Deceased","Date","Probable Cause of Death","Release Date","Release Location","Turned-Over By","Office/Address","Species Description","Biogeography Staus","IUCN Status","Medical Treatments Administered","Manner of Release"
+"2019","24-May","WRC-D-005-2019-23","Male","Long Tailed Macaque","Macaca fascicularis","https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=300&h=200&fit=crop","Charlie","24","Critical II","Injured left arm from trap","Not Yet","No","","","","","Dr. Maria Santos","Barangay Health Center Quezon City","https://en.wikipedia.org/wiki/Crab-eating_macaque","Endemic","Least Concern","Antibiotics wound cleaning pain management",""
+"2019","2-Aug","WRC-D-008-2019-37","Male","Long Tailed Macaque","Macaca fascicularis","https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=300&h=200&fit=crop","Junjun","26","Critical I","Severe dehydration and malnutrition","Not Yet","No","","","","","Local Farmer Juan Cruz","Sitio Malaki Laguna","Medium-sized primate with long tail highly adaptable to various habitats","Endemic","Least Concern","IV fluids nutritional support electrolyte balance",""
+"2020","15-Mar","WRC-D-012-2020-45","Female","Philippine Eagle","Pithecophaga jefferyi","https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=300&h=200&fit=crop","Aguila","12","Stable","Recovering well from wing injury","Yes","No","","","15-Apr-2020","14.2456 121.0467","DENR Officer Rodriguez","DENR Regional Office IV-A","https://en.wikipedia.org/wiki/Philippine_eagle","Endemic","Critically Endangered","Wing splinting anti-inflammatory drugs physical therapy","Soft release with monitoring"
+"2020","8-Jun","WRC-D-018-2020-52","Male","Tarsier","Carlito syrichta","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Tiny","8","Recovering","Good progress with eye treatment","Not Yet","No","","","","","Wildlife Photographer Ana Reyes","Bohol Tourism Office","https://en.wikipedia.org/wiki/Philippine_tarsier","Endemic","Near Threatened","Eye drops antibiotic treatment dietary supplements",""
+"2021","12-Jan","WRC-D-003-2021-15","Female","Binturong","Arctictis binturong","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Blackie","15","Critical I","Needs intensive care for respiratory issues","Not Yet","No","","","","","Park Ranger Miguel Torres","Subic Bay Forest Reserve","https://en.wikipedia.org/wiki/Binturong","Native","Vulnerable","Respiratory therapy oxygen support bronchodilators",""
+"2021","5-Apr","WRC-D-007-2021-28","Female","Philippine Deer","Rusa marianna","https://images.unsplash.com/photo-1551892374-ecf8754cf8b0?w=300&h=200&fit=crop","Bambi","3","Stable","Orphaned fawn doing well","Yes","No","","","22-May-2021","13.7565 121.0583","Concerned Citizen Lisa Garcia","Barangay San Isidro Batangas","Medium-sized deer species endemic to the Philippines","Endemic","Vulnerable","Milk formula vaccination deworming","Direct release to protected area"
+"2021","18-Jul","WRC-D-011-2021-34","Male","Monitor Lizard","Varanus salvator","https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop","Rex","19","Recovering","Tail injury healing nicely","Not Yet","No","","","","","Fisherman Roberto Dela Cruz","Coastal Barangay Palawan","Large semi-aquatic lizard excellent swimmer and climber","Native","Least Concern","Wound care antibiotics calcium supplements",""
+"2022","3-Feb","WRC-D-002-2022-08","Female","Flying Lemur","Cynocephalus volans","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Glider","7","Critical II","Electrocution from power lines","Not Yet","No","","","","","Electric Company Worker Carlos Mendez","Meralco Substation Manila","Gliding mammal with membrane between limbs strictly arboreal","Endemic","Least Concern","Burn treatment pain management fluid therapy",""
+"2022","14-May","WRC-D-009-2022-41","Male","Pangolin","Manis javanica","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Armor","22","Stable","Rescued from illegal trade","Yes","No","","","8-Jun-2022","14.6760 121.0437","NBI Agent Patricia Lim","National Bureau of Investigation","Scaly anteater with protective armor feeds exclusively on ants and termites","Native","Critically Endangered","Stress reduction therapy proper diet health monitoring","Soft release with GPS tracking"
+"2022","29-Aug","WRC-D-015-2022-56","Female","Hornbill","Buceros hydrocorax","https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=300&h=200&fit=crop","Bella","11","Recovering","Broken beak repair successful","Not Yet","No","","","","","Forest Guard Elena Ramos","Mt. Makiling Forest Reserve","Large frugivorous bird with distinctive casque important seed disperser","Endemic","Near Threatened","Beak reconstruction surgery antibiotics nutritional support",""
+"2023","10-Jan","WRC-D-001-2023-03","Male","Civet Cat","Paradoxurus hermaphroditus","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Shadow","16","Critical I","Hit by vehicle severe internal injuries","Not Yet","Yes","15-Jan-2023","Internal bleeding","","","Veterinarian Dr. Jose Mercado","Animal Hospital Cebu City","Nocturnal omnivore with masked face excellent climber","Native","Least Concern","Emergency surgery blood transfusion intensive care",""
+"2023","22-Mar","WRC-D-006-2023-19","Female","Sea Turtle","Chelonia mydas","https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300&h=200&fit=crop","Marina","1","Stable","Plastic ingestion treated successfully","Yes","No","","","10-Apr-2023","14.5906 120.9777","Marine Biologist Dr. Sarah Chen","Marine Science Institute UP Diliman","Large marine reptile herbivorous as adult important for marine ecosystems","Migratory","Endangered","Endoscopic plastic removal rehydration dietary rehabilitation","Beach release with satellite tag"
+"2023","7-Jun","WRC-D-010-2023-33","Male","Fruit Bat","Pteropus vampyrus","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Batman","5","Recovering","Wing membrane tear healing well","Not Yet","No","","","","","Cave Explorer Mark Johnson","Philippine Speleological Society","Large fruit bat with 1.5m wingspan important pollinator and seed disperser","Native","Near Threatened","Wing membrane repair antibiotics flight rehabilitation",""
+"2023","19-Sep","WRC-D-014-2023-47","Female","Wild Boar","Sus scrofa","https://images.unsplash.com/photo-1551892374-ecf8754cf8b0?w=300&h=200&fit=crop","Wilma","20","Critical II","Snare trap wounds on legs","Not Yet","No","","","","","Hunter Association Rep. Tony Valdez","Hunters Association Mindanao","Omnivorous ungulate important ecosystem engineer","Native","Least Concern","Wound debridement antibiotics physical therapy",""
+"2024","4-Feb","WRC-D-004-2024-12","Male","Reticulated Python","Malayopython reticulatus","https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop","Monty","25","Stable","Skin infection cleared up","Yes","No","","","","","Herpetologist Dr. Amanda Cruz","University of the Philippines Los Baños","Large non-venomous constrictor important predator in ecosystem","Native","Least Concern","Antifungal treatment proper humidity dietary management","Direct release to suitable habitat"`;
                 }
                 
                 const jsonData = parseCSV(csvText);
+                console.log('Parsed CSV data:', jsonData);
+                console.log('First row headers:', Object.keys(jsonData[0] || {}));
                 
                 allData = jsonData.map((row, index) => ({
                     id: index,
@@ -242,7 +262,14 @@
                     deathDate: row['Date'] || '',
                     causeOfDeath: row['Probable Cause of Death'] || '',
                     releaseDate: row['Release Date'] || '',
-                    releaseLocation: row['Release Location'] || ''
+                    releaseLocation: row['Release Location'] || '',
+                    turnedOverBy: row['Turned-Over By'] || '',
+                    officeAddress: row['Office/Address'] || '',
+                    speciesDescription: row['Species Description'] || '',
+                    biogeographyStatus: row['Biogeography Staus'] || '',
+                    iucnStatus: row['IUCN Status'] || '',
+                    medicalTreatments: row['Medical Treatments Administered'] || '',
+                    mannerOfRelease: row['Manner of Release'] || ''
                 }));
 
                 filteredData = [...allData];
@@ -392,6 +419,20 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            <div class="bg-purple-50 rounded-lg p-4">
+                                <h3 class="font-semibold text-purple-900 mb-3">Submission Details</h3>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between">
+                                        <span class="text-purple-600">Turned-Over By:</span>
+                                        <span class="font-medium">${animal.turnedOverBy || 'Not recorded'}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-purple-600">Office/Address:</span>
+                                        <span class="font-medium">${animal.officeAddress || 'Not specified'}</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         
                         <div class="space-y-4">
@@ -415,12 +456,64 @@
                                         <span class="font-medium">${animal.releaseDate || 'Not released yet'}</span>
                                     </div>
                                     <div class="flex justify-between">
+                                        <span class="text-gray-600">Manner of Release:</span>
+                                        <span class="font-medium">${animal.mannerOfRelease || 'Not specified'}</span>
+                                    </div>
+                                    <div class="flex justify-between">
                                         <span class="text-gray-600">Release Location:</span>
                                         <span class="font-medium">${animal.releaseLocation || 'Not specified'}</span>
                                     </div>
                                 </div>
                             </div>
+                            
+                            <div class="bg-orange-50 rounded-lg p-4">
+                                <h3 class="font-semibold text-orange-900 mb-3">Conservation Status</h3>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between">
+                                        <span class="text-orange-600">Biogeography Status:</span>
+                                        <span class="font-medium">${animal.biogeographyStatus || 'Not assessed'}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-orange-600">IUCN Status:</span>
+                                        <span class="font-medium">${animal.iucnStatus || 'Not listed'}</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                    
+                    <div class="mt-6 bg-teal-50 rounded-lg p-4">
+                        <h3 class="font-semibold text-teal-900 mb-2">Species Description</h3>
+                        ${animal.speciesDescription && animal.speciesDescription !== '-' && animal.speciesDescription.startsWith('http') ? `
+                            <div class="flex items-center space-x-2">
+                                <a href="${animal.speciesDescription}" target="_blank" rel="noopener noreferrer" 
+                                   class="text-sm text-teal-600 hover:text-teal-800 underline hover:no-underline transition-colors flex items-center space-x-1">
+                                    <span>View detailed species information</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        ` : `
+                            <p class="text-sm text-teal-700">${animal.speciesDescription && animal.speciesDescription !== '-' ? animal.speciesDescription : 'No species description available'}</p>
+                        `}
+                    </div>
+                    
+                    <div class="mt-6 bg-indigo-50 rounded-lg p-4">
+                        <h3 class="font-semibold text-indigo-900 mb-2">Medical Treatments Administered</h3>
+                        ${animal.medicalTreatments && animal.medicalTreatments !== '-' && animal.medicalTreatments.startsWith('http') ? `
+                            <div class="flex items-center space-x-2">
+                                <a href="${animal.medicalTreatments}" target="_blank" rel="noopener noreferrer" 
+                                   class="text-sm text-indigo-600 hover:text-indigo-800 underline hover:no-underline transition-colors flex items-center space-x-1">
+                                    <span>View detailed medical treatment information</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        ` : `
+                            <p class="text-sm text-indigo-700">${animal.medicalTreatments && animal.medicalTreatments !== '-' ? animal.medicalTreatments : 'No medical treatments recorded'}</p>
+                        `}
                     </div>
                     
                     <div class="mt-6 bg-blue-50 rounded-lg p-4">
@@ -514,6 +607,116 @@
             document.body.style.overflow = 'auto';
         }
 
+        function openSpeciesModal(url, commonName, scientificName) {
+            const modal = document.getElementById('speciesModal');
+            const content = document.getElementById('speciesModalContent');
+            
+            content.innerHTML = `
+                <div class="relative">
+                    <button onclick="closeSpeciesModal()" class="absolute top-4 right-4 z-10 bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-black/70 transition-colors">
+                        ✕
+                    </button>
+                    <div class="bg-gradient-to-r from-teal-500 to-emerald-600 text-white p-6">
+                        <h2 class="text-2xl font-bold mb-2">${commonName}</h2>
+                        <p class="text-lg italic opacity-90">${scientificName}</p>
+                        <p class="text-sm opacity-75 mt-2">Species Information</p>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <h3 class="font-semibold text-blue-900">Loading Species Information</h3>
+                        </div>
+                        <p class="text-sm text-blue-700 mb-4">Fetching detailed information from external source...</p>
+                        <div class="flex items-center space-x-2">
+                            <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                            <span class="text-sm text-blue-600">Please wait...</span>
+                        </div>
+                    </div>
+                    
+                    <div id="speciesContent" class="min-h-[400px]">
+                        <!-- Content will be loaded here -->
+                    </div>
+                    
+                    <div class="mt-6 bg-gray-50 rounded-lg p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">External Link</h3>
+                        <div class="flex items-center space-x-2">
+                            <a href="${url}" target="_blank" rel="noopener noreferrer" 
+                               class="text-blue-600 hover:text-blue-800 underline hover:no-underline transition-colors flex items-center space-x-1">
+                                <span>Open in new tab</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Source: ${url}</p>
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+            
+            // Load content in iframe
+            setTimeout(() => {
+                loadSpeciesContent(url);
+            }, 500);
+        }
+
+        function loadSpeciesContent(url) {
+            const contentDiv = document.getElementById('speciesContent');
+            
+            // Create iframe to load the external content
+            const iframe = document.createElement('iframe');
+            iframe.src = url;
+            iframe.className = 'w-full h-96 border border-gray-200 rounded-lg';
+            iframe.style.minHeight = '400px';
+            
+            // Handle iframe load events
+            iframe.onload = function() {
+                const loadingDiv = contentDiv.parentElement.querySelector('.bg-blue-50');
+                if (loadingDiv) {
+                    loadingDiv.innerHTML = `
+                        <div class="flex items-center space-x-2 mb-2">
+                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <h3 class="font-semibold text-green-900">Species Information Loaded</h3>
+                        </div>
+                        <p class="text-sm text-green-700">External content loaded successfully below.</p>
+                    `;
+                    loadingDiv.className = 'bg-green-50 rounded-lg p-4 mb-6';
+                }
+            };
+            
+            iframe.onerror = function() {
+                contentDiv.innerHTML = `
+                    <div class="bg-red-50 rounded-lg p-6 text-center">
+                        <svg class="w-12 h-12 text-red-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                        </svg>
+                        <h3 class="text-lg font-semibold text-red-900 mb-2">Unable to Load Content</h3>
+                        <p class="text-sm text-red-700 mb-4">The external website cannot be displayed in this frame due to security restrictions.</p>
+                        <p class="text-xs text-red-600">Please use the "Open in new tab" link above to view the species information.</p>
+                    </div>
+                `;
+                
+                const loadingDiv = contentDiv.parentElement.querySelector('.bg-blue-50');
+                if (loadingDiv) {
+                    loadingDiv.remove();
+                }
+            };
+            
+            contentDiv.appendChild(iframe);
+        }
+
+        function closeSpeciesModal() {
+            document.getElementById('speciesModal').classList.add('hidden');
+        }
+
         function applyFilters() {
             const speciesFilter = document.getElementById('speciesFilter').value;
             const statusFilter = document.getElementById('statusFilter').value;
@@ -549,11 +752,14 @@
 
         // Close modal on escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
+            if (e.key === 'Escape') {
+                closeModal();
+                closeSpeciesModal();
+            }
         });
 
         // Load data on page load
         loadData();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9793411ca7c0fc92',t:'MTc1Njg4MTYxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97943d27b746fc92',t:'MTc1Njg5MTkzNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
