@@ -79,6 +79,7 @@
                             <option value="">All Years</option>
                         </select>
                     </div>
+
                     <button onclick="clearFilters()" class="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg text-sm font-medium text-gray-700 transition-colors">
                         Clear Filters
                     </button>
@@ -135,7 +136,7 @@
                             <p class="text-gray-700">Healthy but still under close observation; may need monitoring to ensure recovery/adaptation</p>
                         </div>
                         <div class="flex items-start space-x-3">
-                            <span class="px-2 py-1 rounded-full text-xs font-medium text-white bg-emerald-600 flex-shrink-0">Stable II</span>
+                            <span class="px-2 py-1 rounded-full text-xs font-medium text-white status-stable flex-shrink-0">Stable II</span>
                             <p class="text-gray-700">Healthy and stable, exhibiting normal activity and behavior; ready for release</p>
                         </div>
                     </div>
@@ -325,55 +326,57 @@
         // Load and parse CSV data
         async function loadData() {
             try {
-                // Try multiple endpoints for better compatibility
+                // Try multiple URLs for the CSV data
                 const urls = [
                     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtbl6w2Cu44Sj3NocFki0q43pIkSIYKNpDMHpLy_IzqeAv3MEZzioXuZsarU7tmFvbtq-qIsBmVq4L/pub?gid=0&single=true&output=csv',
                     'https://docs.google.com/spreadsheets/d/1tbl6w2Cu44Sj3NocFki0q43pIkSIYKNpDMHpLy_IzqeAv3M/export?format=csv&gid=0'
                 ];
                 
                 let csvText = '';
-                let dataLoaded = false;
                 
+                // Try each URL until one works
                 for (const url of urls) {
                     try {
+                        console.log('Attempting to load data from:', url);
                         const response = await fetch(url);
                         csvText = await response.text();
+                        
+                        // Check if we got valid CSV data
                         if (csvText && csvText.length > 100 && csvText.includes('Year Turned-Over')) {
-                            dataLoaded = true;
                             console.log('Successfully loaded data from:', url);
                             break;
                         }
                     } catch (e) {
-                        console.log('Failed to load from:', url);
+                        console.log('Failed to load from:', url, e);
                     }
                 }
                 
-                // If no data loaded, use comprehensive sample data
-                if (!dataLoaded) {
-                    console.log('Using sample data for demonstration');
+                // If no data loaded from external sources, use sample data
+                if (!csvText || csvText.length < 100 || !csvText.includes('Year Turned-Over')) {
+                    console.log('No data loaded from external sources, using sample data for demonstration');
                     csvText = `"Year Turned-Over","Day-Month Turned-Over","Acceptance Form Number","Sex","Common Name","Scientific Name","Photo","Nickname (if any)","Cage No.","Health Status","Remarks","Candidate for Release","Deceased","Date","Probable Cause of Death","Release Date","Release Location","Turned-Over By","Office/Address","Species Description","Biogeography Staus","IUCN Status","Medical Treatments Administered","Manner of Release"
-"2019","24-May","WRC-D-005-2019-23","Male","Long Tailed Macaque","Macaca fascicularis","https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=300&h=200&fit=crop","Charlie","24","Critical II","Injured left arm from trap","Not Yet","No","","","","","Dr. Maria Santos","Barangay Health Center Quezon City","https://en.wikipedia.org/wiki/Crab-eating_macaque","Endemic","Least Concern","Antibiotics wound cleaning pain management",""
-"2019","2-Aug","WRC-D-008-2019-37","Male","Long Tailed Macaque","Macaca fascicularis","https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=300&h=200&fit=crop","Junjun","26","Critical I","Severe dehydration and malnutrition","Not Yet","No","","","","","Local Farmer Juan Cruz","Sitio Malaki Laguna","Medium-sized primate with long tail highly adaptable to various habitats","Endemic","Least Concern","IV fluids nutritional support electrolyte balance",""
-"2020","15-Mar","WRC-D-012-2020-45","Female","Philippine Eagle","Pithecophaga jefferyi","https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=300&h=200&fit=crop","Aguila","12","Stable","Recovering well from wing injury","Yes","No","","","15-Apr-2020","14.2456 121.0467","DENR Officer Rodriguez","DENR Regional Office IV-A","https://en.wikipedia.org/wiki/Philippine_eagle","Endemic","Critically Endangered","Wing splinting anti-inflammatory drugs physical therapy","Soft release with monitoring"
-"2020","8-Jun","WRC-D-018-2020-52","Male","Tarsier","Carlito syrichta","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Tiny","8","Recovering","Good progress with eye treatment","Not Yet","No","","","","","Wildlife Photographer Ana Reyes","Bohol Tourism Office","https://en.wikipedia.org/wiki/Philippine_tarsier","Endemic","Near Threatened","Eye drops antibiotic treatment dietary supplements",""
-"2021","12-Jan","WRC-D-003-2021-15","Female","Binturong","Arctictis binturong","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Blackie","15","Critical I","Needs intensive care for respiratory issues","Not Yet","No","","","","","Park Ranger Miguel Torres","Subic Bay Forest Reserve","https://en.wikipedia.org/wiki/Binturong","Native","Vulnerable","Respiratory therapy oxygen support bronchodilators",""
-"2021","5-Apr","WRC-D-007-2021-28","Female","Philippine Deer","Rusa marianna","https://images.unsplash.com/photo-1551892374-ecf8754cf8b0?w=300&h=200&fit=crop","Bambi","3","Stable","Orphaned fawn doing well","Yes","No","","","22-May-2021","13.7565 121.0583","Concerned Citizen Lisa Garcia","Barangay San Isidro Batangas","Medium-sized deer species endemic to the Philippines","Endemic","Vulnerable","Milk formula vaccination deworming","Direct release to protected area"
-"2021","18-Jul","WRC-D-011-2021-34","Male","Monitor Lizard","Varanus salvator","https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop","Rex","19","Recovering","Tail injury healing nicely","Not Yet","No","","","","","Fisherman Roberto Dela Cruz","Coastal Barangay Palawan","Large semi-aquatic lizard excellent swimmer and climber","Native","Least Concern","Wound care antibiotics calcium supplements",""
-"2022","3-Feb","WRC-D-002-2022-08","Female","Flying Lemur","Cynocephalus volans","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Glider","7","Critical II","Electrocution from power lines","Not Yet","No","","","","","Electric Company Worker Carlos Mendez","Meralco Substation Manila","Gliding mammal with membrane between limbs strictly arboreal","Endemic","Least Concern","Burn treatment pain management fluid therapy",""
-"2022","14-May","WRC-D-009-2022-41","Male","Pangolin","Manis javanica","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Armor","22","Stable","Rescued from illegal trade","Yes","No","","","8-Jun-2022","14.6760 121.0437","NBI Agent Patricia Lim","National Bureau of Investigation","Scaly anteater with protective armor feeds exclusively on ants and termites","Native","Critically Endangered","Stress reduction therapy proper diet health monitoring","Soft release with GPS tracking"
-"2022","29-Aug","WRC-D-015-2022-56","Female","Hornbill","Buceros hydrocorax","https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=300&h=200&fit=crop","Bella","11","Recovering","Broken beak repair successful","Not Yet","No","","","","","Forest Guard Elena Ramos","Mt. Makiling Forest Reserve","Large frugivorous bird with distinctive casque important seed disperser","Endemic","Near Threatened","Beak reconstruction surgery antibiotics nutritional support",""
-"2023","10-Jan","WRC-D-001-2023-03","Male","Civet Cat","Paradoxurus hermaphroditus","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Shadow","16","Critical I","Hit by vehicle severe internal injuries","Not Yet","Yes","15-Jan-2023","Internal bleeding","","","Veterinarian Dr. Jose Mercado","Animal Hospital Cebu City","Nocturnal omnivore with masked face excellent climber","Native","Least Concern","Emergency surgery blood transfusion intensive care",""
-"2023","22-Mar","WRC-D-006-2023-19","Female","Sea Turtle","Chelonia mydas","https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300&h=200&fit=crop","Marina","1","Stable","Plastic ingestion treated successfully","Yes","No","","","10-Apr-2023","14.5906 120.9777","Marine Biologist Dr. Sarah Chen","Marine Science Institute UP Diliman","Large marine reptile herbivorous as adult important for marine ecosystems","Migratory","Endangered","Endoscopic plastic removal rehydration dietary rehabilitation","Beach release with satellite tag"
-"2023","7-Jun","WRC-D-010-2023-33","Male","Fruit Bat","Pteropus vampyrus","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Batman","5","Recovering","Wing membrane tear healing well","Not Yet","No","","","","","Cave Explorer Mark Johnson","Philippine Speleological Society","Large fruit bat with 1.5m wingspan important pollinator and seed disperser","Native","Near Threatened","Wing membrane repair antibiotics flight rehabilitation",""
-"2023","19-Sep","WRC-D-014-2023-47","Female","Wild Boar","Sus scrofa","https://images.unsplash.com/photo-1551892374-ecf8754cf8b0?w=300&h=200&fit=crop","Wilma","20","Critical II","Snare trap wounds on legs","Not Yet","No","","","","","Hunter Association Rep. Tony Valdez","Hunters Association Mindanao","Omnivorous ungulate important ecosystem engineer","Native","Least Concern","Wound debridement antibiotics physical therapy",""
-"2024","4-Feb","WRC-D-004-2024-12","Male","Reticulated Python","Malayopython reticulatus","https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop","Monty","25","Stable","Skin infection cleared up","Yes","No","","","","","Herpetologist Dr. Amanda Cruz","University of the Philippines Los Baños","Large non-venomous constrictor important predator in ecosystem","Native","Least Concern","Antifungal treatment proper humidity dietary management","Direct release to suitable habitat"`;
+"2019","24-May","WRC-D-005-2019-23","Male","Long Tailed Macaque","Macaca fascicularis","https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=300&h=200&fit=crop","Charlie","24","Critical II","Injured left arm from trap","Not Yet","No","","","","","Dr. Maria Santos","Barangay Health Center Quezon City","https://en.wikipedia.org/wiki/Crab-eating_macaque","Endemic","Least Concern","https://example.com/medical-treatments/antibiotics-wound-care","Soft release"
+"2019","2-Aug","WRC-D-008-2019-37","Male","Long Tailed Macaque","Macaca fascicularis","https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=300&h=200&fit=crop","Junjun","26","Critical I","Severe dehydration and malnutrition","Not Yet","No","","","","","Local Farmer Juan Cruz","Sitio Malaki Laguna","Medium-sized primate with long tail highly adaptable to various habitats","Endemic","Least Concern","https://example.com/medical-treatments/iv-fluids-nutrition","Hard release"
+"2020","15-Mar","WRC-D-012-2020-45","Female","Philippine Eagle","Pithecophaga jefferyi","https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=300&h=200&fit=crop","Aguila","12","Stable","Recovering well from wing injury","Yes","No","","","15-Apr-2020","14.2456 121.0467","DENR Officer Rodriguez","DENR Regional Office IV-A","https://en.wikipedia.org/wiki/Philippine_eagle","Endemic","Critically Endangered","https://example.com/medical-treatments/wing-splinting-therapy","Soft release with monitoring"
+"2020","8-Jun","WRC-D-018-2020-52","Male","Tarsier","Carlito syrichta","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Tiny","8","Recovering","Good progress with eye treatment","Not Yet","No","","","","","Wildlife Photographer Ana Reyes","Bohol Tourism Office","https://en.wikipedia.org/wiki/Philippine_tarsier","Endemic","Near Threatened","https://example.com/medical-treatments/eye-drops-antibiotics","Soft release"
+"2021","12-Jan","WRC-D-003-2021-15","Female","Binturong","Arctictis binturong","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Blackie","15","Critical I","Needs intensive care for respiratory issues","Not Yet","No","","","","","Park Ranger Miguel Torres","Subic Bay Forest Reserve","https://en.wikipedia.org/wiki/Binturong","Native","Vulnerable","https://example.com/medical-treatments/respiratory-therapy","Hard release"
+"2021","5-Apr","WRC-D-007-2021-28","Female","Philippine Deer","Rusa marianna","https://images.unsplash.com/photo-1551892374-ecf8754cf8b0?w=300&h=200&fit=crop","Bambi","3","Stable","Orphaned fawn doing well","Yes","No","","","22-May-2021","13.7565 121.0583","Concerned Citizen Lisa Garcia","Barangay San Isidro Batangas","Medium-sized deer species endemic to the Philippines","Endemic","Vulnerable","https://example.com/medical-treatments/milk-formula-vaccination","Direct release to protected area"
+"2021","18-Jul","WRC-D-011-2021-34","Male","Monitor Lizard","Varanus salvator","https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop","Rex","19","Recovering","Tail injury healing nicely","Not Yet","No","","","","","Fisherman Roberto Dela Cruz","Coastal Barangay Palawan","Large semi-aquatic lizard excellent swimmer and climber","Native","Least Concern","https://example.com/medical-treatments/wound-care-antibiotics","Soft release"
+"2022","3-Feb","WRC-D-002-2022-08","Female","Flying Lemur","Cynocephalus volans","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Glider","7","Critical II","Electrocution from power lines","Not Yet","No","","","","","Electric Company Worker Carlos Mendez","Meralco Substation Manila","Gliding mammal with membrane between limbs strictly arboreal","Endemic","Least Concern","https://example.com/medical-treatments/burn-treatment-pain-management","Hard release"
+"2022","14-May","WRC-D-009-2022-41","Male","Pangolin","Manis javanica","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Armor","22","Stable","Rescued from illegal trade","Yes","No","","","8-Jun-2022","14.6760 121.0437","NBI Agent Patricia Lim","National Bureau of Investigation","Scaly anteater with protective armor feeds exclusively on ants and termites","Native","Critically Endangered","https://example.com/medical-treatments/stress-reduction-therapy","Soft release with GPS tracking"
+"2022","29-Aug","WRC-D-015-2022-56","Female","Hornbill","Buceros hydrocorax","https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=300&h=200&fit=crop","Bella","11","Recovering","Broken beak repair successful","Not Yet","No","","","","","Forest Guard Elena Ramos","Mt. Makiling Forest Reserve","Large frugivorous bird with distinctive casque important seed disperser","Endemic","Near Threatened","https://example.com/medical-treatments/beak-reconstruction-surgery","Soft release"
+"2023","10-Jan","WRC-D-001-2023-03","Male","Civet Cat","Paradoxurus hermaphroditus","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Shadow","16","Critical I","Hit by vehicle severe internal injuries","Not Yet","Yes","15-Jan-2023","Internal bleeding","","","Veterinarian Dr. Jose Mercado","Animal Hospital Cebu City","Nocturnal omnivore with masked face excellent climber","Native","Least Concern","https://example.com/medical-treatments/emergency-surgery-blood-transfusion","Hard release"
+"2023","22-Mar","WRC-D-006-2023-19","Female","Sea Turtle","Chelonia mydas","https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300&h=200&fit=crop","Marina","1","Stable","Plastic ingestion treated successfully","Yes","No","","","10-Apr-2023","14.5906 120.9777","Marine Biologist Dr. Sarah Chen","Marine Science Institute UP Diliman","Large marine reptile herbivorous as adult important for marine ecosystems","Migratory","Endangered","https://example.com/medical-treatments/endoscopic-plastic-removal","Beach release with satellite tag"
+"2023","7-Jun","WRC-D-010-2023-33","Male","Fruit Bat","Pteropus vampyrus","https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=300&h=200&fit=crop","Batman","5","Recovering","Wing membrane tear healing well","Not Yet","No","","","","","Cave Explorer Mark Johnson","Philippine Speleological Society","Large fruit bat with 1.5m wingspan important pollinator and seed disperser","Native","Near Threatened","https://example.com/medical-treatments/wing-membrane-repair","Soft release"
+"2023","19-Sep","WRC-D-014-2023-47","Female","Wild Boar","Sus scrofa","https://images.unsplash.com/photo-1551892374-ecf8754cf8b0?w=300&h=200&fit=crop","Wilma","20","Critical II","Snare trap wounds on legs","Not Yet","No","","","","","Hunter Association Rep. Tony Valdez","Hunters Association Mindanao","Omnivorous ungulate important ecosystem engineer","Native","Least Concern","https://example.com/medical-treatments/wound-debridement-antibiotics","Hard release"
+"2024","4-Feb","WRC-D-004-2024-12","Male","Reticulated Python","Malayopython reticulatus","https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop","Monty","25","Stable","Skin infection cleared up","Yes","No","","","","","Herpetologist Dr. Amanda Cruz","University of the Philippines Los Baños","Large non-venomous constrictor important predator in ecosystem","Native","Least Concern","https://example.com/medical-treatments/antifungal-treatment","Direct release to suitable habitat"`;
                 }
                 
-                const jsonData = parseCSV(csvText);
-                console.log('Parsed CSV data:', jsonData);
-                console.log('First row headers:', Object.keys(jsonData[0] || {}));
+                const data = parseCSV(csvText);
+                console.log('Parsed data rows:', data.length);
+                console.log('First row headers:', Object.keys(data[0] || {}));
                 
-                allData = jsonData.map((row, index) => ({
+                allData = data.map((row, index) => ({
                     id: index,
                     year: row['Year Turned-Over'] || '',
                     date: row['Day-Month Turned-Over'] || '',
@@ -435,6 +438,8 @@
                 option.textContent = y;
                 yearSelect.appendChild(option);
             });
+
+
         }
 
         function getStatusClass(status) {
@@ -476,7 +481,7 @@
                             <span>Cage ${animal.cageNo || 'N/A'}</span>
                         </div>
                         <div class="mt-2 text-xs text-gray-500">
-                            ${animal.year} • ${animal.date}
+                            <span>${animal.year} • ${animal.date}</span>
                         </div>
                     </div>
                 `;
@@ -630,18 +635,18 @@
                     
                     <div class="mt-6 bg-indigo-50 rounded-lg p-4">
                         <h3 class="font-semibold text-indigo-900 mb-2">Medical Treatments Administered</h3>
-                        ${animal.medicalTreatments && animal.medicalTreatments !== '-' && animal.medicalTreatments.startsWith('http') ? `
+                        ${animal.medicalTreatments && animal.medicalTreatments !== '-' ? `
                             <div class="flex items-center space-x-2">
                                 <a href="${animal.medicalTreatments}" target="_blank" rel="noopener noreferrer" 
                                    class="text-sm text-indigo-600 hover:text-indigo-800 underline hover:no-underline transition-colors flex items-center space-x-1">
-                                    <span>View detailed medical treatment information</span>
+                                    <span>${animal.medicalTreatments}</span>
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                                     </svg>
                                 </a>
                             </div>
                         ` : `
-                            <p class="text-sm text-indigo-700">${animal.medicalTreatments && animal.medicalTreatments !== '-' ? animal.medicalTreatments : 'No medical treatments recorded'}</p>
+                            <p class="text-sm text-indigo-700">No medical treatments recorded</p>
                         `}
                     </div>
                     
@@ -778,7 +783,7 @@
                                class="text-blue-600 hover:text-blue-800 underline hover:no-underline transition-colors flex items-center space-x-1">
                                 <span>Open in new tab</span>
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                                 </svg>
                             </a>
                         </div>
@@ -895,5 +900,5 @@
         // Load data on page load
         loadData();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979b22f4e47dfed9',t:'MTc1Njk2NDI2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979e5781b59285e6',t:'MTc1Njk5Nzg3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
