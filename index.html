@@ -55,32 +55,161 @@
     <!-- Filters -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-white/50 shadow-lg">
-            <div class="flex flex-wrap gap-4 items-center">
-                <div class="flex items-center space-x-2">
-                    <label class="text-sm font-medium text-gray-700">Species:</label>
-                    <select id="speciesFilter" class="bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                        <option value="">All Species</option>
-                    </select>
+            <div class="flex flex-wrap gap-4 items-center justify-between">
+                <div class="flex flex-wrap gap-4 items-center">
+                    <div class="flex items-center space-x-2">
+                        <label class="text-sm font-medium text-gray-700">Species:</label>
+                        <select id="speciesFilter" class="bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            <option value="">All Species</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <label class="text-sm font-medium text-gray-700">Status:</label>
+                        <select id="statusFilter" class="bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            <option value="">All Status</option>
+                            <option value="Critical I">Critical I</option>
+                            <option value="Critical II">Critical II</option>
+                            <option value="Stable">Stable</option>
+                            <option value="Recovering">Recovering</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <label class="text-sm font-medium text-gray-700">Year:</label>
+                        <select id="yearFilter" class="bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            <option value="">All Years</option>
+                        </select>
+                    </div>
+                    <button onclick="clearFilters()" class="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg text-sm font-medium text-gray-700 transition-colors">
+                        Clear Filters
+                    </button>
                 </div>
-                <div class="flex items-center space-x-2">
-                    <label class="text-sm font-medium text-gray-700">Status:</label>
-                    <select id="statusFilter" class="bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                        <option value="">All Status</option>
-                        <option value="Critical I">Critical I</option>
-                        <option value="Critical II">Critical II</option>
-                        <option value="Stable">Stable</option>
-                        <option value="Recovering">Recovering</option>
-                    </select>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <label class="text-sm font-medium text-gray-700">Year:</label>
-                    <select id="yearFilter" class="bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                        <option value="">All Years</option>
-                    </select>
-                </div>
-                <button onclick="clearFilters()" class="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg text-sm font-medium text-gray-700 transition-colors">
-                    Clear Filters
+                <button onclick="toggleLegend()" class="bg-blue-100 hover:bg-blue-200 px-4 py-2 rounded-lg text-sm font-medium text-blue-700 transition-colors flex items-center space-x-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>Legend</span>
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Legend Panel -->
+    <div id="legendPanel" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6 hidden">
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 border border-blue-200 shadow-lg">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900 flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <span>Legend & Definitions</span>
+                </h3>
+                <button onclick="toggleLegend()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Health Status Legend -->
+                <div class="bg-gradient-to-br from-red-50 to-green-50 rounded-xl p-4">
+                    <h4 class="font-semibold text-gray-900 mb-3 flex items-center space-x-2">
+                        <div class="w-3 h-3 bg-gradient-to-r from-red-500 to-green-500 rounded-full"></div>
+                        <span>Health Status</span>
+                    </h4>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-start space-x-3">
+                            <span class="px-2 py-1 rounded-full text-xs font-medium text-white status-critical-i flex-shrink-0">Critical I</span>
+                            <p class="text-gray-700">Exhibits signs of weakness, visible injuries, etc., under close observation</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="px-2 py-1 rounded-full text-xs font-medium text-white status-critical-ii flex-shrink-0">Critical II</span>
+                            <p class="text-gray-700">Severely debilitated or extremely weak; requires urgent veterinary intervention</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="px-2 py-1 rounded-full text-xs font-medium text-white status-recovering flex-shrink-0">Recovering</span>
+                            <p class="text-gray-700">Improving from previous injury, illness, or weakness; shows signs of healing but not yet fully stable</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="px-2 py-1 rounded-full text-xs font-medium text-white status-stable flex-shrink-0">Stable I</span>
+                            <p class="text-gray-700">Healthy but still under close observation; may need monitoring to ensure recovery/adaptation</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="px-2 py-1 rounded-full text-xs font-medium text-white bg-emerald-600 flex-shrink-0">Stable II</span>
+                            <p class="text-gray-700">Healthy and stable, exhibiting normal activity and behavior; ready for release</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Biogeography Status Legend -->
+                <div class="bg-gradient-to-br from-orange-50 to-purple-50 rounded-xl p-4">
+                    <h4 class="font-semibold text-gray-900 mb-3 flex items-center space-x-2">
+                        <div class="w-3 h-3 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full"></div>
+                        <span>Biogeography Status</span>
+                    </h4>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-start space-x-3">
+                            <span class="px-2 py-1 rounded-full text-xs font-medium bg-orange-600 text-white flex-shrink-0">Endemic</span>
+                            <p class="text-gray-700">Species that are found only in the Philippines and nowhere else in the world</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="px-2 py-1 rounded-full text-xs font-medium bg-blue-600 text-white flex-shrink-0">Native</span>
+                            <p class="text-gray-700">Species that naturally occur in the Philippines but are also distributed in other countries</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="px-2 py-1 rounded-full text-xs font-medium bg-purple-600 text-white flex-shrink-0">Introduced</span>
+                            <p class="text-gray-700">Species not naturally found in the Philippines, brought in through human activity (pet trade, etc.)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Release Methods Legend -->
+                <div class="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-4">
+                    <h4 class="font-semibold text-gray-900 mb-3 flex items-center space-x-2">
+                        <div class="w-3 h-3 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full"></div>
+                        <span>Release Methods</span>
+                    </h4>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-start space-x-3">
+                            <span class="px-2 py-1 rounded-full text-xs font-medium bg-teal-600 text-white flex-shrink-0">Hard Release</span>
+                            <p class="text-gray-700">Direct release into the wild without transitional support or monitoring</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="px-2 py-1 rounded-full text-xs font-medium bg-cyan-600 text-white flex-shrink-0">Soft Release</span>
+                            <p class="text-gray-700">Gradual release with temporary enclosures, feeding support, and close monitoring</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IUCN Conservation Status -->
+                <div class="bg-gradient-to-br from-yellow-50 to-red-50 rounded-xl p-4">
+                    <h4 class="font-semibold text-gray-900 mb-3 flex items-center space-x-2">
+                        <div class="w-3 h-3 bg-gradient-to-r from-yellow-500 to-red-500 rounded-full"></div>
+                        <span>IUCN Conservation Status</span>
+                    </h4>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center space-x-3">
+                            <span class="px-2 py-1 rounded-full text-xs font-medium bg-green-600 text-white flex-shrink-0">LC</span>
+                            <span class="text-gray-700">Least Concern</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="px-2 py-1 rounded-full text-xs font-medium bg-yellow-600 text-white flex-shrink-0">NT</span>
+                            <span class="text-gray-700">Near Threatened</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="px-2 py-1 rounded-full text-xs font-medium bg-orange-600 text-white flex-shrink-0">VU</span>
+                            <span class="text-gray-700">Vulnerable</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="px-2 py-1 rounded-full text-xs font-medium bg-red-600 text-white flex-shrink-0">EN</span>
+                            <span class="text-gray-700">Endangered</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="px-2 py-1 rounded-full text-xs font-medium bg-red-800 text-white flex-shrink-0">CR</span>
+                            <span class="text-gray-700">Critically Endangered</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -750,6 +879,11 @@
         document.getElementById('statusFilter').addEventListener('change', applyFilters);
         document.getElementById('yearFilter').addEventListener('change', applyFilters);
 
+        function toggleLegend() {
+            const legendPanel = document.getElementById('legendPanel');
+            legendPanel.classList.toggle('hidden');
+        }
+
         // Close modal on escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
@@ -761,5 +895,5 @@
         // Load data on page load
         loadData();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9794a2fbc37f5dd8',t:'MTc1Njg5NjEwNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979b22f4e47dfed9',t:'MTc1Njk2NDI2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
