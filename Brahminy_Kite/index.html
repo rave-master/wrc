@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brahminy Kite - Haliastur indus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .dropdown-content.open {
+            max-height: 1000px;
+            transition: max-height 0.5s ease-in;
+        }
+        
+        .dropdown-arrow {
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown-arrow.rotated {
+            transform: rotate(180deg);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Hero Section -->
+    <div class="hero-gradient text-white py-16">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-6">
+                <svg class="w-20 h-20 mx-auto mb-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2M21 9V7L15 1L13.5 2.5L16.17 5.17L10.59 10.75C10.21 10.37 9.7 10.17 9.17 10.17C8.64 10.17 8.13 10.37 7.75 10.75L2.75 15.75C2.16 16.34 2.16 17.27 2.75 17.86C3.34 18.45 4.27 18.45 4.86 17.86L9.86 12.86C10.24 12.48 10.75 12.28 11.28 12.28C11.81 12.28 12.32 12.48 12.7 12.86L18.3 18.46C18.68 18.84 19.19 19.04 19.72 19.04C20.25 19.04 20.76 18.84 21.14 18.46C21.73 17.87 21.73 16.94 21.14 16.35L15.54 10.75L21 5.29V9H21Z"/>
+                </svg>
+            </div>
+            <h1 class="text-5xl font-bold mb-4">Brahminy Kite</h1>
+            <p class="text-xl mb-2 opacity-90"><em>Haliastur indus</em></p>
+            <p class="text-lg opacity-80">Class: Aves | A Majestic Coastal Raptor</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12">
+        <div class="grid gap-8 max-w-4xl mx-auto">
+            
+            <!-- Physical Characteristics Card -->
+            <div class="bg-white rounded-xl shadow-lg card-hover">
+                <div class="p-6 cursor-pointer" onclick="toggleDropdown('physical')">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-semibold text-gray-800">Physical Characteristics</h2>
+                                <p class="text-gray-600">Striking plumage and graceful flight</p>
+                            </div>
+                        </div>
+                        <svg class="w-6 h-6 text-gray-400 dropdown-arrow" id="arrow-physical" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="dropdown-content" id="content-physical">
+                    <div class="px-6 pb-6">
+                        <div class="bg-gradient-to-r from-orange-50 to-red-50 rounded-lg p-6">
+                            <h3 class="font-semibold text-lg mb-4 text-gray-800">Body Structure</h3>
+                            <div class="grid md:grid-cols-2 gap-4 mb-6">
+                                <div class="flex items-center">
+                                    <span class="w-3 h-3 bg-orange-500 rounded-full mr-3"></span>
+                                    <span>Chestnut body plumage</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-3 h-3 bg-gray-100 rounded-full mr-3"></span>
+                                    <span>White head, neck, and breast</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-3 h-3 bg-gray-800 rounded-full mr-3"></span>
+                                    <span>Black wing tips</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-3 h-3 bg-blue-500 rounded-full mr-3"></span>
+                                    <span>Rounded tail for soaring</span>
+                                </div>
+                            </div>
+                            
+                            <h3 class="font-semibold text-lg mb-3 text-gray-800">Juveniles</h3>
+                            <p class="text-gray-700 mb-4">• Browner overall plumage<br>• Feathers appear mottled before adulthood</p>
+                            
+                            <h3 class="font-semibold text-lg mb-3 text-gray-800">Unique Features</h3>
+                            <p class="text-gray-700">• Distinctive silhouette when gliding over coasts and wetlands<br>• Recognized as a cultural symbol in many Asian traditions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Habitat and Distribution Card -->
+            <div class="bg-white rounded-xl shadow-lg card-hover">
+                <div class="p-6 cursor-pointer" onclick="toggleDropdown('habitat')">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12,2C13.1,2 14,2.9 14,4C14,5.1 13.1,6 12,6C10.9,6 10,5.1 10,4C10,2.9 10.9,2 12,2M21,9V7L15,1L13.5,2.5L16.17,5.17L10.59,10.75C10.21,10.37 9.7,10.17 9.17,10.17C8.64,10.17 8.13,10.37 7.75,10.75L2.75,15.75C2.16,16.34 2.16,17.27 2.75,17.86C3.34,18.45 4.27,18.45 4.86,17.86L9.86,12.86C10.24,12.48 10.75,12.28 11.28,12.28C11.81,12.28 12.32,12.48 12.7,12.86L18.3,18.46C18.68,18.84 19.19,19.04 19.72,19.04C20.25,19.04 20.76,18.84 21.14,18.46C21.73,17.87 21.73,16.94 21.14,16.35L15.54,10.75L21,5.29V9H21Z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-semibold text-gray-800">Habitat & Distribution</h2>
+                                <p class="text-gray-600">Aquatic ecosystems across Asia and Australia</p>
+                            </div>
+                        </div>
+                        <svg class="w-6 h-6 text-gray-400 dropdown-arrow" id="arrow-habitat" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="dropdown-content" id="content-habitat">
+                    <div class="px-6 pb-6">
+                        <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6">
+                            <h3 class="font-semibold text-lg mb-4 text-gray-800">Geographic Range</h3>
+                            <div class="grid md:grid-cols-3 gap-4 mb-6">
+                                <div class="text-center p-3 bg-white rounded-lg">
+                                    <span class="text-2xl">🇮🇳</span>
+                                    <p class="text-sm font-medium mt-1">Indian Subcontinent</p>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg">
+                                    <span class="text-2xl">🌏</span>
+                                    <p class="text-sm font-medium mt-1">Southeast Asia</p>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg">
+                                    <span class="text-2xl">🇦🇺</span>
+                                    <p class="text-sm font-medium mt-1">Northern Australia</p>
+                                </div>
+                            </div>
+                            
+                            <h3 class="font-semibold text-lg mb-4 text-gray-800">Habitat Types</h3>
+                            <div class="grid md:grid-cols-2 gap-3">
+                                <div class="flex items-center p-3 bg-white rounded-lg">
+                                    <span class="text-xl mr-3">🌊</span>
+                                    <span>Coastal areas</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-white rounded-lg">
+                                    <span class="text-xl mr-3">🏞️</span>
+                                    <span>Riverbanks</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-white rounded-lg">
+                                    <span class="text-xl mr-3">🌴</span>
+                                    <span>Mangroves and wetlands</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-white rounded-lg">
+                                    <span class="text-xl mr-3">🌾</span>
+                                    <span>Rice fields</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-white rounded-lg">
+                                    <span class="text-xl mr-3">🌲</span>
+                                    <span>Forest edges near water</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diet Card -->
+            <div class="bg-white rounded-xl shadow-lg card-hover">
+                <div class="p-6 cursor-pointer" onclick="toggleDropdown('diet')">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6Z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-semibold text-gray-800">Diet</h2>
+                                <p class="text-gray-600">Opportunistic carnivore and scavenger</p>
+                            </div>
+                        </div>
+                        <svg class="w-6 h-6 text-gray-400 dropdown-arrow" id="arrow-diet" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="dropdown-content" id="content-diet">
+                    <div class="px-6 pb-6">
+                        <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6">
+                            <h3 class="font-semibold text-lg mb-4 text-gray-800">Primary Food Sources</h3>
+                            <div class="grid md:grid-cols-2 gap-3 mb-6">
+                                <div class="flex items-center p-3 bg-white rounded-lg">
+                                    <span class="text-xl mr-3">🐟</span>
+                                    <span>Fish</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-white rounded-lg">
+                                    <span class="text-xl mr-3">🦀</span>
+                                    <span>Crustaceans</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-white rounded-lg">
+                                    <span class="text-xl mr-3">🐸</span>
+                                    <span>Amphibians</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-white rounded-lg">
+                                    <span class="text-xl mr-3">🐛</span>
+                                    <span>Insects</span>
+                                </div>
+                            </div>
+                            
+                            <h3 class="font-semibold text-lg mb-3 text-gray-800">Other Feeding Habits</h3>
+                            <div class="space-y-2 text-gray-700">
+                                <p>• Feeds on carrion</p>
+                                <p>• Hunts small mammals and birds</p>
+                                <p>• Known for <strong>kleptoparasitism</strong>—stealing prey from other birds</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Danger to Humans Card -->
+            <div class="bg-white rounded-xl shadow-lg card-hover">
+                <div class="p-6 cursor-pointer" onclick="toggleDropdown('danger')">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-emerald-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,12.1 16,12.8 16,14V18C16,19.1 15.1,20 14,20H10C8.9,20 8,19.1 8,18V14C8,12.8 8.6,12.1 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-semibold text-gray-800">Danger to Humans</h2>
+                                <p class="text-gray-600">Generally harmless to humans</p>
+                            </div>
+                        </div>
+                        <svg class="w-6 h-6 text-gray-400 dropdown-arrow" id="arrow-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="dropdown-content" id="content-danger">
+                    <div class="px-6 pb-6">
+                        <div class="bg-gradient-to-r from-emerald-50 to-green-50 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <span class="text-3xl mr-3">✅</span>
+                                <h3 class="font-semibold text-lg text-gray-800">Safety Status</h3>
+                            </div>
+                            <div class="space-y-3 text-gray-700">
+                                <p class="flex items-center">
+                                    <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                                    No records of attacks on humans
+                                </p>
+                                <p class="flex items-center">
+                                    <span class="w-2 h-2 bg-red-500 rounded-full mr-3"></span>
+                                    Main threats are human-caused (habitat loss, disturbance, pollution)
+                                </p>
+                            </div>
+                            <div class="mt-4 p-4 bg-white rounded-lg border-l-4 border-green-500">
+                                <p class="text-sm text-gray-600">
+                                    <strong>Note:</strong> These magnificent birds are more threatened by human activities than they are threatening to humans.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conservation Card -->
+            <div class="bg-white rounded-xl shadow-lg card-hover">
+                <div class="p-6 cursor-pointer" onclick="toggleDropdown('conservation')">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-semibold text-gray-800">Conservation & Research</h2>
+                                <p class="text-gray-600">Protecting wetland and coastal habitats</p>
+                            </div>
+                        </div>
+                        <svg class="w-6 h-6 text-gray-400 dropdown-arrow" id="arrow-conservation" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="dropdown-content" id="content-conservation">
+                    <div class="px-6 pb-6">
+                        <div class="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg p-6">
+                            <div class="text-center mb-6">
+                                <span class="text-4xl">🌿</span>
+                                <h3 class="font-semibold text-lg mt-2 text-gray-800">Ecological Importance</h3>
+                            </div>
+                            <div class="bg-white rounded-lg p-6 border-l-4 border-purple-500">
+                                <blockquote class="text-lg text-gray-700 italic text-center">
+                                    "The Brahminy Kite's presence is often a strong ecological indicator of healthy wetland ecosystems."
+                                </blockquote>
+                            </div>
+                            <div class="mt-6 grid md:grid-cols-2 gap-4">
+                                <div class="text-center p-4 bg-white rounded-lg">
+                                    <span class="text-2xl">🏞️</span>
+                                    <p class="text-sm font-medium mt-2">Wetland Protection</p>
+                                    <p class="text-xs text-gray-600 mt-1">Key to sustaining populations</p>
+                                </div>
+                                <div class="text-center p-4 bg-white rounded-lg">
+                                    <span class="text-2xl">🔬</span>
+                                    <p class="text-sm font-medium mt-2">Research Focus</p>
+                                    <p class="text-xs text-gray-600 mt-1">Ecosystem health indicators</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-300">Learn more about wildlife conservation and the magnificent Brahminy Kite</p>
+            <p class="text-sm text-gray-400 mt-2">Protecting our feathered friends and their habitats</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDropdown(section) {
+            const content = document.getElementById(`content-${section}`);
+            const arrow = document.getElementById(`arrow-${section}`);
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                arrow.classList.remove('rotated');
+            } else {
+                content.classList.add('open');
+                arrow.classList.add('rotated');
+            }
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979db190159085e6',t:'MTc1Njk5MTA3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

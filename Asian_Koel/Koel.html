@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asian Koel - Eudynamys scolopaceus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .dropdown-content.open {
+            max-height: 1000px;
+            transition: max-height 0.5s ease-in;
+        }
+        
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Hero Section -->
+    <div class="hero-gradient text-white py-16 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="mb-6">
+                <span class="inline-block bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                    Class: Aves
+                </span>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold mb-4">Asian Koel</h1>
+            <p class="text-xl md:text-2xl font-light mb-2 opacity-90">Eudynamys scolopaceus</p>
+            <p class="text-lg max-w-3xl mx-auto leading-relaxed opacity-80">
+                The Asian Koel is a medium-sized cuckoo, famous for its loud calls that signal the onset of summer in many Asian cultures.
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-6xl mx-auto px-4 py-12">
+        <!-- Quote Section -->
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 mb-12 border-l-4 border-indigo-500">
+            <blockquote class="text-xl md:text-2xl font-medium text-gray-800 italic text-center">
+                "The Asian Koel's haunting call is not just a sound of summer — it is a story of survival through unique breeding strategies."
+            </blockquote>
+        </div>
+
+        <!-- Information Cards Grid -->
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Physical Characteristics Card -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-emerald-500 to-teal-600 p-6 cursor-pointer" onclick="toggleDropdown('physical')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Physical Characteristics</h3>
+                            <p class="text-emerald-100">Body structure, dimorphism & unique features</p>
+                        </div>
+                        <svg id="physical-arrow" class="w-6 h-6 text-white transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div id="physical-content" class="dropdown-content p-6">
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800 mb-3 flex items-center">
+                                📏 Body Structure
+                            </h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• <strong>Length:</strong> 40–46 cm</li>
+                                <li>• <strong>Males:</strong> Glossy black with greenish-blue sheen</li>
+                                <li>• <strong>Females:</strong> Brown with white streaks and spots</li>
+                                <li>• <strong>Eyes:</strong> Bright red</li>
+                                <li>• <strong>Tail:</strong> Long, rounded, providing balance in flight</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800 mb-3 flex items-center">
+                                ⚥ Sexual Dimorphism
+                            </h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Strongly dimorphic — males glossy black, females spotted brown</li>
+                                <li>• Males vocalize more prominently during breeding season</li>
+                                <li>• Both sexes share similar size</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800 mb-3 flex items-center">
+                                ⭐ Unique Features
+                            </h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• <strong>Brood parasite:</strong> Lays eggs in nests of crows and other host species</li>
+                                <li>• <strong>Calls:</strong> Iconic "koo-Ooo" repeating notes</li>
+                                <li>• Considered an omen or symbol in many Asian traditions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Habitat and Distribution Card -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-orange-500 to-red-500 p-6 cursor-pointer" onclick="toggleDropdown('habitat')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Habitat & Distribution</h3>
+                            <p class="text-orange-100">Geographic range & preferred environments</p>
+                        </div>
+                        <svg id="habitat-arrow" class="w-6 h-6 text-white transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div id="habitat-content" class="dropdown-content p-6">
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800 mb-3 flex items-center">
+                                🌍 Geographic Range
+                            </h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Indian subcontinent</li>
+                                <li>• China and Southeast Asia</li>
+                                <li>• Extends to the Philippines and Indonesia</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800 mb-3 flex items-center">
+                                🏞️ Habitat Types
+                            </h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>🌲 Forest edges</li>
+                                <li>🌴 Plantations</li>
+                                <li>🌳 Urban gardens and parks</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diet and Feeding Card -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-green-500 to-emerald-600 p-6 cursor-pointer" onclick="toggleDropdown('diet')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Diet & Feeding</h3>
+                            <p class="text-green-100">Food sources & feeding behavior</p>
+                        </div>
+                        <svg id="diet-arrow" class="w-6 h-6 text-white transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div id="diet-content" class="dropdown-content p-6">
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800 mb-3 flex items-center">
+                                🍇 Primary Food Sources
+                            </h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Fruits (berries, figs)</li>
+                                <li>• Seeds</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800 mb-3 flex items-center">
+                                🐛 Secondary Food Sources
+                            </h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Insects</li>
+                                <li>• Caterpillars</li>
+                                <li>• Small vertebrates occasionally</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800 mb-3 flex items-center">
+                                🌿 Feeding Behavior
+                            </h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Forages in tree canopies</li>
+                                <li>• Plays an important role in seed dispersal</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Danger to Humans Card -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-yellow-500 to-orange-500 p-6 cursor-pointer" onclick="toggleDropdown('danger')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Human Interaction</h3>
+                            <p class="text-yellow-100">Safety & threats assessment</p>
+                        </div>
+                        <svg id="danger-arrow" class="w-6 h-6 text-white transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div id="danger-content" class="dropdown-content p-6">
+                    <div class="space-y-6">
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                            <h4 class="font-semibold text-lg text-green-800 mb-3 flex items-center">
+                                ✅ Safety to Humans
+                            </h4>
+                            <ul class="space-y-2 text-green-700">
+                                <li>• Harmless to humans</li>
+                                <li>• Calls can be noisy and disruptive in urban areas</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                            <h4 class="font-semibold text-lg text-red-800 mb-3 flex items-center">
+                                ⚠️ Human-Driven Threats
+                            </h4>
+                            <ul class="space-y-2 text-red-700">
+                                <li>• Habitat alteration reduces fruit sources</li>
+                                <li>• Nest host decline may affect breeding success</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conservation Card (Full Width) -->
+        <div class="mt-8 bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+            <div class="bg-gradient-to-r from-purple-600 to-indigo-600 p-6 cursor-pointer" onclick="toggleDropdown('conservation')">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Conservation & Research</h3>
+                        <p class="text-purple-100">Conservation status & scientific importance</p>
+                    </div>
+                    <svg id="conservation-arrow" class="w-6 h-6 text-white transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+            </div>
+            <div id="conservation-content" class="dropdown-content p-6">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-semibold text-lg text-gray-800 mb-3 flex items-center">
+                            🛡️ Conservation Concerns
+                        </h4>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>• Local populations decline with urbanization</li>
+                            <li>• Dependent on availability of crow and myna hosts</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold text-lg text-gray-800 mb-3 flex items-center">
+                            🔬 Research Importance
+                        </h4>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>• Classic study species for brood parasitism behavior</li>
+                            <li>• Useful in understanding bird-host coevolution</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-300">Learn more about the fascinating world of Asian wildlife and conservation efforts.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDropdown(section) {
+            const content = document.getElementById(section + '-content');
+            const arrow = document.getElementById(section + '-arrow');
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                arrow.classList.remove('rotate-180');
+            } else {
+                content.classList.add('open');
+                arrow.classList.add('rotate-180');
+            }
+        }
+
+        // Add smooth scrolling for better UX
+        document.addEventListener('DOMContentLoaded', function() {
+            // Optional: Auto-open first card for better initial experience
+            // toggleDropdown('physical');
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979dcf4574c9fed9',t:'MTc1Njk5MjI5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

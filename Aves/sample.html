@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Class Aves Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2>Class Aves Records</h2>
+    <table id="data-table">
+        <thead></thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtbl6w2Cu44Sj3NocFki0q43pIkSIYKNpDMHpLy_IzqeAv3MEZzioXuZsarU7tmFvbtq-qIsBmVq4L/pub?gid=495574991&single=true&output=csv';
+
+        async function loadCSV(url) {
+            const response = await fetch(url);
+            const data = await response.text();
+            return data;
+        }
+
+        function parseCSV(csvText) {
+            const lines = csvText.split('\n').filter(line => line.trim() !== '');
+            const headers = lines[0].split(',').map(h => h.trim());
+            const rows = lines.slice(1).map(line => line.split(','));
+            return { headers, rows };
+        }
+
+        function renderTable(headers, rows) {
+            const thead = document.querySelector('#data-table thead');
+            const tbody = document.querySelector('#data-table tbody');
+
+            thead.innerHTML = '<tr>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
+            tbody.innerHTML = rows.map(row => 
+                '<tr>' + row.map(cell => `<td>${cell}</td>`).join('') + '</tr>'
+            ).join('');
+        }
+
+        async function init() {
+            try {
+                const csv = await loadCSV(CSV_URL);
+                const { headers, rows } = parseCSV(csv);
+                renderTable(headers, rows);
+            } catch (error) {
+                console.error('Error loading or parsing CSV:', error);
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
