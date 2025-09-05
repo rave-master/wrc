@@ -391,7 +391,7 @@
                     remarks: row['Remarks'] || '',
                     candidateForRelease: row['Candidate for Release'] || '',
                     deceased: row['Deceased'] || '',
-                    deathDate: row['Date'] || '',
+                    deathDate: row['Date of Death'] || row['Date'] || '',
                     causeOfDeath: row['Probable Cause of Death'] || '',
                     releaseDate: row['Release Date'] || '',
                     releaseLocation: row['Release Location'] || '',
@@ -671,8 +671,8 @@
                         <h3 class="font-semibold text-red-900 mb-2">Mortality Information</h3>
                         <div class="text-sm text-red-700 space-y-1">
                             <p><strong>Deceased:</strong> ${animal.deceased || 'No'}</p>
-                            <p><strong>Date of Death:</strong> ${animal.deathDate || 'N/A'}</p>
-                            <p><strong>Probable Cause of Death:</strong> ${animal.causeOfDeath || 'N/A'}</p>
+                            <p><strong>Date of Death:</strong> ${(animal.deathDate && animal.deathDate.trim() !== '') ? animal.deathDate : 'N/A'}</p>
+                            <p><strong>Probable Cause of Death:</strong> ${(animal.causeOfDeath && animal.causeOfDeath.trim() !== '') ? animal.causeOfDeath : 'N/A'}</p>
                         </div>
                     </div>
                     
@@ -912,5 +912,5 @@
         // Load data on page load
         loadData();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97a2fc24f374fedd',t:'MTc1NzA0NjU2MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97a3731d5112fedd',t:'MTc1NzA1MTQzMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
