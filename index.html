@@ -475,8 +475,8 @@
                 card.innerHTML = `
                     <div class="relative">
                         <img src="${animal.photo}" alt="${animal.commonName}" 
-                             class="w-full h-48 object-cover"
-                             onerror="this.src='https://via.placeholder.com/300x200/10b981/ffffff?text=${encodeURIComponent(animal.commonName || 'Wildlife')}'; this.alt='Placeholder image';">
+                             class="w-full h-64 object-contain bg-gray-100"
+                             onerror="this.src='https://via.placeholder.com/300x400/10b981/ffffff?text=${encodeURIComponent(animal.commonName || 'Wildlife')}'; this.alt='Placeholder image';">
                         <div class="absolute top-3 right-3">
                             <span class="px-2 py-1 rounded-full text-xs font-medium text-white ${getStatusClass(animal.healthStatus)}">
                                 ${animal.healthStatus || 'Unknown'}
@@ -512,8 +512,8 @@
                         ✕
                     </button>
                     <img src="${animal.photo}" alt="${animal.commonName}" 
-                         class="w-full h-64 object-cover"
-                         onerror="this.src='https://via.placeholder.com/600x300/10b981/ffffff?text=${encodeURIComponent(animal.commonName || 'Wildlife')}'; this.alt='Placeholder image';">
+                         class="w-full h-80 object-contain bg-gray-100"
+                         onerror="this.src='https://via.placeholder.com/600x800/10b981/ffffff?text=${encodeURIComponent(animal.commonName || 'Wildlife')}'; this.alt='Placeholder image';">
                     <div class="absolute bottom-4 left-4">
                         <span class="px-3 py-1 rounded-full text-sm font-medium text-white ${getStatusClass(animal.healthStatus)}">
                             ${animal.healthStatus || 'Unknown Status'}
@@ -912,5 +912,5 @@
         // Load data on page load
         loadData();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97a11699c201fed9',t:'MTc1NzAyNjY3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97a2fc24f374fedd',t:'MTc1NzA0NjU2MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
