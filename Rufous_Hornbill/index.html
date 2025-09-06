@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rufous Hornbill - The Kalaw</title>
+    <title>Rufous Hornbill - The Kalaw of the Philippines</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -28,7 +28,7 @@
         }
         
         .hero-gradient {
-            background: linear-gradient(135deg, #065f46 0%, #047857 50%, #059669 100%);
+            background: linear-gradient(135deg, #166534 0%, #15803d 50%, #16a34a 100%);
         }
         
         .card-hover {
@@ -39,28 +39,62 @@
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
+        
+        .soar-animation {
+            animation: soar 4s ease-in-out infinite;
+        }
+        
+        @keyframes soar {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
     </style>
 </head>
-<body class="bg-gradient-to-br from-emerald-50 to-teal-50 min-h-screen">
+<body class="bg-gradient-to-br from-green-50 to-emerald-50 min-h-screen">
     <!-- Header -->
     <div class="hero-gradient text-white py-16">
         <div class="max-w-6xl mx-auto px-6 text-center">
             <div class="mb-6">
-                <svg class="w-20 h-20 mx-auto mb-4 text-amber-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                <img src="https://ia801001.us.archive.org/30/items/mg-5192/_MG_5182.JPG" alt="Rufous Hornbill showing distinctive casque and rufous plumage" class="w-32 h-32 mx-auto mb-4 rounded-full object-cover border-4 border-white/30 shadow-lg soar-animation" onerror="this.style.display='none'; document.getElementById('fallback-icon').style.display='block';">
+                <svg id="fallback-icon" class="w-20 h-20 mx-auto mb-4 text-white soar-animation hidden" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                 </svg>
             </div>
             <h1 class="text-5xl font-bold mb-4">Rufous Hornbill</h1>
-            <p class="text-xl text-emerald-100 mb-2"><em>Buceros hydrocorax</em></p>
-            <p class="text-lg text-emerald-200">Known locally as "Kalaw" - Guardian of Philippine Forests</p>
-            <div class="mt-6 inline-block bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
-                <span class="text-sm font-medium">Class: Aves</span>
+            <p class="text-xl text-green-100 mb-2"><em>Buceros hydrocorax</em></p>
+            <p class="text-lg text-green-200">The "Kalaw" - Guardian of Philippine Forests</p>
+            <div class="mt-6 flex justify-center space-x-4">
+                <div class="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
+                    <span class="text-sm font-medium">Class: Aves</span>
+                </div>
+                <div class="bg-green-600 backdrop-blur-sm rounded-full px-4 py-2">
+                    <span class="text-sm font-bold">🇵🇭 Endemic</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Endemic Species Banner -->
+    <div class="max-w-6xl mx-auto px-6 py-6">
+        <div class="bg-gradient-to-r from-emerald-100 to-green-100 border-l-4 border-emerald-500 p-6 rounded-lg">
+            <div class="flex items-center">
+                <svg class="w-8 h-8 text-emerald-600 mr-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                <div>
+                    <h3 class="text-lg font-bold text-emerald-800">Philippine Endemic</h3>
+                    <p class="text-emerald-700">Found only in the Philippines - a true national treasure and keystone species of forest ecosystems.</p>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <div class="max-w-6xl mx-auto px-6 py-12">
+    <div class="max-w-6xl mx-auto px-6 py-6">
         <!-- Quote -->
         <div class="text-center mb-12">
             <blockquote class="text-2xl font-medium text-gray-700 italic">
@@ -68,14 +102,34 @@
             </blockquote>
         </div>
 
+        <!-- Habitat Icons -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🌲</div>
+                <p class="text-sm text-gray-600">Primary Forests</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🌳</div>
+                <p class="text-sm text-gray-600">Secondary Forests</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">⛰️</div>
+                <p class="text-sm text-gray-600">Montane Forests</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🏔️</div>
+                <p class="text-sm text-gray-600">Up to 2100m</p>
+            </div>
+        </div>
+
         <!-- Cards Grid -->
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Physical Characteristics Card -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
-                <div class="bg-gradient-to-r from-orange-500 to-red-500 p-6 text-white">
+                <div class="bg-gradient-to-r from-orange-600 to-red-600 p-6 text-white">
                     <h3 class="text-xl font-semibold flex items-center">
                         <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                         </svg>
                         Physical Characteristics
                     </h3>
@@ -89,14 +143,17 @@
                     </button>
                     <div id="physical-content" class="dropdown-content mt-4">
                         <div class="space-y-4">
+                            <div class="bg-orange-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-orange-800">Iconic Philippine bird with distinctive rufous plumage and casque-topped bill</p>
+                            </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Body Structure</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• Length: 60–65 cm</li>
-                                    <li>• Plumage: rufous body with black wings and tail</li>
-                                    <li>• Beak: large, curved with a casque</li>
-                                    <li>• Wings: broad for strong, heavy flight</li>
-                                    <li>• Tail: long and white-tipped</li>
+                                    <li>• Length: 60-65 cm</li>
+                                    <li>• Rufous body with black wings and tail</li>
+                                    <li>• Large, curved beak with prominent casque</li>
+                                    <li>• Broad wings for strong, heavy flight</li>
+                                    <li>• Long tail with white tips</li>
                                 </ul>
                             </div>
                             <div>
@@ -104,15 +161,15 @@
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• Males and females look similar</li>
                                     <li>• Females usually smaller in size</li>
-                                    <li>• During nesting, females are sealed inside tree cavities</li>
+                                    <li>• Both have distinctive casque</li>
                                 </ul>
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Unique Features</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• "Cavity sealer": female seals herself inside nest cavity</li>
-                                    <li>• Known for loud calls that echo through forests</li>
-                                    <li>• Keystone seed disperser, spreading large-fruited plants</li>
+                                    <li>• Known for loud, echoing forest calls</li>
+                                    <li>• Distinctive flight pattern</li>
+                                    <li>• Impressive size and presence</li>
                                 </ul>
                             </div>
                         </div>
@@ -122,7 +179,7 @@
 
             <!-- Habitat and Distribution Card -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
-                <div class="bg-gradient-to-r from-green-500 to-emerald-500 p-6 text-white">
+                <div class="bg-gradient-to-r from-green-600 to-emerald-600 p-6 text-white">
                     <h3 class="text-xl font-semibold flex items-center">
                         <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
@@ -139,22 +196,32 @@
                     </button>
                     <div id="habitat-content" class="dropdown-content mt-4">
                         <div class="space-y-4">
-                            <div class="bg-blue-50 p-3 rounded-lg">
-                                <p class="text-sm font-medium text-blue-800">Endemic to the Philippines</p>
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-green-800">Endemic to the Philippines - found only in select islands</p>
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Geographic Range</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• Luzon</li>
-                                    <li>• Samar and Leyte</li>
-                                    <li>• Mindanao</li>
+                                    <li>🏝️ Luzon</li>
+                                    <li>🏝️ Samar and Leyte</li>
+                                    <li>🏝️ Mindanao</li>
                                 </ul>
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Habitat Types</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>🌲 Primary and secondary forests</li>
-                                    <li>⛰️ Montane forests up to 2100 m</li>
+                                    <li>🌲 Primary forests (preferred)</li>
+                                    <li>🌳 Secondary forests</li>
+                                    <li>⛰️ Montane forests up to 2100m elevation</li>
+                                    <li>🌿 Dense canopy environments</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Habitat Requirements</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Large trees for nesting cavities</li>
+                                    <li>• Diverse fruit-bearing trees</li>
+                                    <li>• Intact forest canopy</li>
                                 </ul>
                             </div>
                         </div>
@@ -162,9 +229,9 @@
                 </div>
             </div>
 
-            <!-- Diet and Feeding Card -->
+            <!-- Diet Card -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
-                <div class="bg-gradient-to-r from-purple-500 to-indigo-500 p-6 text-white">
+                <div class="bg-gradient-to-r from-yellow-600 to-orange-600 p-6 text-white">
                     <h3 class="text-xl font-semibold flex items-center">
                         <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97L6.5 22h3l-.25-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5l1.5 6h2l-1.5-6H22V6h-6z"/>
@@ -181,24 +248,32 @@
                     </button>
                     <div id="diet-content" class="dropdown-content mt-4">
                         <div class="space-y-4">
+                            <div class="bg-yellow-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-yellow-800">Primarily frugivorous - keystone seed disperser</p>
+                            </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Primary Food Sources</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• Fruits, especially figs</li>
+                                    <li>🍇 Fruits (especially figs)</li>
+                                    <li>🌰 Large-seeded fruits</li>
+                                    <li>🫐 Forest berries</li>
                                 </ul>
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Secondary Food Sources</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• Insects</li>
-                                    <li>• Small vertebrates (frogs, lizards)</li>
+                                    <li>🦗 Insects and arthropods</li>
+                                    <li>🐸 Small frogs</li>
+                                    <li>🦎 Lizards and small vertebrates</li>
                                 </ul>
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Feeding Behavior</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• Forages in canopy</li>
-                                    <li>• Important in maintaining forest plant diversity</li>
+                                    <li>• Forages primarily in forest canopy</li>
+                                    <li>• Swallows fruits whole when possible</li>
+                                    <li>• Critical for maintaining forest plant diversity</li>
+                                    <li>• Disperses large seeds other birds cannot</li>
                                 </ul>
                             </div>
                         </div>
@@ -206,37 +281,105 @@
                 </div>
             </div>
 
-            <!-- Danger to Humans Card -->
+            <!-- Unique Nesting Behavior Card -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
-                <div class="bg-gradient-to-r from-yellow-500 to-orange-500 p-6 text-white">
+                <div class="bg-gradient-to-r from-purple-600 to-pink-600 p-6 text-white">
                     <h3 class="text-xl font-semibold flex items-center">
                         <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        Unique Nesting Behavior
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('nesting')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="nesting-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="nesting-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-purple-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-purple-800">Extraordinary "cavity sealer" nesting strategy</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Cavity Sealing Process</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Female seals herself inside tree cavity</li>
+                                    <li>• Uses mud, droppings, and food remains</li>
+                                    <li>• Leaves only small slit for feeding</li>
+                                    <li>• Male feeds female through the opening</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Nesting Period</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Female remains sealed for 3-4 months</li>
+                                    <li>• Incubates eggs and raises chicks inside</li>
+                                    <li>• Male works tirelessly to provide food</li>
+                                    <li>• Family emerges when chicks are ready</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Evolutionary Advantages</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Protection from predators</li>
+                                    <li>• Climate control for eggs and chicks</li>
+                                    <li>• Reduced competition for nesting sites</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Human Interaction Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-blue-600 to-teal-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                         </svg>
                         Human Interaction
                     </h3>
                 </div>
                 <div class="p-6">
-                    <button onclick="toggleDropdown('danger')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                    <button onclick="toggleDropdown('human')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
                         <span>View Details</span>
-                        <svg id="danger-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                        <svg id="human-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M7 10l5 5 5-5z"/>
                         </svg>
                     </button>
-                    <div id="danger-content" class="dropdown-content mt-4">
+                    <div id="human-content" class="dropdown-content mt-4">
                         <div class="space-y-4">
-                            <div class="bg-green-50 p-3 rounded-lg">
-                                <p class="text-sm font-medium text-green-800">• Harmless to humans</p>
-                                <p class="text-sm text-green-600">• Vulnerable to hunting for meat and traditional use</p>
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-blue-800">Harmless to humans but vulnerable to human activities</p>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-red-700 mb-2 flex items-center">
-                                    ⚠️ Human-Driven Threats
-                                </h4>
+                                <h4 class="font-semibold text-green-700 mb-2">Safety for Humans</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• Severe deforestation</li>
-                                    <li>• Hunting and trapping</li>
-                                    <li>• Loss of nesting trees</li>
+                                    <li>✓ Completely harmless to humans</li>
+                                    <li>✓ Shy and avoids human contact</li>
+                                    <li>✓ No aggressive behaviors toward people</li>
+                                    <li>✓ Peaceful forest dweller</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-red-700 mb-2">Human-Driven Threats</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>⚠️ Severe deforestation</li>
+                                    <li>⚠️ Hunting for meat and traditional use</li>
+                                    <li>⚠️ Loss of large nesting trees</li>
+                                    <li>⚠️ Habitat fragmentation</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Cultural Significance</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Known locally as "Kalaw"</li>
+                                    <li>• Important in Filipino folklore</li>
+                                    <li>• Symbol of forest health</li>
                                 </ul>
                             </div>
                         </div>
@@ -245,13 +388,13 @@
             </div>
 
             <!-- Conservation Card -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover md:col-span-2 lg:col-span-1">
-                <div class="bg-gradient-to-r from-teal-500 to-cyan-500 p-6 text-white">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-red-600 to-orange-600 p-6 text-white">
                     <h3 class="text-xl font-semibold flex items-center">
                         <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
                         </svg>
-                        Conservation & Research
+                        Conservation Status
                     </h3>
                 </div>
                 <div class="p-6">
@@ -263,11 +406,16 @@
                     </button>
                     <div id="conservation-content" class="dropdown-content mt-4">
                         <div class="space-y-4">
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-red-800">Declining populations due to habitat loss - urgent conservation needed</p>
+                            </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Conservation Concerns</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• Populations declining due to forest loss</li>
-                                    <li>• Low reproductive rate worsens vulnerability</li>
+                                    <li>• Populations declining rapidly</li>
+                                    <li>• Low reproductive rate increases vulnerability</li>
+                                    <li>• Requires large territories</li>
+                                    <li>• Dependent on old-growth forests</li>
                                 </ul>
                             </div>
                             <div>
@@ -275,6 +423,17 @@
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• Critical seed disperser in Philippine forests</li>
                                     <li>• Indicator species of intact lowland forests</li>
+                                    <li>• Keystone species for forest regeneration</li>
+                                    <li>• Important for ecosystem health studies</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Conservation Actions Needed</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Protect remaining primary forests</li>
+                                    <li>• Establish forest corridors</li>
+                                    <li>• Anti-hunting enforcement</li>
+                                    <li>• Community education programs</li>
                                 </ul>
                             </div>
                         </div>
@@ -283,10 +442,39 @@
             </div>
         </div>
 
-        <!-- Fun Fact Card -->
-        <div class="mt-12 bg-gradient-to-r from-amber-400 to-orange-400 rounded-xl p-8 text-center text-white">
-            <h3 class="text-2xl font-bold mb-4">🦅 Did You Know?</h3>
-            <p class="text-lg">The female Rufous Hornbill seals herself inside a tree cavity during nesting, leaving only a small slit for the male to feed her and their chicks. This unique behavior makes them one of nature's most dedicated parents!</p>
+        <!-- Cultural and Ecological Significance -->
+        <div class="mt-12 grid md:grid-cols-2 gap-8">
+            <div class="bg-gradient-to-r from-emerald-500 to-green-500 rounded-xl p-8 text-center text-white">
+                <h3 class="text-2xl font-bold mb-4">🌿 Forest Guardian</h3>
+                <p class="text-lg">As a keystone seed disperser, the Rufous Hornbill is essential for maintaining Philippine forest biodiversity, spreading large-fruited plants that other birds cannot disperse.</p>
+            </div>
+            
+            <div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-xl p-8 text-center text-white">
+                <h3 class="text-2xl font-bold mb-4">🏛️ Cultural Icon</h3>
+                <p class="text-lg">Known as "Kalaw" in Filipino culture, this magnificent bird represents the rich natural heritage of the Philippines and the urgent need for forest conservation.</p>
+            </div>
+        </div>
+
+        <!-- Ecological Role -->
+        <div class="mt-12 bg-gradient-to-r from-green-100 to-emerald-100 rounded-xl p-8">
+            <h3 class="text-2xl font-bold text-center mb-6 text-gray-800">🌳 Keystone Species Role</h3>
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+                <div>
+                    <div class="text-3xl mb-2">🌱</div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Seed Dispersal</h4>
+                    <p class="text-sm text-gray-600">Disperses large seeds that other birds cannot, maintaining forest plant diversity</p>
+                </div>
+                <div>
+                    <div class="text-3xl mb-2">🌲</div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Forest Regeneration</h4>
+                    <p class="text-sm text-gray-600">Essential for regenerating Philippine forests and maintaining ecosystem balance</p>
+                </div>
+                <div>
+                    <div class="text-3xl mb-2">📊</div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Indicator Species</h4>
+                    <p class="text-sm text-gray-600">Their presence indicates healthy, intact forest ecosystems</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -304,5 +492,5 @@
             }
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979dde2bf4e9fed9',t:'MTc1Njk5MjkwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97aa371bf497fedd',t:'MTc1NzEyMjM3NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sulu Hornbill - Critically Endangered</title>
+    <title>Sulu Hornbill - Critically Endangered Philippine Endemic</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -28,7 +28,7 @@
         }
         
         .hero-gradient {
-            background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 50%, #b91c1c 100%);
+            background: linear-gradient(135deg, #7c2d12 0%, #dc2626 50%, #ea580c 100%);
         }
         
         .card-hover {
@@ -38,6 +38,19 @@
         .card-hover:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .soar-animation {
+            animation: soar 4s ease-in-out infinite;
+        }
+        
+        @keyframes soar {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
         
         .pulse-red {
@@ -59,34 +72,35 @@
     <div class="hero-gradient text-white py-16">
         <div class="max-w-6xl mx-auto px-6 text-center">
             <div class="mb-6">
-                <svg class="w-20 h-20 mx-auto mb-4 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                <img src="https://ia801001.us.archive.org/30/items/mg-5192/_MG_5284.JPG" alt="Sulu Hornbill showing distinctive black plumage and pale yellow casque" class="w-32 h-32 mx-auto mb-4 rounded-full object-cover border-4 border-white/30 shadow-lg soar-animation" onerror="this.style.display='none'; document.getElementById('fallback-icon').style.display='block';">
+                <svg id="fallback-icon" class="w-20 h-20 mx-auto mb-4 text-white soar-animation hidden" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                 </svg>
             </div>
             <h1 class="text-5xl font-bold mb-4">Sulu Hornbill</h1>
             <p class="text-xl text-red-100 mb-2"><em>Anthracoceros montani</em></p>
-            <p class="text-lg text-red-200">Living Treasure of Tawi-Tawi - On the Brink of Extinction</p>
+            <p class="text-lg text-red-200">Living Treasure of Tawi-Tawi</p>
             <div class="mt-6 flex justify-center space-x-4">
                 <div class="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
                     <span class="text-sm font-medium">Class: Aves</span>
                 </div>
                 <div class="bg-red-600 backdrop-blur-sm rounded-full px-4 py-2 pulse-red">
-                    <span class="text-sm font-bold">CRITICALLY ENDANGERED</span>
+                    <span class="text-sm font-bold">⚠️ CRITICALLY ENDANGERED</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Critical Status Alert -->
+    <!-- Critical Status Banner -->
     <div class="max-w-6xl mx-auto px-6 py-6">
-        <div class="bg-red-100 border-l-4 border-red-500 p-6 rounded-lg">
+        <div class="bg-gradient-to-r from-red-100 to-orange-100 border-l-4 border-red-500 p-6 rounded-lg">
             <div class="flex items-center">
-                <svg class="w-8 h-8 text-red-500 mr-4" fill="currentColor" viewBox="0 0 24 24">
+                <svg class="w-8 h-8 text-red-600 mr-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
                 </svg>
                 <div>
-                    <h3 class="text-lg font-bold text-red-800">URGENT: Fewer than 50 individuals remain</h3>
-                    <p class="text-red-700">This species is on the verge of extinction and needs immediate conservation action.</p>
+                    <h3 class="text-lg font-bold text-red-800">Critically Endangered - Fewer than 50 Individuals</h3>
+                    <p class="text-red-700">Endemic to Tawi-Tawi in the Sulu archipelago - one of the world's rarest birds on the brink of extinction.</p>
                 </div>
             </div>
         </div>
@@ -101,14 +115,34 @@
             </blockquote>
         </div>
 
+        <!-- Habitat Icons -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🏝️</div>
+                <p class="text-sm text-gray-600">Tawi-Tawi Island</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🌲</div>
+                <p class="text-sm text-gray-600">Lowland Rainforests</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🌴</div>
+                <p class="text-sm text-gray-600">Secondary Forests</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">⚠️</div>
+                <p class="text-sm text-gray-600">< 50 Individuals</p>
+            </div>
+        </div>
+
         <!-- Cards Grid -->
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Physical Characteristics Card -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
-                <div class="bg-gradient-to-r from-gray-800 to-black p-6 text-white">
+                <div class="bg-gradient-to-r from-orange-600 to-red-600 p-6 text-white">
                     <h3 class="text-xl font-semibold flex items-center">
                         <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                         </svg>
                         Physical Characteristics
                     </h3>
@@ -122,17 +156,17 @@
                     </button>
                     <div id="physical-content" class="dropdown-content mt-4">
                         <div class="space-y-4">
-                            <div class="bg-gray-50 p-3 rounded-lg">
-                                <p class="text-sm font-medium text-gray-800">Medium-sized hornbill with striking casque and glossy black plumage</p>
+                            <div class="bg-orange-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-orange-800">One of the rarest birds in the Philippines with striking black plumage and pale yellow casque</p>
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Body Structure</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• Length: ~70 cm</li>
-                                    <li>• Plumage: black with white tail tip</li>
-                                    <li>• Beak: pale yellow, topped with a casque</li>
-                                    <li>• Wings: broad, adapted for canopy flight</li>
-                                    <li>• Eyes: red or brown, depending on age</li>
+                                    <li>• Glossy black plumage with white tail tip</li>
+                                    <li>• Pale yellow beak topped with casque</li>
+                                    <li>• Broad wings adapted for canopy flight</li>
+                                    <li>• Red or brown eyes depending on age</li>
                                 </ul>
                             </div>
                             <div>
@@ -146,8 +180,8 @@
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Unique Features</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• Cavity-nesting with female sealed inside tree cavity</li>
-                                    <li>• Rare and localized, found only in Tawi-Tawi</li>
+                                    <li>• Cavity-nesting with female sealed inside tree</li>
+                                    <li>• Rare and localized to Tawi-Tawi</li>
                                     <li>• Strong, loud calls heard across forest patches</li>
                                 </ul>
                             </div>
@@ -158,7 +192,7 @@
 
             <!-- Habitat and Distribution Card -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
-                <div class="bg-gradient-to-r from-green-700 to-emerald-700 p-6 text-white">
+                <div class="bg-gradient-to-r from-green-600 to-emerald-600 p-6 text-white">
                     <h3 class="text-xl font-semibold flex items-center">
                         <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
@@ -175,15 +209,15 @@
                     </button>
                     <div id="habitat-content" class="dropdown-content mt-4">
                         <div class="space-y-4">
-                            <div class="bg-red-50 p-3 rounded-lg border border-red-200">
-                                <p class="text-sm font-medium text-red-800">Endemic to the Sulu archipelago (Philippines)</p>
-                                <p class="text-xs text-red-600 mt-1">Extremely restricted range</p>
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-green-800">Endemic to the Sulu archipelago - extremely restricted range</p>
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Geographic Range</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• Basilan and Tawi-Tawi islands</li>
-                                    <li>• Now mainly confined to Tawi-Tawi</li>
+                                    <li>🏝️ Basilan (historically)</li>
+                                    <li>🏝️ Tawi-Tawi (current stronghold)</li>
+                                    <li>⚠️ Extremely limited distribution</li>
                                 </ul>
                             </div>
                             <div>
@@ -191,7 +225,17 @@
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>🌲 Lowland rainforests</li>
                                     <li>🌴 Secondary forests</li>
-                                    <li>🌳 Nesting in large emergent trees</li>
+                                    <li>🌳 Large emergent trees for nesting</li>
+                                    <li>🌿 Dense forest patches</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Habitat Requirements</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Large trees for cavity nesting</li>
+                                    <li>• Fruit-bearing forest trees</li>
+                                    <li>• Intact forest connectivity</li>
+                                    <li>• Protection from hunting pressure</li>
                                 </ul>
                             </div>
                         </div>
@@ -199,9 +243,9 @@
                 </div>
             </div>
 
-            <!-- Diet and Feeding Card -->
+            <!-- Diet Card -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
-                <div class="bg-gradient-to-r from-purple-600 to-indigo-600 p-6 text-white">
+                <div class="bg-gradient-to-r from-yellow-600 to-orange-600 p-6 text-white">
                     <h3 class="text-xl font-semibold flex items-center">
                         <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97L6.5 22h3l-.25-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5l1.5 6h2l-1.5-6H22V6h-6z"/>
@@ -218,24 +262,31 @@
                     </button>
                     <div id="diet-content" class="dropdown-content mt-4">
                         <div class="space-y-4">
+                            <div class="bg-yellow-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-yellow-800">Primarily frugivorous - crucial seed disperser in remaining forests</p>
+                            </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Primary Food Sources</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• Fruits, especially figs</li>
+                                    <li>🍇 Fruits (especially figs)</li>
+                                    <li>🌰 Forest fruits and berries</li>
                                 </ul>
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Secondary Food Sources</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• Insects</li>
-                                    <li>• Small vertebrates (frogs, lizards)</li>
+                                    <li>🦗 Insects</li>
+                                    <li>🐸 Small frogs</li>
+                                    <li>🦎 Lizards and small vertebrates</li>
                                 </ul>
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Feeding Behavior</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• Forages in pairs or small groups</li>
-                                    <li>• Plays a crucial role in seed dispersal</li>
+                                    <li>• Plays crucial role in seed dispersal</li>
+                                    <li>• Essential for forest regeneration</li>
+                                    <li>• Limited by shrinking habitat</li>
                                 </ul>
                             </div>
                         </div>
@@ -243,37 +294,105 @@
                 </div>
             </div>
 
-            <!-- Danger to Humans Card -->
+            <!-- Unique Nesting Behavior Card -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
-                <div class="bg-gradient-to-r from-orange-600 to-red-600 p-6 text-white">
+                <div class="bg-gradient-to-r from-purple-600 to-pink-600 p-6 text-white">
                     <h3 class="text-xl font-semibold flex items-center">
                         <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        Unique Nesting Behavior
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('nesting')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="nesting-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="nesting-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-purple-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-purple-800">Cavity-nesting behavior like other hornbills - critically dependent on large trees</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Nesting Requirements</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Requires large emergent trees</li>
+                                    <li>• Female seals herself inside cavity</li>
+                                    <li>• Extremely vulnerable to habitat loss</li>
+                                    <li>• Limited suitable nesting sites</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Breeding Challenges</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Very small population size</li>
+                                    <li>• Limited genetic diversity</li>
+                                    <li>• Habitat fragmentation isolates pairs</li>
+                                    <li>• Low reproductive success</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Conservation Concerns</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Loss of nesting trees to deforestation</li>
+                                    <li>• Hunting pressure during breeding</li>
+                                    <li>• Climate change impacts</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Human Interaction Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-blue-600 to-teal-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                         </svg>
                         Human Interaction
                     </h3>
                 </div>
                 <div class="p-6">
-                    <button onclick="toggleDropdown('danger')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                    <button onclick="toggleDropdown('human')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
                         <span>View Details</span>
-                        <svg id="danger-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                        <svg id="human-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M7 10l5 5 5-5z"/>
                         </svg>
                     </button>
-                    <div id="danger-content" class="dropdown-content mt-4">
+                    <div id="human-content" class="dropdown-content mt-4">
                         <div class="space-y-4">
-                            <div class="bg-green-50 p-3 rounded-lg">
-                                <p class="text-sm font-medium text-green-800">• Harmless to humans</p>
-                                <p class="text-sm text-green-600">• Avoids people due to extreme hunting pressure</p>
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-blue-800">Harmless to humans but extremely vulnerable to human activities</p>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-red-700 mb-2 flex items-center">
-                                    ⚠️ Critical Human-Driven Threats
-                                </h4>
+                                <h4 class="font-semibold text-green-700 mb-2">Safety for Humans</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• Severe deforestation in Sulu archipelago</li>
-                                    <li>• Hunting and capture for trade</li>
-                                    <li>• Extremely restricted range makes species fragile</li>
+                                    <li>✓ Completely harmless to humans</li>
+                                    <li>✓ Extremely shy and avoids people</li>
+                                    <li>✓ No aggressive behaviors</li>
+                                    <li>✓ Peaceful forest dweller</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-red-700 mb-2">Critical Human Threats</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>⚠️ Severe deforestation in Sulu archipelago</li>
+                                    <li>⚠️ Hunting and capture for trade</li>
+                                    <li>⚠️ Extremely restricted range</li>
+                                    <li>⚠️ Avoids people due to hunting pressure</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Cultural Impact</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Living treasure of the Philippines</li>
+                                    <li>• Symbol of Sulu's natural heritage</li>
+                                    <li>• Represents urgent conservation need</li>
                                 </ul>
                             </div>
                         </div>
@@ -282,14 +401,13 @@
             </div>
 
             <!-- Conservation Card -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover md:col-span-2 lg:col-span-2">
-                <div class="bg-gradient-to-r from-red-700 to-red-800 p-6 text-white">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-red-600 to-orange-600 p-6 text-white">
                     <h3 class="text-xl font-semibold flex items-center">
                         <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
                         </svg>
-                        Conservation & Research
-                        <span class="ml-3 bg-white text-red-700 px-2 py-1 rounded-full text-xs font-bold">CRITICALLY ENDANGERED</span>
+                        Conservation Status
                     </h3>
                 </div>
                 <div class="p-6">
@@ -300,52 +418,74 @@
                         </svg>
                     </button>
                     <div id="conservation-content" class="dropdown-content mt-4">
-                        <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-red-800">Listed as Critically Endangered (IUCN) - on the brink of extinction</p>
+                            </div>
                             <div>
-                                <h4 class="font-semibold text-red-700 mb-2">Conservation Concerns</h4>
+                                <h4 class="font-semibold text-gray-800 mb-2">Critical Status</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• Fewer than 50 mature individuals estimated</li>
                                     <li>• Ongoing habitat destruction in Tawi-Tawi</li>
                                     <li>• Species on the brink of extinction</li>
+                                    <li>• Extremely fragile due to restricted range</li>
                                 </ul>
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Research Importance</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• Represents one of the last remaining hornbill populations in Sulu</li>
-                                    <li>• Highlights urgent need for conservation in the region</li>
+                                    <li>• Last remaining hornbill in Sulu archipelago</li>
+                                    <li>• Highlights urgent conservation needs</li>
+                                    <li>• Critical for Sulu forest ecosystem</li>
+                                    <li>• Represents biodiversity crisis</li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="mt-4 p-4 bg-red-50 rounded-lg border border-red-200">
-                            <p class="text-sm font-medium text-red-800">IUCN Status: Critically Endangered</p>
-                            <p class="text-xs text-red-600 mt-1">Immediate conservation action required to prevent extinction</p>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Urgent Actions Needed</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Immediate habitat protection in Tawi-Tawi</li>
+                                    <li>• Strict anti-hunting enforcement</li>
+                                    <li>• Captive breeding programs</li>
+                                    <li>• Emergency conservation intervention</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Emergency Conservation Alert -->
-        <div class="mt-12 bg-gradient-to-r from-red-600 to-red-700 rounded-xl p-8 text-center text-white">
-            <h3 class="text-3xl font-bold mb-4">🚨 EXTINCTION ALERT</h3>
-            <p class="text-xl mb-4">With fewer than 50 individuals remaining, the Sulu Hornbill could disappear forever within our lifetime.</p>
-            <p class="text-lg opacity-90">Every remaining forest in Tawi-Tawi is crucial for this species' survival. The time to act is NOW.</p>
+        <!-- Critical Status and Significance -->
+        <div class="mt-12 grid md:grid-cols-2 gap-8">
+            <div class="bg-gradient-to-r from-red-600 to-orange-600 rounded-xl p-8 text-center text-white">
+                <h3 class="text-2xl font-bold mb-4">⚠️ Critical Emergency</h3>
+                <p class="text-lg">With fewer than 50 individuals remaining, the Sulu Hornbill faces imminent extinction. Every individual matters for the species' survival.</p>
+            </div>
+            
+            <div class="bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl p-8 text-center text-white">
+                <h3 class="text-2xl font-bold mb-4">🏛️ Living Treasure</h3>
+                <p class="text-lg">This magnificent bird represents the unique biodiversity of the Sulu archipelago and the urgent need for immediate conservation action.</p>
+            </div>
         </div>
 
-        <!-- Population Status -->
-        <div class="mt-8 bg-white rounded-xl p-8 shadow-lg">
-            <h3 class="text-2xl font-bold text-center mb-6 text-gray-800">Population Status</h3>
-            <div class="flex justify-center items-center space-x-8">
-                <div class="text-center">
-                    <div class="text-4xl font-bold text-red-600 mb-2">&lt;50</div>
-                    <p class="text-sm text-gray-600">Mature Individuals</p>
+        <!-- Conservation Priority -->
+        <div class="mt-12 bg-gradient-to-r from-red-100 to-orange-100 rounded-xl p-8 border-2 border-red-300">
+            <h3 class="text-2xl font-bold text-center mb-6 text-red-800">🚨 Conservation Priority</h3>
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+                <div>
+                    <div class="text-3xl mb-2">🏝️</div>
+                    <h4 class="font-semibold text-red-800 mb-2">Habitat Protection</h4>
+                    <p class="text-sm text-red-700">Immediate protection of remaining forests in Tawi-Tawi is critical</p>
                 </div>
-                
-                <div class="text-4xl text-red-500">⚠️</div>
-                <div class="text-center">
-                    <div class="text-4xl font-bold text-red-700 mb-2">CR</div>
-                    <p class="text-sm text-gray-600">IUCN Status</p>
+                <div>
+                    <div class="text-3xl mb-2">🛡️</div>
+                    <h4 class="font-semibold text-red-800 mb-2">Anti-Hunting</h4>
+                    <p class="text-sm text-red-700">Strict enforcement needed to prevent further population decline</p>
+                </div>
+                <div>
+                    <div class="text-3xl mb-2">🔬</div>
+                    <h4 class="font-semibold text-red-800 mb-2">Emergency Research</h4>
+                    <p class="text-sm text-red-700">Urgent studies needed to develop effective conservation strategies</p>
                 </div>
             </div>
         </div>
@@ -365,5 +505,5 @@
             }
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979de8c907b8fed9',t:'MTc1Njk5MzMzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97aa3da58655fedd',t:'MTc1NzEyMjY0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

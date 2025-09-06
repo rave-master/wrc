@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Philippine Serpent Eagle - Forest Predator</title>
+    <title>Philippine Serpent Eagle - Forest Predator and Protector</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -28,7 +28,7 @@
         }
         
         .hero-gradient {
-            background: linear-gradient(135deg, #7c2d12 0%, #9a3412 50%, #c2410c 100%);
+            background: linear-gradient(135deg, #451a03 0%, #7c2d12 50%, #a16207 100%);
         }
         
         .card-hover {
@@ -39,28 +39,75 @@
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
+        
+        .soar-animation {
+            animation: soar 4s ease-in-out infinite;
+        }
+        
+        @keyframes soar {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .eye-glow {
+            animation: eye-glow 3s ease-in-out infinite;
+        }
+        
+        @keyframes eye-glow {
+            0%, 100% {
+                text-shadow: 0 0 5px #fbbf24;
+            }
+            50% {
+                text-shadow: 0 0 15px #fbbf24, 0 0 25px #f59e0b;
+            }
+        }
     </style>
 </head>
-<body class="bg-gradient-to-br from-orange-50 to-amber-50 min-h-screen">
+<body class="bg-gradient-to-br from-amber-50 to-yellow-50 min-h-screen">
     <!-- Header -->
     <div class="hero-gradient text-white py-16">
         <div class="max-w-6xl mx-auto px-6 text-center">
             <div class="mb-6">
-                <svg class="w-20 h-20 mx-auto mb-4 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+                <img src="https://ia801001.us.archive.org/30/items/mg-5192/_MG_5172.JPG" alt="Philippine Serpent Eagle showing piercing yellow eyes and distinctive crest" class="w-32 h-32 mx-auto mb-4 rounded-full object-cover border-4 border-white/30 shadow-lg soar-animation" onerror="this.style.display='none'; document.getElementById('fallback-icon').style.display='block';">
+                <svg id="fallback-icon" class="w-20 h-20 mx-auto mb-4 text-white soar-animation hidden" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                 </svg>
             </div>
             <h1 class="text-5xl font-bold mb-4">Philippine Serpent Eagle</h1>
-            <p class="text-xl text-orange-100 mb-2"><em>Spilonis holospilus</em></p>
-            <p class="text-lg text-orange-200">Master of the Forest Canopy - Snake Hunter Extraordinaire</p>
-            <div class="mt-6 inline-block bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
-                <span class="text-sm font-medium">Class: Aves</span>
+            <p class="text-xl text-amber-100 mb-2"><em>Spilonis holospilus</em></p>
+            <p class="text-lg text-amber-200">Forest Predator and Protector</p>
+            <div class="mt-6 flex justify-center space-x-4">
+                <div class="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
+                    <span class="text-sm font-medium">Class: Aves</span>
+                </div>
+                <div class="bg-yellow-600 backdrop-blur-sm rounded-full px-4 py-2">
+                    <span class="text-sm font-bold eye-glow">👁️ Piercing Eyes</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Endemic Species Banner -->
+    <div class="max-w-6xl mx-auto px-6 py-6">
+        <div class="bg-gradient-to-r from-amber-100 to-yellow-100 border-l-4 border-amber-500 p-6 rounded-lg">
+            <div class="flex items-center">
+                <svg class="w-8 h-8 text-amber-600 mr-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                <div>
+                    <h3 class="text-lg font-bold text-amber-800">Philippine Endemic Raptor</h3>
+                    <p class="text-amber-700">Specialized snake hunter with piercing yellow eyes and distinctive "klak-klak-klak" forest calls.</p>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <div class="max-w-6xl mx-auto px-6 py-12">
+    <div class="max-w-6xl mx-auto px-6 py-6">
         <!-- Quote -->
         <div class="text-center mb-12">
             <blockquote class="text-2xl font-medium text-gray-700 italic">
@@ -68,14 +115,34 @@
             </blockquote>
         </div>
 
+        <!-- Habitat Icons -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🌲</div>
+                <p class="text-sm text-gray-600">Primary Forests</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🌴</div>
+                <p class="text-sm text-gray-600">Forest Edges</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🌾</div>
+                <p class="text-sm text-gray-600">Upland Grasslands</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🐍</div>
+                <p class="text-sm text-gray-600">Snake Specialist</p>
+            </div>
+        </div>
+
         <!-- Cards Grid -->
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Physical Characteristics Card -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
-                <div class="bg-gradient-to-r from-amber-600 to-orange-600 p-6 text-white">
+                <div class="bg-gradient-to-r from-orange-600 to-red-600 p-6 text-white">
                     <h3 class="text-xl font-semibold flex items-center">
                         <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                         </svg>
                         Physical Characteristics
                     </h3>
@@ -89,18 +156,18 @@
                     </button>
                     <div id="physical-content" class="dropdown-content mt-4">
                         <div class="space-y-4">
-                            <div class="bg-amber-50 p-3 rounded-lg">
-                                <p class="text-sm font-medium text-amber-800">Medium-sized raptor with piercing yellow eyes</p>
+                            <div class="bg-orange-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-orange-800">Medium-sized raptor with piercing yellow eyes and distinctive crest</p>
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Body Structure</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• Length: 50–60 cm</li>
                                     <li>• Wingspan: ~110 cm</li>
-                                    <li>• Plumage: dark brown with lighter underparts</li>
-                                    <li>• Crest: short and erectile, giving a fierce look</li>
-                                    <li>• Beak: hooked, black-tipped, yellow cere</li>
-                                    <li>• Legs: strong, yellow, adapted for grasping snakes</li>
+                                    <li>• Dark brown plumage with lighter underparts</li>
+                                    <li>• Short, erectile crest giving fierce look</li>
+                                    <li>• Hooked beak with black tip and yellow cere</li>
+                                    <li>• Strong yellow legs adapted for grasping snakes</li>
                                 </ul>
                             </div>
                             <div>
@@ -114,9 +181,10 @@
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Unique Features</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• Distinctive loud "klak-klak-klak" calls</li>
+                                    <li>• Distinctive "klak-klak-klak" calls</li>
                                     <li>• Specialist in snake predation</li>
-                                    <li>• Often perches quietly before ambushing prey</li>
+                                    <li>• Perches quietly before ambushing prey</li>
+                                    <li>• Piercing yellow eyes for keen vision</li>
                                 </ul>
                             </div>
                         </div>
@@ -143,15 +211,33 @@
                     </button>
                     <div id="habitat-content" class="dropdown-content mt-4">
                         <div class="space-y-4">
-                            <div class="bg-blue-50 p-3 rounded-lg">
-                                <p class="text-sm font-medium text-blue-800">Endemic to the Philippines</p>
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-green-800">Endemic to the Philippines - found across multiple islands</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Geographic Range</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>🏝️ Throughout the Philippines</li>
+                                    <li>🏝️ Multiple island populations</li>
+                                    <li>🌍 Endemic species</li>
+                                </ul>
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Habitat Types</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>🌲 Primary and secondary forests</li>
-                                    <li>🌴 Forest edges</li>
+                                    <li>🌴 Forest edges and clearings</li>
                                     <li>🌾 Upland grasslands with scattered trees</li>
+                                    <li>🌿 Mixed woodland environments</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Habitat Requirements</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Tall perching trees for hunting</li>
+                                    <li>• Open areas for swooping attacks</li>
+                                    <li>• Abundant reptile prey populations</li>
+                                    <li>• Nesting sites in forest canopy</li>
                                 </ul>
                             </div>
                         </div>
@@ -159,9 +245,9 @@
                 </div>
             </div>
 
-            <!-- Diet and Feeding Card -->
+            <!-- Diet Card -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
-                <div class="bg-gradient-to-r from-red-600 to-pink-600 p-6 text-white">
+                <div class="bg-gradient-to-r from-yellow-600 to-orange-600 p-6 text-white">
                     <h3 class="text-xl font-semibold flex items-center">
                         <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97L6.5 22h3l-.25-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5l1.5 6h2l-1.5-6H22V6h-6z"/>
@@ -178,21 +264,22 @@
                     </button>
                     <div id="diet-content" class="dropdown-content mt-4">
                         <div class="space-y-4">
-                            <div class="bg-red-50 p-3 rounded-lg">
-                                <p class="text-sm font-medium text-red-800">🐍 Specialized Snake Hunter</p>
+                            <div class="bg-yellow-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-yellow-800">Specialized snake hunter - nature's reptile population controller</p>
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Primary Food Sources</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• Snakes</li>
-                                    <li>• Lizards</li>
+                                    <li>🐍 Snakes (various species)</li>
+                                    <li>🦎 Lizards and geckos</li>
                                 </ul>
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Secondary Food Sources</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• Frogs</li>
-                                    <li>• Small mammals and birds</li>
+                                    <li>🐸 Frogs and toads</li>
+                                    <li>🐭 Small mammals</li>
+                                    <li>🐦 Small birds</li>
                                 </ul>
                             </div>
                             <div>
@@ -200,6 +287,8 @@
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• Hunts from a perch, swooping down on prey</li>
                                     <li>• Uses strong talons to immobilize reptiles</li>
+                                    <li>• Patient ambush predator</li>
+                                    <li>• Regulates snake populations naturally</li>
                                 </ul>
                             </div>
                         </div>
@@ -207,36 +296,107 @@
                 </div>
             </div>
 
-            <!-- Danger to Humans Card -->
+            <!-- Hunting Behavior Card -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
-                <div class="bg-gradient-to-r from-yellow-600 to-orange-500 p-6 text-white">
+                <div class="bg-gradient-to-r from-purple-600 to-pink-600 p-6 text-white">
                     <h3 class="text-xl font-semibold flex items-center">
                         <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        Hunting Behavior
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('hunting')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="hunting-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="hunting-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-purple-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-purple-800">Master of stealth and precision - specialized snake hunting techniques</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Hunting Strategy</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Perches quietly on high vantage points</li>
+                                    <li>• Scans forest floor for movement</li>
+                                    <li>• Swift, silent swooping attacks</li>
+                                    <li>• Precise talon strikes to immobilize prey</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Adaptations for Snake Hunting</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Strong, sharp talons for gripping</li>
+                                    <li>• Keen eyesight to spot camouflaged prey</li>
+                                    <li>• Quick reflexes to avoid snake strikes</li>
+                                    <li>• Powerful wings for rapid descent</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Vocalizations</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Distinctive "klak-klak-klak" calls</li>
+                                    <li>• Territorial announcements</li>
+                                    <li>• Communication with mates</li>
+                                    <li>• Warning calls to other eagles</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Human Interaction Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-blue-600 to-teal-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                         </svg>
                         Human Interaction
                     </h3>
                 </div>
                 <div class="p-6">
-                    <button onclick="toggleDropdown('danger')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                    <button onclick="toggleDropdown('human')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
                         <span>View Details</span>
-                        <svg id="danger-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                        <svg id="human-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M7 10l5 5 5-5z"/>
                         </svg>
                     </button>
-                    <div id="danger-content" class="dropdown-content mt-4">
+                    <div id="human-content" class="dropdown-content mt-4">
                         <div class="space-y-4">
-                            <div class="bg-green-50 p-3 rounded-lg">
-                                <p class="text-sm font-medium text-green-800">• Harmless to humans</p>
-                                <p class="text-sm text-green-600">• Rarely interacts with people</p>
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-blue-800">Harmless to humans and beneficial for natural pest control</p>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-red-700 mb-2 flex items-center">
-                                    ⚠️ Human-Driven Threats
-                                </h4>
+                                <h4 class="font-semibold text-green-700 mb-2">Safety for Humans</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
-                                    <li>• Deforestation reduces hunting grounds</li>
-                                    <li>• Hunting for trophies or persecution</li>
+                                    <li>✓ Completely harmless to humans</li>
+                                    <li>✓ Rarely interacts with people</li>
+                                    <li>✓ Beneficial for controlling snake populations</li>
+                                    <li>✓ Natural pest control service</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-red-700 mb-2">Human-Driven Threats</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>⚠️ Deforestation reduces hunting grounds</li>
+                                    <li>⚠️ Hunting for trophies or persecution</li>
+                                    <li>⚠️ Habitat fragmentation</li>
+                                    <li>⚠️ Targeted due to bold calls</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Ecological Benefits</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Controls venomous snake populations</li>
+                                    <li>• Maintains ecological balance</li>
+                                    <li>• Reduces human-snake conflicts</li>
+                                    <li>• Indicator of healthy forest ecosystems</li>
                                 </ul>
                             </div>
                         </div>
@@ -245,13 +405,13 @@
             </div>
 
             <!-- Conservation Card -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover md:col-span-2 lg:col-span-2">
-                <div class="bg-gradient-to-r from-teal-600 to-cyan-600 p-6 text-white">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-red-600 to-orange-600 p-6 text-white">
                     <h3 class="text-xl font-semibold flex items-center">
                         <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
                         </svg>
-                        Conservation & Research
+                        Conservation Status
                     </h3>
                 </div>
                 <div class="p-6">
@@ -262,12 +422,17 @@
                         </svg>
                     </button>
                     <div id="conservation-content" class="dropdown-content mt-4">
-                        <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-red-800">Vulnerable to habitat loss - dependent on forested areas</p>
+                            </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-2">Conservation Concerns</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• Dependence on forested areas makes it vulnerable</li>
-                                    <li>• Often targeted by hunters due to its bold calls</li>
+                                    <li>• Often targeted by hunters due to bold calls</li>
+                                    <li>• Habitat fragmentation affects hunting success</li>
+                                    <li>• Declining prey populations in disturbed areas</li>
                                 </ul>
                             </div>
                             <div>
@@ -275,6 +440,17 @@
                                 <ul class="text-sm text-gray-600 space-y-1">
                                     <li>• Predator role helps regulate snake populations</li>
                                     <li>• Useful in studying raptor adaptation to islands</li>
+                                    <li>• Indicator species for forest health</li>
+                                    <li>• Important for understanding ecosystem balance</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Conservation Actions Needed</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Protect remaining forest habitats</li>
+                                    <li>• Reduce hunting pressure</li>
+                                    <li>• Maintain forest connectivity</li>
+                                    <li>• Education about ecological benefits</li>
                                 </ul>
                             </div>
                         </div>
@@ -283,16 +459,38 @@
             </div>
         </div>
 
-        <!-- Fun Fact Cards -->
+        <!-- Ecological Role and Significance -->
         <div class="mt-12 grid md:grid-cols-2 gap-8">
-            <div class="bg-gradient-to-r from-purple-500 to-indigo-500 rounded-xl p-8 text-center text-white">
-                <h3 class="text-2xl font-bold mb-4">🦅 Hunting Strategy</h3>
-                <p class="text-lg">The Serpent Eagle is a master of patience! It can sit motionless on a perch for hours, waiting for the perfect moment to swoop down and catch unsuspecting snakes with its powerful talons.</p>
+            <div class="bg-gradient-to-r from-amber-600 to-yellow-600 rounded-xl p-8 text-center text-white">
+                <h3 class="text-2xl font-bold mb-4">🐍 Snake Controller</h3>
+                <p class="text-lg">As a specialized snake predator, the Philippine Serpent Eagle plays a crucial role in maintaining balanced reptile populations and reducing human-snake conflicts.</p>
             </div>
             
-            <div class="bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl p-8 text-center text-white">
-                <h3 class="text-2xl font-bold mb-4">🔊 Forest Calls</h3>
-                <p class="text-lg">Their distinctive "klak-klak-klak" calls can be heard echoing through Philippine forests from great distances, serving as both territorial markers and communication with their mates.</p>
+            <div class="bg-gradient-to-r from-stone-700 to-amber-700 rounded-xl p-8 text-center text-white">
+                <h3 class="text-2xl font-bold mb-4">🌲 Forest Guardian</h3>
+                <p class="text-lg">This magnificent raptor symbolizes the wild spirit of Philippine forests and serves as an important indicator of ecosystem health.</p>
+            </div>
+        </div>
+
+        <!-- Ecological Role -->
+        <div class="mt-12 bg-gradient-to-r from-amber-100 to-yellow-100 rounded-xl p-8">
+            <h3 class="text-2xl font-bold text-center mb-6 text-gray-800">🦅 Apex Predator Role</h3>
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+                <div>
+                    <div class="text-3xl mb-2">🎯</div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Precision Hunter</h4>
+                    <p class="text-sm text-gray-600">Specialized hunting techniques for capturing snakes and reptiles with remarkable accuracy</p>
+                </div>
+                <div>
+                    <div class="text-3xl mb-2">⚖️</div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Population Control</h4>
+                    <p class="text-sm text-gray-600">Maintains natural balance by controlling snake and reptile populations in forest ecosystems</p>
+                </div>
+                <div>
+                    <div class="text-3xl mb-2">🔊</div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Forest Voice</h4>
+                    <p class="text-sm text-gray-600">Distinctive calls echo through forests, marking territory and communicating with mates</p>
+                </div>
             </div>
         </div>
     </div>
@@ -311,5 +509,5 @@
             }
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979de3578514fed9',t:'MTc1Njk5MzExNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97aa472f2153fedd',t:'MTc1NzEyMzAzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

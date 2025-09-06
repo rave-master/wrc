@@ -3,159 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>White-bellied Sea Eagle - Icthyophaga leucogaster</title>
+    <title>White-bellied Sea Eagle - Coastal Guardian and Apex Predator</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
         .dropdown-content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
         }
+        
         .dropdown-content.open {
             max-height: 1000px;
             transition: max-height 0.5s ease-in;
         }
+        
         .rotate-180 {
             transform: rotate(180deg);
         }
-        .eagle-gradient {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 50%, #0284c7 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .soar-animation {
+            animation: soar 6s ease-in-out infinite;
+        }
+        
+        @keyframes soar {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-8px) rotate(2deg);
+            }
+            75% {
+                transform: translateY(-5px) rotate(-2deg);
+            }
+        }
+        
+        .wave-shimmer {
+            animation: wave-shimmer 4s ease-in-out infinite;
+        }
+        
+        @keyframes wave-shimmer {
+            0%, 100% {
+                text-shadow: 0 0 5px #0ea5e9;
+            }
+            50% {
+                text-shadow: 0 0 15px #0ea5e9, 0 0 25px #0284c7;
+            }
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+<body class="bg-gradient-to-br from-sky-50 to-blue-50 min-h-screen">
     <!-- Header -->
-    <header class="eagle-gradient text-white py-12">
-        <div class="container mx-auto px-6 text-center">
+    <div class="hero-gradient text-white py-16">
+        <div class="max-w-6xl mx-auto px-6 text-center">
             <div class="mb-6">
-                <svg class="w-20 h-20 mx-auto mb-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                <img src="https://ia801001.us.archive.org/30/items/mg-5192/_MG_5238.JPG" alt="White-bellied Sea Eagle showing distinctive white belly and powerful build" class="w-32 h-32 mx-auto mb-4 rounded-full object-cover border-4 border-white/30 shadow-lg soar-animation" onerror="this.style.display='none'; document.getElementById('fallback-icon').style.display='block';">
+                <svg id="fallback-icon" class="w-20 h-20 mx-auto mb-4 text-white soar-animation hidden" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                 </svg>
             </div>
             <h1 class="text-5xl font-bold mb-4">White-bellied Sea Eagle</h1>
-            <p class="text-xl italic mb-2">Icthyophaga leucogaster</p>
-            <p class="text-lg opacity-90">Class: Aves</p>
-            <div class="mt-6 bg-white/20 backdrop-blur-sm rounded-lg p-4 max-w-4xl mx-auto">
-                <p class="text-lg leading-relaxed">"The White-bellied Sea Eagle is not only a skilled hunter but also a guardian of aquatic ecosystems, making its protection vital for coastal biodiversity."</p>
+            <p class="text-xl text-sky-100 mb-2"><em>Icthyophaga leucogaster</em></p>
+            <p class="text-lg text-sky-200">Coastal Guardian and Apex Predator</p>
+            <div class="mt-6 flex justify-center space-x-4">
+                <div class="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
+                    <span class="text-sm font-medium">Class: Aves</span>
+                </div>
+                <div class="bg-cyan-600 backdrop-blur-sm rounded-full px-4 py-2">
+                    <span class="text-sm font-bold wave-shimmer">🌊 Coastal Master</span>
+                </div>
             </div>
         </div>
-    </header>
+    </div>
+
+    <!-- Species Banner -->
+    <div class="max-w-6xl mx-auto px-6 py-6">
+        <div class="bg-gradient-to-r from-sky-100 to-blue-100 border-l-4 border-sky-500 p-6 rounded-lg">
+            <div class="flex items-center">
+                <svg class="w-8 h-8 text-sky-600 mr-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                <div>
+                    <h3 class="text-lg font-bold text-sky-800">Asia-Pacific's Iconic Raptor</h3>
+                    <p class="text-sky-700">Large, powerful sea eagle with distinctive white belly, commanding coastal waters from India to Australia.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-6 py-12">
-        <div class="grid gap-8 max-w-6xl mx-auto">
-            
+    <div class="max-w-6xl mx-auto px-6 py-6">
+        <!-- Quote -->
+        <div class="text-center mb-12">
+            <blockquote class="text-2xl font-medium text-gray-700 italic">
+                "The White-bellied Sea Eagle is not only a skilled hunter but also a guardian of aquatic ecosystems, making its protection vital for coastal biodiversity."
+            </blockquote>
+        </div>
+
+        <!-- Habitat Icons -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🌊</div>
+                <p class="text-sm text-gray-600">Coastal Cliffs</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🌴</div>
+                <p class="text-sm text-gray-600">Mangroves</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🏞️</div>
+                <p class="text-sm text-gray-600">Rivers & Lakes</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🐟</div>
+                <p class="text-sm text-gray-600">Fish Hunter</p>
+            </div>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Physical Characteristics Card -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div class="bg-gradient-to-r from-blue-600 to-blue-700 p-6 cursor-pointer" onclick="toggleDropdown('physical')">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                                </svg>
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-blue-600 to-cyan-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        Physical Characteristics
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('physical')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="physical-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="physical-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-blue-800">Large, powerful raptor with bold white and dark gray plumage and commanding presence</p>
                             </div>
                             <div>
-                                <h2 class="text-2xl font-bold text-white">Physical Characteristics</h2>
-                                <p class="text-blue-100">Large, powerful raptor with distinctive plumage</p>
-                            </div>
-                        </div>
-                        <svg id="physical-arrow" class="w-6 h-6 text-white transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </div>
-                </div>
-                <div id="physical-content" class="dropdown-content">
-                    <div class="p-6 space-y-6">
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="bg-blue-50 rounded-lg p-4">
-                                <h3 class="font-semibold text-blue-900 mb-3 flex items-center">
-                                    <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-                                    Body Structure
-                                </h3>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li><strong>Wingspan:</strong> 1.8–2.2 m</li>
-                                    <li><strong>Weight:</strong> 2.5–4.5 kg (females heavier)</li>
-                                    <li><strong>Plumage:</strong> White head, breast, belly, and tail with dark gray wings and back</li>
-                                    <li><strong>Beak:</strong> Strong, hooked, dark-tipped for tearing flesh</li>
-                                    <li><strong>Tail:</strong> Short and wedge-shaped, aiding in gliding</li>
-                                    <li><strong>Eyes:</strong> Keen eyesight for detecting prey over long distances</li>
+                                <h4 class="font-semibold text-gray-800 mb-2">Body Structure</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Wingspan: 1.8–2.2 m</li>
+                                    <li>• Weight: 2.5–4.5 kg (females heavier)</li>
+                                    <li>• White head, breast, belly, and tail</li>
+                                    <li>• Dark gray wings and back</li>
+                                    <li>• Strong, hooked, dark-tipped beak</li>
+                                    <li>• Short, wedge-shaped tail for maneuvering</li>
                                 </ul>
                             </div>
-                            <div class="bg-purple-50 rounded-lg p-4">
-                                <h3 class="font-semibold text-purple-900 mb-3 flex items-center">
-                                    <span class="w-2 h-2 bg-purple-600 rounded-full mr-2"></span>
-                                    Sexual Dimorphism
-                                </h3>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li>Females are noticeably larger and heavier than males</li>
-                                    <li>Plumage between sexes is nearly identical</li>
-                                    <li>Behavioral differences mostly seen during nesting, with females more dominant in defense</li>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Sexual Dimorphism</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Females noticeably larger and heavier</li>
+                                    <li>• Plumage nearly identical between sexes</li>
+                                    <li>• Females more dominant in nest defense</li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="bg-green-50 rounded-lg p-4">
-                            <h3 class="font-semibold text-green-900 mb-3 flex items-center">
-                                <span class="w-2 h-2 bg-green-600 rounded-full mr-2"></span>
-                                Unique Features
-                            </h3>
-                            <ul class="space-y-2 text-gray-700">
-                                <li>Known for soaring effortlessly on outstretched wings with slow, deep wingbeats</li>
-                                <li>Emits loud, goose-like honking calls, often heard in pairs during territory defense</li>
-                                <li>Engages in kleptoparasitism (stealing food from other raptors like ospreys)</li>
-                                <li>Cultural significance: revered in folklore as a spirit bird in some regions</li>
-                            </ul>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Unique Features</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Soars effortlessly with slow, deep wingbeats</li>
+                                    <li>• Loud, goose-like honking calls</li>
+                                    <li>• Keen eyesight for long-distance prey detection</li>
+                                    <li>• Cultural significance as spirit bird</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Habitat and Distribution Card -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div class="bg-gradient-to-r from-green-600 to-green-700 p-6 cursor-pointer" onclick="toggleDropdown('habitat')">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                                </svg>
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-teal-600 to-emerald-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                        Habitat & Distribution
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('habitat')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="habitat-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="habitat-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-teal-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-teal-800">Thrives near large bodies of water where fish and waterbirds are abundant</p>
                             </div>
                             <div>
-                                <h2 class="text-2xl font-bold text-white">Habitat & Distribution</h2>
-                                <p class="text-green-100">Thrives near large bodies of water across Asia and Australia</p>
-                            </div>
-                        </div>
-                        <svg id="habitat-arrow" class="w-6 h-6 text-white transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </div>
-                </div>
-                <div id="habitat-content" class="dropdown-content">
-                    <div class="p-6 space-y-6">
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="bg-blue-50 rounded-lg p-4">
-                                <h3 class="font-semibold text-blue-900 mb-3 flex items-center">
-                                    <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-                                    Geographic Range
-                                </h3>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li>India to Southeast Asia, including the Philippines</li>
-                                    <li>Indonesia and New Guinea</li>
-                                    <li>Coastal and inland Australia</li>
+                                <h4 class="font-semibold text-gray-800 mb-2">Geographic Range</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>🌏 India to Southeast Asia, including Philippines</li>
+                                    <li>🏝️ Indonesia and New Guinea</li>
+                                    <li>🇦🇺 Coastal and inland Australia</li>
                                 </ul>
                             </div>
-                            <div class="bg-green-50 rounded-lg p-4">
-                                <h3 class="font-semibold text-green-900 mb-3 flex items-center">
-                                    <span class="w-2 h-2 bg-green-600 rounded-full mr-2"></span>
-                                    Habitat Types
-                                </h3>
-                                <ul class="space-y-2 text-gray-700">
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Habitat Types</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
                                     <li>🌊 Coastal cliffs and beaches</li>
                                     <li>🌴 Mangroves and estuaries</li>
                                     <li>🏞️ Large inland rivers and lakes</li>
-                                    <li>🌳 Tall emergent trees or cliffs near water (nesting sites)</li>
+                                    <li>🌳 Tall emergent trees near water</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Habitat Requirements</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Proximity to large water bodies</li>
+                                    <li>• Abundant fish and waterbird populations</li>
+                                    <li>• Tall nesting sites (trees or cliffs)</li>
+                                    <li>• Minimal human disturbance</li>
                                 </ul>
                             </div>
                         </div>
@@ -163,59 +248,51 @@
                 </div>
             </div>
 
-            <!-- Diet and Feeding Card -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div class="bg-gradient-to-r from-orange-600 to-orange-700 p-6 cursor-pointer" onclick="toggleDropdown('diet')">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                                </svg>
+            <!-- Diet Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-orange-600 to-red-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        Diet & Feeding
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('diet')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="diet-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="diet-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-orange-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-orange-800">Apex predator and opportunistic feeder specializing in aquatic prey</p>
                             </div>
                             <div>
-                                <h2 class="text-2xl font-bold text-white">Diet & Feeding Behavior</h2>
-                                <p class="text-orange-100">Apex predator and opportunistic feeder</p>
-                            </div>
-                        </div>
-                        <svg id="diet-arrow" class="w-6 h-6 text-white transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </div>
-                </div>
-                <div id="diet-content" class="dropdown-content">
-                    <div class="p-6 space-y-6">
-                        <div class="grid md:grid-cols-3 gap-6">
-                            <div class="bg-blue-50 rounded-lg p-4">
-                                <h3 class="font-semibold text-blue-900 mb-3 flex items-center">
-                                    <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-                                    Primary Food
-                                </h3>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li>Fish (main prey, snatched from water surface)</li>
-                                    <li>Waterbirds (ducks, herons)</li>
-                                    <li>Reptiles (turtles, snakes)</li>
+                                <h4 class="font-semibold text-gray-800 mb-2">Primary Food</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>🐟 Fish (main prey, snatched from surface)</li>
+                                    <li>🦆 Waterbirds (ducks, herons)</li>
+                                    <li>🐢 Reptiles (turtles, snakes)</li>
                                 </ul>
                             </div>
-                            <div class="bg-purple-50 rounded-lg p-4">
-                                <h3 class="font-semibold text-purple-900 mb-3 flex items-center">
-                                    <span class="w-2 h-2 bg-purple-600 rounded-full mr-2"></span>
-                                    Secondary Food
-                                </h3>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li>Mammals (occasionally)</li>
-                                    <li>Carrion (dead animals, roadkill, discarded fish)</li>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Secondary Food</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>🐭 Mammals (occasionally)</li>
+                                    <li>💀 Carrion (dead animals, roadkill)</li>
+                                    <li>🗑️ Discarded fish</li>
                                 </ul>
                             </div>
-                            <div class="bg-green-50 rounded-lg p-4">
-                                <h3 class="font-semibold text-green-900 mb-3 flex items-center">
-                                    <span class="w-2 h-2 bg-green-600 rounded-full mr-2"></span>
-                                    Feeding Behavior
-                                </h3>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li>Soars high while scanning waters below</li>
-                                    <li>Dives steeply and uses talons to snatch prey</li>
-                                    <li>Often harasses other birds to steal their catch</li>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Feeding Behavior</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Soars high while scanning waters below</li>
+                                    <li>• Dives steeply using talons to snatch prey</li>
+                                    <li>• Engages in kleptoparasitism (food theft)</li>
+                                    <li>• Harasses other birds mid-flight</li>
                                 </ul>
                             </div>
                         </div>
@@ -223,44 +300,106 @@
                 </div>
             </div>
 
-            <!-- Danger and Threats Card -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div class="bg-gradient-to-r from-red-600 to-red-700 p-6 cursor-pointer" onclick="toggleDropdown('danger')">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
-                                </svg>
+            <!-- Hunting Behavior Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-purple-600 to-pink-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 11H7l3-7 3 7h-2v8h-2v-8z"/>
+                        </svg>
+                        Hunting & Behavior
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('hunting')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="hunting-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="hunting-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-purple-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-purple-800">Master of aerial hunting with impressive soaring and diving abilities</p>
                             </div>
                             <div>
-                                <h2 class="text-2xl font-bold text-white">Danger to Humans</h2>
-                                <p class="text-red-100">Generally not dangerous, but faces human threats</p>
-                            </div>
-                        </div>
-                        <svg id="danger-arrow" class="w-6 h-6 text-white transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </div>
-                </div>
-                <div id="danger-content" class="dropdown-content">
-                    <div class="p-6 space-y-6">
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
-                                <h3 class="font-semibold text-green-900 mb-3">✅ Safety to Humans</h3>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li>Not dangerous to humans</li>
-                                    <li>May dive aggressively when nests are disturbed</li>
-                                    <li>Large size and calls can intimidate, but they pose no real threat</li>
+                                <h4 class="font-semibold text-gray-800 mb-2">Hunting Strategy</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Soars effortlessly on thermal currents</li>
+                                    <li>• Scans water surfaces from great heights</li>
+                                    <li>• Executes steep, powerful dives</li>
+                                    <li>• Precise talon strikes at water surface</li>
                                 </ul>
                             </div>
-                            <div class="bg-red-50 rounded-lg p-4 border-l-4 border-red-500">
-                                <h3 class="font-semibold text-red-900 mb-3">⚠️ Threats from Humans</h3>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li>Habitat loss due to deforestation and coastal development</li>
-                                    <li>Wetland reclamation</li>
-                                    <li>Illegal hunting and egg collection</li>
-                                    <li>Declining fish stocks and entanglement in fishing nets</li>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Flight Adaptations</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Broad wings for efficient soaring</li>
+                                    <li>• Wedge-shaped tail for maneuverability</li>
+                                    <li>• Slow, deep wingbeats when active flying</li>
+                                    <li>• Excellent thermal riding abilities</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Territorial Behavior</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Loud, goose-like honking calls</li>
+                                    <li>• Pairs defend territory together</li>
+                                    <li>• Aggressive nest site defense</li>
+                                    <li>• Spectacular aerial displays</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Human Interaction Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-blue-600 to-teal-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        Human Interaction
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('human')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="human-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="human-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-blue-800">Not dangerous to humans but may dive aggressively when nests are disturbed</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-green-700 mb-2">Safety for Humans</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>✓ Not dangerous to humans</li>
+                                    <li>✓ Poses no real threat despite size</li>
+                                    <li>✓ Generally avoids human contact</li>
+                                    <li>✓ Cultural reverence in many regions</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-amber-700 mb-2">Caution Needed</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>⚠️ May dive aggressively near nests</li>
+                                    <li>⚠️ Large size and calls can intimidate</li>
+                                    <li>⚠️ Protective during breeding season</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-red-700 mb-2">Threats from Humans</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>⚠️ Habitat loss from coastal development</li>
+                                    <li>⚠️ Illegal hunting and egg collection</li>
+                                    <li>⚠️ Declining fish stocks</li>
+                                    <li>⚠️ Entanglement in fishing nets</li>
                                 </ul>
                             </div>
                         </div>
@@ -269,78 +408,100 @@
             </div>
 
             <!-- Conservation Card -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div class="bg-gradient-to-r from-teal-600 to-teal-700 p-6 cursor-pointer" onclick="toggleDropdown('conservation')">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                                </svg>
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-green-600 to-teal-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        Conservation Status
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('conservation')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="conservation-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="conservation-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-green-800">Least Concern (IUCN) but faces local population declines</p>
                             </div>
                             <div>
-                                <h2 class="text-2xl font-bold text-white">Conservation & Research</h2>
-                                <p class="text-teal-100">Least Concern status but faces local population declines</p>
-                            </div>
-                        </div>
-                        <svg id="conservation-arrow" class="w-6 h-6 text-white transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </div>
-                </div>
-                <div id="conservation-content" class="dropdown-content">
-                    <div class="p-6 space-y-6">
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="bg-yellow-50 rounded-lg p-4">
-                                <h3 class="font-semibold text-yellow-900 mb-3 flex items-center">
-                                    <span class="w-2 h-2 bg-yellow-600 rounded-full mr-2"></span>
-                                    Conservation Concerns
-                                </h3>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li>Sensitive to habitat destruction and disturbance near nesting sites</li>
-                                    <li>Pollution and reduced prey availability impact survival</li>
-                                    <li>Protection of mangroves and wetlands is critical</li>
+                                <h4 class="font-semibold text-gray-800 mb-2">Conservation Concerns</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Sensitive to habitat destruction near nests</li>
+                                    <li>• Pollution and reduced prey availability</li>
+                                    <li>• Protection of mangroves and wetlands critical</li>
+                                    <li>• Local population declines in some areas</li>
                                 </ul>
                             </div>
-                            <div class="bg-blue-50 rounded-lg p-4">
-                                <h3 class="font-semibold text-blue-900 mb-3 flex items-center">
-                                    <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-                                    Research Importance
-                                </h3>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li>Indicator of coastal and river ecosystem health</li>
-                                    <li>Apex predator role helps regulate fish and waterbird populations</li>
-                                    <li>Studied for breeding ecology, territorial behavior, and migration</li>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Research Importance</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Indicator of coastal ecosystem health</li>
+                                    <li>• Apex predator role in population regulation</li>
+                                    <li>• Studies on breeding ecology and behavior</li>
+                                    <li>• Migration pattern research</li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="bg-teal-50 rounded-lg p-4 text-center">
-                            <div class="inline-flex items-center justify-center w-16 h-16 bg-teal-600 text-white rounded-full mb-4">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                                </svg>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Conservation Actions</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Protect coastal nesting habitats</li>
+                                    <li>• Maintain healthy fish populations</li>
+                                    <li>• Reduce coastal development impacts</li>
+                                    <li>• Monitor breeding success rates</li>
+                                </ul>
                             </div>
-                            <h3 class="text-lg font-semibold text-teal-900 mb-2">IUCN Status: Least Concern</h3>
-                            <p class="text-gray-600">Despite overall stable populations, local declines require continued monitoring and habitat protection</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 mt-16">
-        <div class="container mx-auto px-6 text-center">
-            <p class="text-lg mb-2">White-bellied Sea Eagle Conservation</p>
-            <p class="text-gray-400">Protecting coastal biodiversity through education and awareness</p>
+        <!-- Ecological Role and Significance -->
+        <div class="mt-12 grid md:grid-cols-2 gap-8">
+            <div class="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl p-8 text-center text-white">
+                <h3 class="text-2xl font-bold mb-4">🌊 Apex Predator</h3>
+                <p class="text-lg">As a top predator in coastal ecosystems, the White-bellied Sea Eagle helps regulate fish and waterbird populations, maintaining aquatic balance.</p>
+            </div>
+            
+            <div class="bg-gradient-to-r from-teal-600 to-blue-600 rounded-xl p-8 text-center text-white">
+                <h3 class="text-2xl font-bold mb-4">🏛️ Cultural Icon</h3>
+                <p class="text-lg">Revered across Asia-Pacific cultures as a symbol of strength and freedom, this magnificent raptor holds deep spiritual significance.</p>
+            </div>
         </div>
-    </footer>
+
+        <!-- Ecological Role -->
+        <div class="mt-12 bg-gradient-to-r from-sky-100 to-blue-100 rounded-xl p-8">
+            <h3 class="text-2xl font-bold text-center mb-6 text-gray-800">🦅 Ecosystem Guardian Role</h3>
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+                <div>
+                    <div class="text-3xl mb-2">🎯</div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Precision Hunter</h4>
+                    <p class="text-sm text-gray-600">Masters aerial hunting with spectacular dives and surface strikes, controlling aquatic prey populations</p>
+                </div>
+                <div>
+                    <div class="text-3xl mb-2">🌡️</div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Ecosystem Indicator</h4>
+                    <p class="text-sm text-gray-600">Population health reflects the condition of coastal and river ecosystems across the Asia-Pacific region</p>
+                </div>
+                <div>
+                    <div class="text-3xl mb-2">📢</div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Territorial Voice</h4>
+                    <p class="text-sm text-gray-600">Loud honking calls echo across waters, marking territory and maintaining pair bonds in coastal domains</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        function toggleDropdown(section) {
-            const content = document.getElementById(section + '-content');
-            const arrow = document.getElementById(section + '-arrow');
+        function toggleDropdown(id) {
+            const content = document.getElementById(id + '-content');
+            const arrow = document.getElementById(id + '-arrow');
             
             if (content.classList.contains('open')) {
                 content.classList.remove('open');
@@ -350,18 +511,6 @@
                 arrow.classList.add('rotate-180');
             }
         }
-
-        // Add smooth scrolling for better UX
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('[onclick^="toggleDropdown"]');
-            cards.forEach(card => {
-                card.addEventListener('click', function() {
-                    setTimeout(() => {
-                        this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }, 100);
-                });
-            });
-        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979dc43e72ff85e6',t:'MTc1Njk5MTg0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97aa54bb729cfedd',t:'MTc1NzEyMzU4OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
