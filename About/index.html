@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Wildlife Rescue Center Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hero-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23065f46' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-green-50 to-blue-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-green-800 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold">Wildlife Rescue Center</h1>
+                        <p class="text-green-200 text-sm">Dashboard System</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="/index.html" class="hover:text-green-200 transition-colors">Home</a>
+                    <a href="#" class="text-green-200 font-semibold">About Us</a>
+                    <a href="https://denrxisystems.com/" class="hover:text-green-200 transition-colors">Services</a>
+                  
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-pattern py-16">
+        <div class="container mx-auto px-6 text-center">
+            <div class="fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">About Our Mission</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                    Protecting Philippine wildlife through rescue, rehabilitation, and conservation efforts in accordance with DENR mandates and international sustainability goals.
+                </p>
+                <div class="bg-white rounded-lg shadow-lg p-6 max-w-2xl mx-auto">
+                    <div class="flex items-center justify-center space-x-2 text-green-700">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span class="font-semibold">Located at:</span>
+                    </div>
+                    <p class="text-gray-700 mt-2">So. Mandaapan, Brgy. New Balamban, Tagum City, Davao del Norte</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <!-- DENR Mandate Section -->
+        <section class="mb-16 fade-in">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <div class="flex items-center mb-6">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2v1a1 1 0 102 0V3a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm2.5 7a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm2.45.707a1.5 1.5 0 00-2.9 0l-.707.707a1 1 0 101.414 1.414L8 13.414l1.243 1.243a1 1 0 001.414-1.414l-.707-.707z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-800">DENR Mandate & Legal Framework</h3>
+                </div>
+                <div class="grid md:grid-cols-1 gap-8 mb-8">
+                    <!-- DENR Vision, Mission, Mandate -->
+                    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
+                        <h4 class="text-2xl font-bold text-blue-800 mb-6">DENR Official Statements</h4>
+                        
+                        <div class="mb-6">
+                            <h5 class="text-lg font-semibold text-blue-700 mb-3 flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+                                </svg>
+                                Vision
+                            </h5>
+                            <p class="text-gray-700 italic bg-white p-4 rounded border-l-3 border-blue-400">
+                                "A nation enjoying and sustaining its natural resources and a clean and healthy environment."
+                            </p>
+                        </div>
+
+                        <div class="mb-6">
+                            <h5 class="text-lg font-semibold text-blue-700 mb-3 flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                                    <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
+                                </svg>
+                                Mission
+                            </h5>
+                            <p class="text-gray-700 italic bg-white p-4 rounded border-l-3 border-blue-400">
+                                "To mobilize our citizenry in protecting, conserving, and managing the environment and natural resources for the present and future generations."
+                            </p>
+                        </div>
+
+                        <div>
+                            <h5 class="text-lg font-semibold text-blue-700 mb-3 flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clip-rule="evenodd"/>
+                                </svg>
+                                Mandate
+                            </h5>
+                            <p class="text-gray-700 italic bg-white p-4 rounded border-l-3 border-blue-400">
+                                "The Department is the primary agency responsible for the conservation, management, development, and proper use of the country's environment and natural resources."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-xl font-semibold text-green-700 mb-4">Legal Framework & Responsibilities</h4>
+                        <p class="text-gray-600 mb-4">
+                            Under Republic Act No. 8749 (Clean Air Act) and RA 9147 (Wildlife Resources Conservation and Protection Act), DENR is mandated to:
+                        </p>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <span class="text-green-600 mr-2">•</span>
+                                Conserve and protect wildlife species and their habitats
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-600 mr-2">•</span>
+                                Regulate wildlife trade and trafficking
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-600 mr-2">•</span>
+                                Establish rescue and rehabilitation centers
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-600 mr-2">•</span>
+                                Promote environmental education and awareness
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h4 class="text-xl font-semibold text-green-700 mb-4">Our Legal Compliance</h4>
+                        <p class="text-gray-600 mb-4">
+                            This Wildlife Rescue Center operates under:
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                <span class="text-sm text-gray-700">DENR Administrative Order No. 2019-09</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                <span class="text-sm text-gray-700">Wildlife Rescue Center Permit</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                <span class="text-sm text-gray-700">Environmental Compliance Certificate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Philippine Wildlife Laws -->
+        <section class="mb-16 fade-in">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <div class="flex items-center mb-6">
+                    <div class="w-16 h-16 bg-amber-600 rounded-full flex items-center justify-center mr-4">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-800">Philippine Wildlife Protection Laws</h3>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-amber-50 p-6 rounded-lg">
+                        <h4 class="text-lg font-semibold text-amber-700 mb-3">RA 9147</h4>
+                        <p class="text-sm text-gray-600 mb-3">Wildlife Resources Conservation and Protection Act</p>
+                        <ul class="text-xs text-gray-600 space-y-1">
+                            <li>• Prohibits hunting of endangered species</li>
+                            <li>• Regulates wildlife trade</li>
+                            <li>• Establishes penalties for violations</li>
+                        </ul>
+                    </div>
+                    <div class="bg-amber-50 p-6 rounded-lg">
+                        <h4 class="text-lg font-semibold text-amber-700 mb-3">RA 8485</h4>
+                        <p class="text-sm text-gray-600 mb-3">Animal Welfare Act</p>
+                        <ul class="text-xs text-gray-600 space-y-1">
+                            <li>• Protects animals from cruelty</li>
+                            <li>• Ensures proper animal care</li>
+                            <li>• Promotes humane treatment</li>
+                        </ul>
+                    </div>
+                    <div class="bg-amber-50 p-6 rounded-lg">
+                        <h4 class="text-lg font-semibold text-amber-700 mb-3">CITES</h4>
+                        <p class="text-sm text-gray-600 mb-3">Convention on International Trade</p>
+                        <ul class="text-xs text-gray-600 space-y-1">
+                            <li>• Regulates international wildlife trade</li>
+                            <li>• Protects endangered species</li>
+                            <li>• Ensures sustainable use</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SDG Section -->
+        <section class="mb-16 fade-in">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <div class="flex items-center mb-6">
+                    <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mr-4">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-800">Sustainable Development Goals</h3>
+                </div>
+                <p class="text-gray-600 mb-8">Our wildlife rescue center directly contributes to achieving the United Nations Sustainable Development Goals:</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="border-l-4 border-green-500 pl-6">
+                        <h4 class="text-lg font-semibold text-green-700 mb-2">SDG 15: Life on Land</h4>
+                        <p class="text-sm text-gray-600">Protecting terrestrial ecosystems, combating desertification, and halting biodiversity loss through wildlife rescue and rehabilitation.</p>
+                    </div>
+                    <div class="border-l-4 border-blue-500 pl-6">
+                        <h4 class="text-lg font-semibold text-blue-700 mb-2">SDG 14: Life Below Water</h4>
+                        <p class="text-sm text-gray-600">Conserving marine and coastal ecosystems, including rescue of marine wildlife and habitat protection.</p>
+                    </div>
+                    <div class="border-l-4 border-purple-500 pl-6">
+                        <h4 class="text-lg font-semibold text-purple-700 mb-2">SDG 17: Partnerships</h4>
+                        <p class="text-sm text-gray-600">Collaborating with local communities, government agencies, and international organizations for wildlife conservation.</p>
+                    </div>
+                    <div class="border-l-4 border-orange-500 pl-6">
+                        <h4 class="text-lg font-semibold text-orange-700 mb-2">SDG 4: Quality Education</h4>
+                        <p class="text-sm text-gray-600">Promoting environmental education and awareness about wildlife conservation and sustainable practices.</p>
+                    </div>
+                    <div class="border-l-4 border-red-500 pl-6">
+                        <h4 class="text-lg font-semibold text-red-700 mb-2">SDG 3: Good Health</h4>
+                        <p class="text-sm text-gray-600">Ensuring healthy ecosystems that support both wildlife and human well-being through disease prevention and monitoring.</p>
+                    </div>
+                    <div class="border-l-4 border-teal-500 pl-6">
+                        <h4 class="text-lg font-semibold text-teal-700 mb-2">SDG 11: Sustainable Cities</h4>
+                        <p class="text-sm text-gray-600">Creating sustainable urban-wildlife interfaces and promoting coexistence in developing communities.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Services -->
+        <section class="mb-16 fade-in">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h3 class="text-3xl font-bold text-gray-800 mb-8 text-center">Our Core Services</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="text-center p-6 bg-green-50 rounded-lg">
+                        <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">🦅</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-800 mb-2">Wildlife Rescue</h4>
+                        <p class="text-sm text-gray-600">24/7 emergency response for injured and distressed wildlife</p>
+                    </div>
+                    <div class="text-center p-6 bg-blue-50 rounded-lg">
+                        <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">🏥</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-800 mb-2">Rehabilitation</h4>
+                        <p class="text-sm text-gray-600">Medical care and recovery programs for rescued animals</p>
+                    </div>
+                    <div class="text-center p-6 bg-purple-50 rounded-lg">
+                        <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">🌿</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-800 mb-2">Release Programs</h4>
+                        <p class="text-sm text-gray-600">Safe return of rehabilitated wildlife to their natural habitats</p>
+                    </div>
+                    <div class="text-center p-6 bg-amber-50 rounded-lg">
+                        <div class="w-16 h-16 bg-amber-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">📚</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-800 mb-2">Education</h4>
+                        <p class="text-sm text-gray-600">Community outreach and environmental awareness programs</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Information -->
+        <section class="fade-in">
+            <div class="bg-gradient-to-r from-green-600 to-blue-600 rounded-xl shadow-lg p-8 text-white">
+                <div class="text-center mb-8">
+                    <h3 class="text-3xl font-bold mb-4">Get Involved</h3>
+                    <p class="text-green-100 max-w-2xl mx-auto">
+                        Join us in our mission to protect Philippine wildlife. Report wildlife emergencies, volunteer, or learn more about conservation efforts.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div>
+                        <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                            </svg>
+                        </div>
+                        <h4 class="font-semibold mb-2">Emergency Hotline</h4>
+                        <p class="text-green-100">24/7 Wildlife Rescue</p>
+                    </div>
+                    <div>
+                        <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <h4 class="font-semibold mb-2">Visit Us</h4>
+                        <p class="text-green-100 text-sm">So. Mandaapan, Brgy. New Balamban<br>Tagum City, Davao del Norte</p>
+                    </div>
+                    <div>
+                        <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                            </svg>
+                        </div>
+                        <h4 class="font-semibold mb-2">Volunteer</h4>
+                        <p class="text-green-100">Join Our Conservation Team</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400 mb-4">© 2024 Wildlife Rescue Center Dashboard. All rights reserved.</p>
+            <p class="text-sm text-gray-500">
+                Operating under DENR mandate • Committed to SDG achievement • Protecting Philippine biodiversity
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling and fade-in animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all fade-in elements
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.8s ease-in-out, transform 0.8s ease-in-out';
+                observer.observe(el);
+            });
+
+            // Add hover effects to service cards
+            document.querySelectorAll('.bg-green-50, .bg-blue-50, .bg-purple-50, .bg-amber-50').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97b25a40066bfedd',t:'MTc1NzIwNzcwMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
