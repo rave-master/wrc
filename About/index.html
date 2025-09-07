@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Wildlife Rescue Center Dashboard</title>
+    <link rel="icon" href="https://ia601205.us.archive.org/12/items/icon_20250717/icon.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .hero-pattern {
@@ -30,11 +31,26 @@
                         <p class="text-green-200 text-sm">Dashboard System</p>
                     </div>
                 </div>
+                <!-- Desktop Navigation -->
                 <nav class="hidden md:flex space-x-6">
                     <a href="/index.html" class="hover:text-green-200 transition-colors">Home</a>
                     <a href="#" class="text-green-200 font-semibold">About Us</a>
                     <a href="https://denrxisystems.com/" class="hover:text-green-200 transition-colors">Services</a>
                 </nav>
+                <!-- Mobile Navigation -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white focus:outline-none">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                    <div id="mobile-menu" class="hidden absolute right-6 mt-2 w-48 bg-green-800 rounded-lg shadow-lg z-50">
+                        <a href="/index.html" class="block px-4 py-2 text-white hover:bg-green-700">Home</a>
+                        <a href="#" class="block px-4 py-2 text-green-200 font-semibold bg-green-900">About Us</a>
+                        <a href="https://denrxisystems.com/" class="block px-4 py-2 text-white hover:bg-green-700">Services</a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -323,21 +339,6 @@
                         <h4 class="font-semibold mb-2">Volunteer</h4>
                         <p class="text-green-100">Join Our Conservation Team</p>
                     </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 mt-16">
-        <div class="container mx-auto px-6 text-center">
-            <p class="text-gray-400 mb-4">© 2024 Wildlife Rescue Center Dashboard. All rights reserved.</p>
-            <p class="text-sm text-gray-500">
-                Operating under DENR mandate • Committed to SDG achievement • Protecting Philippine biodiversity
-            </p>
-        </div>
-    </footer>
-
     <script>
         // Add smooth scrolling and fade-in animations
         document.addEventListener('DOMContentLoaded', function() {
@@ -361,6 +362,36 @@
                 el.style.transform = 'translateY(20px)';
                 el.style.transition = 'opacity 0.8s ease-in-out, transform 0.8s ease-in-out';
                 observer.observe(el);
+            });
+
+            // Add hover effects to service cards
+            document.querySelectorAll('.bg-green-50, .bg-blue-50, .bg-purple-50, .bg-amber-50').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Mobile menu toggle
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+                // Optional: Hide menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!menuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
             });
 
             // Add hover effects to service cards
