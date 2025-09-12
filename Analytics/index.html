@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wildlife Rescue Center Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+    .modal.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 90vw;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    .close {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #666;
+    }
+    .close:hover {
+      color: #000;
+    }
+    .stat-card {
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    .chart-container {
+      position: relative;
+      height: 300px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+  <!-- Header -->
+  <div class="bg-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-6">
+      <h1 class="text-4xl font-bold text-gray-800 text-center">🐒 Wildlife Rescue Center Dashboard</h1>
+      <p class="text-center text-gray-600 mt-2">Comprehensive Wildlife Management & Analytics</p>
+    </div>
+  </div>
+
+  <!-- Summary Statistics -->
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <!-- Total Animals -->
+      <div class="stat-card bg-white rounded-xl shadow-lg p-6 cursor-pointer" onclick="openModal('totalModal')">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600">Total Animals</p>
+            <p class="text-2xl font-bold text-gray-900" id="totalAnimals">-</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Total Mortality -->
+      <div class="stat-card bg-white rounded-xl shadow-lg p-6 cursor-pointer" onclick="openModal('mortalityModal')">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-red-100 text-red-600">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"/>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600">Total Mortality</p>
+            <p class="text-2xl font-bold text-gray-900" id="totalMortality">-</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Total Released -->
+      <div class="stat-card bg-white rounded-xl shadow-lg p-6 cursor-pointer" onclick="openModal('releasedModal')">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-green-100 text-green-600">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600">Total Released</p>
+            <p class="text-2xl font-bold text-gray-900" id="totalReleased">-</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Total Alive -->
+      <div class="stat-card bg-white rounded-xl shadow-lg p-6 cursor-pointer" onclick="openModal('aliveModal')">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600">Total Alive</p>
+            <p class="text-2xl font-bold text-gray-900" id="totalAlive">-</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Species Distribution -->
+      <div class="bg-white rounded-xl shadow-lg p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-semibold text-gray-800">Species Distribution</h3>
+          <button onclick="openModal('speciesModal')" class="text-blue-600 hover:text-blue-800 font-medium">View Details</button>
+        </div>
+        <div class="chart-container">
+          <canvas id="speciesChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Health Status Overview -->
+      <div class="bg-white rounded-xl shadow-lg p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-semibold text-gray-800">Health Status Overview</h3>
+          <button onclick="openModal('healthModal')" class="text-blue-600 hover:text-blue-800 font-medium">View Details</button>
+        </div>
+        <div class="chart-container">
+          <canvas id="healthChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Release Candidates -->
+      <div class="bg-white rounded-xl shadow-lg p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-semibold text-gray-800">Release Candidates</h3>
+          <button onclick="openModal('candidateModal')" class="text-blue-600 hover:text-blue-800 font-medium">View Details</button>
+        </div>
+        <div class="chart-container">
+          <canvas id="releaseChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Intake Timeline -->
+      <div class="bg-white rounded-xl shadow-lg p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-semibold text-gray-800">Monthly Intake</h3>
+          <button onclick="openModal('intakeModal')" class="text-blue-600 hover:text-blue-800 font-medium">View Details</button>
+        </div>
+        <div class="chart-container">
+          <canvas id="intakeChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modals -->
+  <!-- Total Animals Modal -->
+  <div id="totalModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('totalModal')">&times;</span>
+      <h2 class="text-2xl font-bold mb-4">Total Animals by Species</h2>
+      <div id="totalSpeciesBreakdown"></div>
+    </div>
+  </div>
+
+  <!-- Mortality Modal -->
+  <div id="mortalityModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('mortalityModal')">&times;</span>
+      <h2 class="text-2xl font-bold mb-4">Mortality Analysis</h2>
+      <div id="mortalityBreakdown"></div>
+    </div>
+  </div>
+
+  <!-- Released Modal -->
+  <div id="releasedModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('releasedModal')">&times;</span>
+      <h2 class="text-2xl font-bold mb-4">Released Animals Analysis</h2>
+      <div id="releasedBreakdown"></div>
+    </div>
+  </div>
+
+  <!-- Alive Modal -->
+  <div id="aliveModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('aliveModal')">&times;</span>
+      <h2 class="text-2xl font-bold mb-4">Living Animals Breakdown</h2>
+      <div id="aliveBreakdown"></div>
+    </div>
+  </div>
+
+  <!-- Species Modal -->
+  <div id="speciesModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('speciesModal')">&times;</span>
+      <h2 class="text-2xl font-bold mb-4">Detailed Species Analysis</h2>
+      <div class="chart-container mb-4">
+        <canvas id="speciesDetailChart"></canvas>
+      </div>
+      <div id="speciesTable"></div>
+    </div>
+  </div>
+
+  <!-- Health Modal -->
+  <div id="healthModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('healthModal')">&times;</span>
+      <h2 class="text-2xl font-bold mb-4">Health Status Details</h2>
+      <div class="chart-container mb-4">
+        <canvas id="healthDetailChart"></canvas>
+      </div>
+      <div id="healthTable"></div>
+    </div>
+  </div>
+
+  <!-- Candidate Modal -->
+  <div id="candidateModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('candidateModal')">&times;</span>
+      <h2 class="text-2xl font-bold mb-4">Release Candidate Analysis</h2>
+      <div class="chart-container mb-4">
+        <canvas id="candidateDetailChart"></canvas>
+      </div>
+      <div id="candidateTable"></div>
+    </div>
+  </div>
+
+  <!-- Intake Modal -->
+  <div id="intakeModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('intakeModal')">&times;</span>
+      <h2 class="text-2xl font-bold mb-4">Intake Timeline Analysis</h2>
+      <div class="chart-container mb-4">
+        <canvas id="intakeDetailChart"></canvas>
+      </div>
+      <div id="intakeTable"></div>
+    </div>
+  </div>
+
+  <script>
+    let globalData = [];
+    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTtbl6w2Cu44Sj3NocFki0q43pIkSIYKNpDMHpLy_IzqeAv3MEZzioXuZsarU7tmFvbtq-qIsBmVq4L/pub?gid=0&single=true&output=csv";
+
+    // Modal functions
+    function openModal(modalId) {
+      document.getElementById(modalId).classList.add('show');
+      
+      // Generate detailed content based on modal type
+      switch(modalId) {
+        case 'totalModal':
+          generateTotalBreakdown();
+          break;
+        case 'mortalityModal':
+          generateMortalityBreakdown();
+          break;
+        case 'releasedModal':
+          generateReleasedBreakdown();
+          break;
+        case 'aliveModal':
+          generateAliveBreakdown();
+          break;
+        case 'speciesModal':
+          generateSpeciesDetail();
+          break;
+        case 'healthModal':
+          generateHealthDetail();
+          break;
+        case 'candidateModal':
+          generateCandidateDetail();
+          break;
+        case 'intakeModal':
+          generateIntakeDetail();
+          break;
+      }
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('show');
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.classList.remove('show');
+      }
+    }
+
+    // Data analysis functions
+    function analyzeData(data) {
+      const analysis = {
+        totalAnimals: data.length,
+        speciesCounts: {},
+        healthCounts: {},
+        releaseCounts: {},
+        mortalityCount: 0,
+        releasedCount: 0,
+        aliveCount: 0,
+        aliveBreakdown: {
+          forRelease: 0,
+          ongoingRehab: 0,
+          keepIncapacity: 0
+        },
+        intakeByMonth: {}
+      };
+
+      data.forEach(row => {
+        // Species analysis
+        const species = row["Common Name"] || "Unknown";
+        analysis.speciesCounts[species] = (analysis.speciesCounts[species] || 0) + 1;
+
+        // Health status analysis
+        const health = row["Health Status"] || "Unknown";
+        analysis.healthCounts[health] = (analysis.healthCounts[health] || 0) + 1;
+
+        // Mortality analysis
+        const dateOfDeath = row["Date of Death"] || "";
+        if (health.toLowerCase().includes('dead') || 
+            health.toLowerCase().includes('died') || 
+            health.toLowerCase().includes('mortality') ||
+            health.toLowerCase().includes('deceased') ||
+            dateOfDeath.trim() !== "") {
+          analysis.mortalityCount++;
+        }
+
+        // Release analysis
+        const candidate = row["Candidate for Release"]?.trim() || "Not Specified";
+        analysis.releaseCounts[candidate] = (analysis.releaseCounts[candidate] || 0) + 1;
+
+        // Released count
+        const releaseDate = row["Release Date"] || "";
+        if (health.toLowerCase().includes('released') || 
+            candidate.toLowerCase() === 'released' ||
+            releaseDate.trim() !== "") {
+          analysis.releasedCount++;
+        }
+
+        // Alive analysis (exclude released animals)
+        const animalReleaseDate = row["Release Date"] || "";
+        const isReleased = health.toLowerCase().includes('released') || 
+                          candidate.toLowerCase() === 'released' ||
+                          animalReleaseDate.trim() !== "";
+        
+        if (!health.toLowerCase().includes('dead') && 
+            !health.toLowerCase().includes('died') && 
+            !health.toLowerCase().includes('mortality') &&
+            !health.toLowerCase().includes('deceased') &&
+            dateOfDeath.trim() === "" &&
+            !isReleased) {
+          analysis.aliveCount++;
+          
+          // Categorize alive animals
+          if (candidate.toLowerCase() === 'yes' || health.toLowerCase().includes('ready for release')) {
+            analysis.aliveBreakdown.forRelease++;
+          } else if (health.toLowerCase().includes('rehab') || health.toLowerCase().includes('treatment')) {
+            analysis.aliveBreakdown.ongoingRehab++;
+          } else if (candidate.toLowerCase() === 'no' || health.toLowerCase().includes('permanent')) {
+            analysis.aliveBreakdown.keepIncapacity++;
+          }
+        }
+
+        // Intake timeline
+        const intakeDate = row["Intake Date"];
+        if (intakeDate) {
+          const date = new Date(intakeDate);
+          if (!isNaN(date)) {
+            const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+            analysis.intakeByMonth[monthKey] = (analysis.intakeByMonth[monthKey] || 0) + 1;
+          }
+        }
+      });
+
+      // Calculate ongoing rehabilitation as total minus other categories
+      analysis.aliveBreakdown.ongoingRehab = analysis.totalAnimals - 
+                                            analysis.aliveBreakdown.forRelease - 
+                                            analysis.releasedCount - 
+                                            analysis.mortalityCount;
+
+      return analysis;
+    }
+
+    function updateSummaryStats(analysis) {
+      document.getElementById('totalAnimals').textContent = analysis.totalAnimals;
+      document.getElementById('totalMortality').textContent = analysis.mortalityCount;
+      document.getElementById('totalReleased').textContent = analysis.releasedCount;
+      document.getElementById('totalAlive').textContent = analysis.aliveCount;
+    }
+
+    function generateTotalBreakdown() {
+      const analysis = analyzeData(globalData);
+      const container = document.getElementById('totalSpeciesBreakdown');
+      
+      let html = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">';
+      Object.entries(analysis.speciesCounts)
+        .sort(([,a], [,b]) => b - a)
+        .forEach(([species, count]) => {
+          const percentage = ((count / analysis.totalAnimals) * 100).toFixed(1);
+          html += `
+            <div class="bg-gray-50 p-4 rounded-lg">
+              <div class="flex justify-between items-center">
+                <span class="font-medium">${species}</span>
+                <span class="text-lg font-bold">${count}</span>
+              </div>
+              <div class="text-sm text-gray-600">${percentage}% of total</div>
+            </div>
+          `;
+        });
+      html += '</div>';
+      container.innerHTML = html;
+    }
+
+    function generateMortalityBreakdown() {
+      const container = document.getElementById('mortalityBreakdown');
+      const mortalityData = globalData.filter(row => {
+        const health = row["Health Status"] || "";
+        const dateOfDeath = row["Date of Death"] || "";
+        return health.toLowerCase().includes('dead') || 
+               health.toLowerCase().includes('died') || 
+               health.toLowerCase().includes('mortality') ||
+               health.toLowerCase().includes('deceased') ||
+               dateOfDeath.trim() !== "";
+      });
+
+      const speciesBreakdown = {};
+      mortalityData.forEach(row => {
+        const species = row["Common Name"] || "Unknown";
+        speciesBreakdown[species] = (speciesBreakdown[species] || 0) + 1;
+      });
+
+      let html = `
+        <div class="mb-6">
+          <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+            <h3 class="text-lg font-semibold text-red-800">Total Mortality: ${mortalityData.length}</h3>
+            <p class="text-red-600">Mortality Rate: ${((mortalityData.length / globalData.length) * 100).toFixed(1)}%</p>
+          </div>
+        </div>
+        <h4 class="text-lg font-semibold mb-3">Mortality by Species</h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      `;
+      
+      Object.entries(speciesBreakdown)
+        .sort(([,a], [,b]) => b - a)
+        .forEach(([species, count]) => {
+          html += `
+            <div class="bg-gray-50 p-4 rounded-lg">
+              <div class="flex justify-between items-center">
+                <span class="font-medium">${species}</span>
+                <span class="text-lg font-bold text-red-600">${count}</span>
+              </div>
+            </div>
+          `;
+        });
+      html += '</div>';
+      container.innerHTML = html;
+    }
+
+    function generateReleasedBreakdown() {
+      const container = document.getElementById('releasedBreakdown');
+      const releasedData = globalData.filter(row => {
+        const health = row["Health Status"] || "";
+        const candidate = row["Candidate for Release"] || "";
+        const releaseDate = row["Release Date"] || "";
+        return health.toLowerCase().includes('released') || 
+               candidate.toLowerCase() === 'released' ||
+               releaseDate.trim() !== "";
+      });
+
+      const speciesBreakdown = {};
+      releasedData.forEach(row => {
+        const species = row["Common Name"] || "Unknown";
+        speciesBreakdown[species] = (speciesBreakdown[species] || 0) + 1;
+      });
+
+      let html = `
+        <div class="mb-6">
+          <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+            <h3 class="text-lg font-semibold text-green-800">Total Released: ${releasedData.length}</h3>
+            <p class="text-green-600">Release Rate: ${((releasedData.length / globalData.length) * 100).toFixed(1)}%</p>
+          </div>
+        </div>
+        <h4 class="text-lg font-semibold mb-3">Releases by Species</h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      `;
+      
+      Object.entries(speciesBreakdown)
+        .sort(([,a], [,b]) => b - a)
+        .forEach(([species, count]) => {
+          html += `
+            <div class="bg-gray-50 p-4 rounded-lg">
+              <div class="flex justify-between items-center">
+                <span class="font-medium">${species}</span>
+                <span class="text-lg font-bold text-green-600">${count}</span>
+              </div>
+            </div>
+          `;
+        });
+      html += '</div>';
+      container.innerHTML = html;
+    }
+
+    function generateAliveBreakdown() {
+      const analysis = analyzeData(globalData);
+      const container = document.getElementById('aliveBreakdown');
+      
+      let html = `
+        <div class="mb-6">
+          <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+            <h3 class="text-lg font-semibold text-yellow-800">Total Alive: ${analysis.aliveCount}</h3>
+            <p class="text-yellow-600">Survival Rate: ${((analysis.aliveCount / globalData.length) * 100).toFixed(1)}%</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div class="bg-green-50 p-4 rounded-lg text-center">
+            <div class="text-2xl font-bold text-green-600">${analysis.aliveBreakdown.forRelease}</div>
+            <div class="text-sm text-green-800">Ready for Release</div>
+          </div>
+          <div class="bg-blue-50 p-4 rounded-lg text-center">
+            <div class="text-2xl font-bold text-blue-600">${analysis.aliveBreakdown.ongoingRehab}</div>
+            <div class="text-sm text-blue-800">Ongoing Rehabilitation</div>
+          </div>
+          <div class="bg-orange-50 p-4 rounded-lg text-center">
+            <div class="text-2xl font-bold text-orange-600">${analysis.aliveBreakdown.keepIncapacity}</div>
+            <div class="text-sm text-orange-800">Permanent Care</div>
+          </div>
+        </div>
+      `;
+      
+      container.innerHTML = html;
+    }
+
+    function generateSpeciesDetail() {
+      const analysis = analyzeData(globalData);
+      
+      // Create detailed chart
+      const ctx = document.getElementById('speciesDetailChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(analysis.speciesCounts),
+          datasets: [{
+            label: 'Count',
+            data: Object.values(analysis.speciesCounts),
+            backgroundColor: '#4f46e5'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+
+      // Create table
+      const container = document.getElementById('speciesTable');
+      let html = `
+        <table class="w-full border-collapse border border-gray-300">
+          <thead>
+            <tr class="bg-gray-50">
+              <th class="border border-gray-300 px-4 py-2 text-left">Species</th>
+              <th class="border border-gray-300 px-4 py-2 text-right">Count</th>
+              <th class="border border-gray-300 px-4 py-2 text-right">Percentage</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+      
+      Object.entries(analysis.speciesCounts)
+        .sort(([,a], [,b]) => b - a)
+        .forEach(([species, count]) => {
+          const percentage = ((count / analysis.totalAnimals) * 100).toFixed(1);
+          html += `
+            <tr>
+              <td class="border border-gray-300 px-4 py-2">${species}</td>
+              <td class="border border-gray-300 px-4 py-2 text-right">${count}</td>
+              <td class="border border-gray-300 px-4 py-2 text-right">${percentage}%</td>
+            </tr>
+          `;
+        });
+      
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+
+    function generateHealthDetail() {
+      const analysis = analyzeData(globalData);
+      
+      const ctx = document.getElementById('healthDetailChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: Object.keys(analysis.healthCounts),
+          datasets: [{
+            data: Object.values(analysis.healthCounts),
+            backgroundColor: ['#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4']
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+    }
+
+    function generateCandidateDetail() {
+      const analysis = analyzeData(globalData);
+      
+      const ctx = document.getElementById('candidateDetailChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: Object.keys(analysis.releaseCounts),
+          datasets: [{
+            data: Object.values(analysis.releaseCounts),
+            backgroundColor: ['#059669', '#dc2626', '#d97706']
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+    }
+
+    function generateIntakeDetail() {
+      const analysis = analyzeData(globalData);
+      
+      const sortedMonths = Object.keys(analysis.intakeByMonth).sort();
+      const ctx = document.getElementById('intakeDetailChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: sortedMonths,
+          datasets: [{
+            label: 'Monthly Intake',
+            data: sortedMonths.map(month => analysis.intakeByMonth[month]),
+            borderColor: '#3b82f6',
+            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+    }
+
+    // Load and process data
+    Papa.parse(csvUrl, {
+      download: true,
+      header: true,
+      complete: function(results) {
+        globalData = results.data.filter(row => row["Common Name"]); // Filter out empty rows
+        const analysis = analyzeData(globalData);
+        
+        // Update summary statistics
+        updateSummaryStats(analysis);
+
+        // Create main dashboard charts
+        // Species Distribution
+        new Chart(document.getElementById("speciesChart"), {
+          type: "doughnut",
+          data: {
+            labels: Object.keys(analysis.speciesCounts).slice(0, 8),
+            datasets: [{
+              data: Object.values(analysis.speciesCounts).slice(0, 8),
+              backgroundColor: ["#4f46e5","#06b6d4","#10b981","#f59e0b","#ef4444","#8b5cf6","#ec4899","#6b7280"]
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'bottom'
+              }
+            }
+          }
+        });
+
+        // Health Status
+        new Chart(document.getElementById("healthChart"), {
+          type: "bar",
+          data: {
+            labels: Object.keys(analysis.healthCounts),
+            datasets: [{
+              label: "Count",
+              data: Object.values(analysis.healthCounts),
+              backgroundColor: "#4f46e5"
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false
+          }
+        });
+
+        // Release Candidates
+        new Chart(document.getElementById("releaseChart"), {
+          type: "pie",
+          data: {
+            labels: Object.keys(analysis.releaseCounts),
+            datasets: [{
+              data: Object.values(analysis.releaseCounts),
+              backgroundColor: ["#10b981","#ef4444","#f59e0b","#6b7280"]
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false
+          }
+        });
+
+        // Monthly Intake
+        const sortedMonths = Object.keys(analysis.intakeByMonth).sort();
+        new Chart(document.getElementById("intakeChart"), {
+          type: "line",
+          data: {
+            labels: sortedMonths.slice(-12), // Last 12 months
+            datasets: [{
+              label: "Monthly Intake",
+              data: sortedMonths.slice(-12).map(month => analysis.intakeByMonth[month]),
+              borderColor: "#4f46e5",
+              backgroundColor: "rgba(79, 70, 229, 0.1)",
+              fill: true
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false
+          }
+        });
+      },
+      error: function(error) {
+        console.error("Error loading data:", error);
+        document.body.innerHTML = '<div class="text-center mt-20"><h2 class="text-2xl text-red-600">Error loading data. Please check the CSV URL.</h2></div>';
+      }
+    });
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97dde4eed5f74045',t:'MTc1NzY2NDI2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
