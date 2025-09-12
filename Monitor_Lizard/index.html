@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yellow-headed Monitor Lizard - Philippine Endemic Treasure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .dropdown-content.open {
+            max-height: 1000px;
+            transition: max-height 0.5s ease-in;
+        }
+        
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #92400e 0%, #d97706 50%, #f59e0b 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .monitor-animation {
+            animation: monitor-prowl 6s ease-in-out infinite;
+        }
+        
+        @keyframes monitor-prowl {
+            0%, 100% {
+                transform: translateX(0px) rotate(0deg);
+            }
+            25% {
+                transform: translateX(4px) rotate(1deg);
+            }
+            50% {
+                transform: translateX(-3px) rotate(-0.5deg);
+            }
+            75% {
+                transform: translateX(2px) rotate(0.5deg);
+            }
+        }
+        
+        .golden-shimmer {
+            animation: golden-shimmer 4s ease-in-out infinite;
+        }
+        
+        @keyframes golden-shimmer {
+            0%, 100% {
+                text-shadow: 0 0 5px #f59e0b;
+            }
+            50% {
+                text-shadow: 0 0 15px #f59e0b, 0 0 25px #fbbf24;
+            }
+        }
+        
+        .philippine-bg {
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(146, 64, 14, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(217, 119, 6, 0.1) 0%, transparent 50%);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-yellow-50 to-amber-50 min-h-screen philippine-bg">
+    <!-- Header -->
+    <div class="hero-gradient text-white py-16">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="mb-6">
+                <img src="https://ia801001.us.archive.org/30/items/mg-5192/_MG_5225.JPG" alt="Yellow-headed Monitor Lizard showing its distinctive golden head and powerful build" class="w-32 h-32 mx-auto mb-4 rounded-full object-cover border-4 border-white/30 shadow-lg monitor-animation" onerror="this.style.display='none'; document.getElementById('fallback-icon').style.display='block';">
+                <svg id="fallback-icon" class="w-20 h-20 mx-auto mb-4 text-white monitor-animation hidden" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                </svg>
+            </div>
+            <h1 class="text-5xl font-bold mb-4">Yellow-headed Monitor Lizard</h1>
+            <p class="text-xl text-yellow-100 mb-2"><em>Varanus cumingi</em></p>
+            <p class="text-lg text-yellow-200">Philippine Endemic Treasure</p>
+            <div class="mt-6 flex justify-center space-x-4">
+                <div class="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
+                    <span class="text-sm font-medium">Class: Reptilia</span>
+                </div>
+                <div class="bg-yellow-600 backdrop-blur-sm rounded-full px-4 py-2">
+                    <span class="text-sm font-bold golden-shimmer">🇵🇭 "Halo"</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Species Banner -->
+    <div class="max-w-6xl mx-auto px-6 py-6">
+        <div class="bg-gradient-to-r from-yellow-100 to-amber-100 border-l-4 border-yellow-500 p-6 rounded-lg">
+            <div class="flex items-center">
+                <svg class="w-8 h-8 text-yellow-600 mr-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                </svg>
+                <div>
+                    <h3 class="text-lg font-bold text-yellow-800">Philippines' Golden Guardian</h3>
+                    <p class="text-yellow-700">Endemic monitor lizard known as "Halo," instantly recognizable by its striking golden-yellow head and powerful aquatic abilities.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-6xl mx-auto px-6 py-6">
+        <!-- Quote -->
+        <div class="text-center mb-12">
+            <blockquote class="text-2xl font-medium text-gray-700 italic">
+                "The Yellow-headed Water Monitor is a true Philippine reptile treasure — powerful, adaptive, and ecologically essential."
+            </blockquote>
+        </div>
+
+        <!-- Habitat Icons -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🌴</div>
+                <p class="text-sm text-gray-600">Mangroves</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🏞️</div>
+                <p class="text-sm text-gray-600">Riverbanks</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🌲</div>
+                <p class="text-sm text-gray-600">Forests</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🐟</div>
+                <p class="text-sm text-gray-600">Aquatic Hunter</p>
+            </div>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Physical Characteristics Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-yellow-600 to-amber-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                        </svg>
+                        Physical Characteristics
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('physical')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="physical-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="physical-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-yellow-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-yellow-800">Instantly recognizable by its striking golden-yellow head and dark, patterned body</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Body Structure</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Length: Typically 1–1.5 m (up to 1.8 m)</li>
+                                    <li>• Weight: 5–12 kg</li>
+                                    <li>• Head: Bright golden-yellow</li>
+                                    <li>• Body: Black/dark brown with yellow speckles</li>
+                                    <li>• Tail: Long, laterally compressed</li>
+                                    <li>• Strong limbs with sharp claws</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Sexual Dimorphism</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Males generally larger and bulkier</li>
+                                    <li>• Mature males have broader heads</li>
+                                    <li>• Size difference becomes pronounced with age</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Unique Traits</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Excellent swimmer, climber, and runner</li>
+                                    <li>• Forked tongue and Jacobson's organ</li>
+                                    <li>• Strictly Philippine endemic</li>
+                                    <li>• Cultural significance as "Halo"</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Habitat and Distribution Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-green-600 to-emerald-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                        Habitat & Distribution
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('habitat')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="habitat-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="habitat-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-green-800">Endemic to the Philippines, particularly Mindanao, Basilan, and surrounding islands</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Geographic Range</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>🏝️ Mindanao (primary range)</li>
+                                    <li>🏝️ Basilan and surrounding islands</li>
+                                    <li>🏝️ Some Visayan areas</li>
+                                    <li>🇵🇭 Strictly Philippine endemic</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Habitat Types</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>🌴 Mangrove swamps and estuaries</li>
+                                    <li>🏞️ Riverbanks, marshes, wetlands</li>
+                                    <li>🌲 Lowland dipterocarp forests</li>
+                                    <li>🏘️ Occasionally near farms and villages</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Habitat Requirements</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Access to freshwater sources</li>
+                                    <li>• Dense vegetation for shelter</li>
+                                    <li>• Abundant prey populations</li>
+                                    <li>• Suitable basking sites</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diet Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-orange-600 to-red-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        Diet & Feeding
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('diet')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="diet-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="diet-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-orange-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-orange-800">Opportunistic carnivore and scavenger, vital to ecosystem balance</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Diet Includes</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>🐟 Fish, crustaceans, and amphibians</li>
+                                    <li>🐤 Birds and their eggs</li>
+                                    <li>🐭 Small mammals, particularly rodents</li>
+                                    <li>🦎 Reptiles and carrion</li>
+                                    <li>🥚 Domestic poultry and eggs</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Feeding Behavior</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Actively forages on land and in water</li>
+                                    <li>• Scavenges carcasses effectively</li>
+                                    <li>• Controls pest populations like rats</li>
+                                    <li>• Opportunistic hunting strategy</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Ecological Role</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Helps recycle nutrients through scavenging</li>
+                                    <li>• Natural pest control agent</li>
+                                    <li>• Maintains ecosystem balance</li>
+                                    <li>• Important predator in food web</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Behavior Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-blue-600 to-cyan-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 11H7l3-7 3 7h-2v8h-2v-8z"/>
+                        </svg>
+                        Behavior & Abilities
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('behavior')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="behavior-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="behavior-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-blue-800">Versatile predator with excellent swimming, climbing, and running abilities</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Movement Abilities</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Excellent swimmer with compressed tail</li>
+                                    <li>• Skilled climber using sharp claws</li>
+                                    <li>• Fast runner on land</li>
+                                    <li>• Agile in multiple environments</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Hunting Strategy</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Active foraging in water and on land</li>
+                                    <li>• Uses chemical sensing to locate prey</li>
+                                    <li>• Opportunistic feeding behavior</li>
+                                    <li>• Efficient scavenging abilities</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Cultural Significance</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Known locally as "Halo" in Cebuano</li>
+                                    <li>• Tied to local folklore</li>
+                                    <li>• Sometimes feared but also respected</li>
+                                    <li>• Symbol of strength in local culture</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Human Interaction Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-purple-600 to-pink-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                        </svg>
+                        Human Interaction
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('human')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="human-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="human-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-purple-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-purple-800">Generally shy and avoids humans, but will defend itself if threatened</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-green-700 mb-2">Typical Behavior</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>✓ Generally shy and avoids humans</li>
+                                    <li>✓ Prefers to flee rather than fight</li>
+                                    <li>✓ Important ecological role</li>
+                                    <li>✓ Cultural significance in Philippines</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-amber-700 mb-2">Defense Mechanisms</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>⚠️ Bites (can cause infection)</li>
+                                    <li>⚠️ Powerful tail whips</li>
+                                    <li>⚠️ Sharp claw scratches</li>
+                                    <li>⚠️ Will defend if cornered</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-red-700 mb-2">Human-Wildlife Conflict</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>⚠️ Considered nuisance in rural areas</li>
+                                    <li>⚠️ Raids poultry farms for eggs and chicks</li>
+                                    <li>⚠️ Sometimes killed by farmers</li>
+                                    <li>⚠️ Habitat loss from development</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conservation Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-teal-600 to-green-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        Conservation Status
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('conservation')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="conservation-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="conservation-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-teal-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-teal-800">Philippine endemic treasure requiring protection of wetland and forest ecosystems</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Conservation Concerns</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Habitat loss from development</li>
+                                    <li>• Human-wildlife conflict over poultry</li>
+                                    <li>• Limited to Philippine islands</li>
+                                    <li>• Wetland destruction threatens populations</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Ecological Importance</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Vital to ecosystem balance</li>
+                                    <li>• Natural pest control agent</li>
+                                    <li>• Nutrient recycling through scavenging</li>
+                                    <li>• Indicator of ecosystem health</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Conservation Actions</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Protect mangrove and wetland habitats</li>
+                                    <li>• Education about ecological benefits</li>
+                                    <li>• Reduce human-wildlife conflict</li>
+                                    <li>• Monitor population trends</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Endemic Status and Cultural Significance -->
+        <div class="mt-12 grid md:grid-cols-2 gap-8">
+            <div class="bg-gradient-to-r from-yellow-600 to-amber-600 rounded-xl p-8 text-center text-white">
+                <h3 class="text-2xl font-bold mb-4">🇵🇭 Philippine Endemic</h3>
+                <p class="text-lg">Strictly endemic to the Philippines, this golden-headed monitor is found nowhere else on Earth, making it a true national treasure.</p>
+            </div>
+            
+            <div class="bg-gradient-to-r from-amber-600 to-orange-600 rounded-xl p-8 text-center text-white">
+                <h3 class="text-2xl font-bold mb-4">🏛️ Cultural Icon "Halo"</h3>
+                <p class="text-lg">Known locally as "Halo" in Cebuano-speaking areas, this monitor lizard holds cultural significance as a symbol of strength and resilience.</p>
+            </div>
+        </div>
+
+        <!-- Ecological Role -->
+        <div class="mt-12 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-xl p-8">
+            <h3 class="text-2xl font-bold text-center mb-6 text-gray-800">🦎 Ecosystem Guardian Role</h3>
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+                <div>
+                    <div class="text-3xl mb-2">🎯</div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Pest Controller</h4>
+                    <p class="text-sm text-gray-600">Controls rodent and pest populations in agricultural and natural areas, providing valuable ecosystem services</p>
+                </div>
+                <div>
+                    <div class="text-3xl mb-2">♻️</div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Nutrient Recycler</h4>
+                    <p class="text-sm text-gray-600">Scavenges carrion effectively, helping recycle nutrients and maintain ecosystem health in wetlands and forests</p>
+                </div>
+                <div>
+                    <div class="text-3xl mb-2">🌊</div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Aquatic Predator</h4>
+                    <p class="text-sm text-gray-600">Bridges terrestrial and aquatic ecosystems, controlling fish and amphibian populations in Philippine waterways</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDropdown(id) {
+            const content = document.getElementById(id + '-content');
+            const arrow = document.getElementById(id + '-arrow');
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                arrow.classList.remove('rotate-180');
+            } else {
+                content.classList.add('open');
+                arrow.classList.add('rotate-180');
+            }
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97dd4262328a0655',t:'MTc1NzY1NzYxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
