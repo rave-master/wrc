@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burmese Python - Southeast Asia's Giant Constrictor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .dropdown-content.open {
+            max-height: 1000px;
+            transition: max-height 0.5s ease-in;
+        }
+        
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #451a03 0%, #78350f 50%, #a16207 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .python-animation {
+            animation: python-coil 8s ease-in-out infinite;
+        }
+        
+        @keyframes python-coil {
+            0%, 100% {
+                transform: translateX(0px) rotate(0deg);
+            }
+            25% {
+                transform: translateX(3px) rotate(1deg);
+            }
+            50% {
+                transform: translateX(-2px) rotate(-1deg);
+            }
+            75% {
+                transform: translateX(2px) rotate(0.5deg);
+            }
+        }
+        
+        .pattern-glow {
+            animation: pattern-glow 4s ease-in-out infinite;
+        }
+        
+        @keyframes pattern-glow {
+            0%, 100% {
+                text-shadow: 0 0 5px #a16207;
+            }
+            50% {
+                text-shadow: 0 0 15px #a16207, 0 0 25px #d97706;
+            }
+        }
+        
+        .burmese-bg {
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(161, 98, 7, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(69, 26, 3, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(120, 53, 15, 0.1) 0%, transparent 50%);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-amber-50 to-yellow-50 min-h-screen burmese-bg">
+    <!-- Header -->
+    <div class="hero-gradient text-white py-16">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="mb-6">
+                <img src="https://ia801001.us.archive.org/30/items/mg-5192/_MG_5244.JPG" alt="Burmese Python displaying its massive size and distinctive blotched pattern" class="w-32 h-32 mx-auto mb-4 rounded-full object-cover border-4 border-white/30 shadow-lg python-animation" onerror="this.style.display='none'; document.getElementById('fallback-icon').style.display='block';">
+                <svg id="fallback-icon" class="w-20 h-20 mx-auto mb-4 text-white python-animation hidden" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                </svg>
+            </div>
+            <h1 class="text-5xl font-bold mb-4">Burmese Python</h1>
+            <p class="text-xl text-amber-100 mb-2"><em>Python bivittatus</em></p>
+            <p class="text-lg text-amber-200">Southeast Asia's Giant Constrictor</p>
+            <div class="mt-6 flex justify-center space-x-4">
+                <div class="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
+                    <span class="text-sm font-medium">Class: Reptilia</span>
+                </div>
+                <div class="bg-amber-600 backdrop-blur-sm rounded-full px-4 py-2">
+                    <span class="text-sm font-bold pattern-glow">🐍 Apex Constrictor</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Species Banner -->
+    <div class="max-w-6xl mx-auto px-6 py-6">
+        <div class="bg-gradient-to-r from-amber-100 to-yellow-100 border-l-4 border-amber-500 p-6 rounded-lg">
+            <div class="flex items-center">
+                <svg class="w-8 h-8 text-amber-600 mr-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                </svg>
+                <div>
+                    <h3 class="text-lg font-bold text-amber-800">Heavyweight Champion of Serpents</h3>
+                    <p class="text-amber-700">One of the heaviest and longest snake species, admired for its striking blotched pattern and incredible constricting power.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-6xl mx-auto px-6 py-6">
+        <!-- Quote -->
+        <div class="text-center mb-12">
+            <blockquote class="text-2xl font-medium text-gray-700 italic">
+                "The Burmese Python is one of the heaviest and longest snake species, admired for its striking blotched pattern."
+            </blockquote>
+        </div>
+
+        <!-- Habitat Icons -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🌲</div>
+                <p class="text-sm text-gray-600">Forests</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🌾</div>
+                <p class="text-sm text-gray-600">Grasslands</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🌿</div>
+                <p class="text-sm text-gray-600">Swamps</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-md">
+                <div class="text-2xl mb-2">🎯</div>
+                <p class="text-sm text-gray-600">Ambush Predator</p>
+            </div>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Physical Characteristics Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-amber-600 to-yellow-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                        </svg>
+                        Physical Characteristics
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('physical')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="physical-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="physical-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-amber-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-amber-800">One of the heaviest and longest snake species with distinctive blotched pattern</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Body Structure</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Average Length: 3–5 m (up to 7 m recorded)</li>
+                                    <li>• Weight: Can exceed 100 kg</li>
+                                    <li>• Pattern: Dark brown blotches with black borders</li>
+                                    <li>• Base color: Tan or yellowish skin</li>
+                                    <li>• Head: Large with pronounced heat pits</li>
+                                    <li>• Muscular, heavy-bodied build</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Sexual Dimorphism</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Females considerably larger than males</li>
+                                    <li>• Males more active during breeding season</li>
+                                    <li>• Size difference can be dramatic</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Unique Features</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Excellent swimmer, spends time near water</li>
+                                    <li>• Climbs trees when younger</li>
+                                    <li>• Heat-sensing pits for prey detection</li>
+                                    <li>• Incredible constricting strength</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Habitat and Distribution Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-green-600 to-emerald-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                        Habitat & Distribution
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('habitat')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="habitat-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="habitat-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-green-800">Native to Southeast Asia with established invasive populations in Florida</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Native Range</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>🇲🇲 Myanmar (Burma)</li>
+                                    <li>🇹🇭 Thailand</li>
+                                    <li>🇻🇳 Vietnam</li>
+                                    <li>🇮🇩 Parts of Indonesia</li>
+                                    <li>🌏 Other Southeast Asian regions</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Habitat Types</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>🌲 Tropical forests</li>
+                                    <li>🌾 Grasslands and savannas</li>
+                                    <li>🌿 Swamps and wetlands</li>
+                                    <li>🏞️ Marshlands near rivers and lakes</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-red-700 mb-2">Invasive Populations</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>⚠️ Established in Florida Everglades, USA</li>
+                                    <li>⚠️ Result of exotic pet releases</li>
+                                    <li>⚠️ Severe impact on native wildlife</li>
+                                    <li>⚠️ Ongoing management challenges</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diet Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-red-600 to-pink-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        Diet & Feeding
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('diet')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="diet-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="diet-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-red-800">Apex constrictor feeding on a wide range of prey through powerful ambush tactics</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Prey Items</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>🐦 Birds of various sizes</li>
+                                    <li>🐭 Mammals (rats, pigs, deer)</li>
+                                    <li>🦎 Reptiles and amphibians</li>
+                                    <li>🐗 Large mammals when fully grown</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Feeding Behavior</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Ambush predator strategy</li>
+                                    <li>• Uses constriction to suffocate prey</li>
+                                    <li>• Swallows prey whole after killing</li>
+                                    <li>• Can go months without feeding</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Hunting Adaptations</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Heat-sensing pits detect warm-blooded prey</li>
+                                    <li>• Incredible muscular strength for constriction</li>
+                                    <li>• Patient ambush tactics</li>
+                                    <li>• Flexible jaws for large prey consumption</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Behavior Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 11H7l3-7 3 7h-2v8h-2v-8z"/>
+                        </svg>
+                        Behavior & Abilities
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('behavior')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="behavior-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="behavior-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-blue-800">Versatile predator with excellent swimming abilities and arboreal skills when young</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Movement & Locomotion</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Excellent swimmer, often near water</li>
+                                    <li>• Young pythons are skilled climbers</li>
+                                    <li>• Adults primarily terrestrial</li>
+                                    <li>• Can move surprisingly fast when needed</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Hunting Strategy</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Patient ambush predator</li>
+                                    <li>• Uses camouflage effectively</li>
+                                    <li>• Lightning-fast strike when prey approaches</li>
+                                    <li>• Constricts with incredible force</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Reproductive Behavior</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Females lay large clutches of eggs</li>
+                                    <li>• Maternal care includes incubation</li>
+                                    <li>• Males compete for breeding rights</li>
+                                    <li>• Seasonal breeding patterns</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Human Interaction Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-orange-600 to-red-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                        </svg>
+                        Human Interaction
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('human')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="human-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="human-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-orange-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-orange-800">Potentially dangerous due to immense size and strength, but attacks on humans are rare</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-red-700 mb-2">Potential Dangers</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>⚠️ Potentially dangerous due to size and strength</li>
+                                    <li>⚠️ Attacks on humans rare but possible</li>
+                                    <li>⚠️ Especially in rural Southeast Asian settings</li>
+                                    <li>⚠️ Constriction can be fatal</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-green-700 mb-2">Typical Behavior</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>✓ Generally avoids human contact</li>
+                                    <li>✓ Prefers natural prey over humans</li>
+                                    <li>✓ More often threatened by humans</li>
+                                    <li>✓ Important in traditional medicine and culture</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Human Threats to Species</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Hunting and habitat destruction</li>
+                                    <li>• Harvested for skin and meat</li>
+                                    <li>• Traditional medicine uses</li>
+                                    <li>• Exotic pet trade pressures</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conservation Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-purple-600 to-indigo-600 p-6 text-white">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                        </svg>
+                        Conservation & Impact
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <button onclick="toggleDropdown('conservation')" class="w-full flex items-center justify-between text-left font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                        <span>View Details</span>
+                        <svg id="conservation-arrow" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="conservation-content" class="dropdown-content mt-4">
+                        <div class="space-y-4">
+                            <div class="bg-purple-50 p-3 rounded-lg">
+                                <p class="text-sm font-medium text-purple-800">Facing pressure in native range while causing ecological damage as invasive species</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Native Range Status</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Declining populations in some areas</li>
+                                    <li>• Habitat loss from development</li>
+                                    <li>• Hunting pressure for various uses</li>
+                                    <li>• Still relatively widespread</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-red-700 mb-2">Invasive Species Impact</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>⚠️ Devastating Florida Everglades ecosystem</li>
+                                    <li>⚠️ Consuming native birds and mammals</li>
+                                    <li>⚠️ Disrupting food webs</li>
+                                    <li>⚠️ Difficult to control or eradicate</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Management Efforts</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Removal programs in Florida</li>
+                                    <li>• Research on population control</li>
+                                    <li>• Education about responsible pet ownership</li>
+                                    <li>• Habitat protection in native range</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Size Comparison and Invasive Impact -->
+        <div class="mt-12 grid md:grid-cols-2 gap-8">
+            <div class="bg-gradient-to-r from-amber-600 to-yellow-600 rounded-xl p-8 text-center text-white">
+                <h3 class="text-2xl font-bold mb-4">⚖️ Heavyweight Champion</h3>
+                <p class="text-lg">One of the world's heaviest snakes, capable of exceeding 100 kg and reaching lengths up to 7 meters, making it a true giant among serpents.</p>
+            </div>
+            
+            <div class="bg-gradient-to-r from-red-600 to-pink-600 rounded-xl p-8 text-center text-white">
+                <h3 class="text-2xl font-bold mb-4">⚠️ Invasive Threat</h3>
+                <p class="text-lg">While magnificent in its native Southeast Asia, established populations in Florida's Everglades pose severe threats to native wildlife ecosystems.</p>
+            </div>
+        </div>
+
+        <!-- Ecological Role -->
+        <div class="mt-12 bg-gradient-to-r from-amber-100 to-yellow-100 rounded-xl p-8">
+            <h3 class="text-2xl font-bold text-center mb-6 text-gray-800">🐍 Dual Nature: Native Apex vs. Invasive Threat</h3>
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+                <div>
+                    <div class="text-3xl mb-2">🎯</div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Native Ecosystem Role</h4>
+                    <p class="text-sm text-gray-600">In Southeast Asia, serves as important apex predator controlling mammal and bird populations in tropical ecosystems</p>
+                </div>
+                <div>
+                    <div class="text-3xl mb-2">🌊</div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Aquatic Adaptability</h4>
+                    <p class="text-sm text-gray-600">Excellent swimming abilities allow exploitation of both terrestrial and aquatic prey in wetland environments</p>
+                </div>
+                <div>
+                    <div class="text-3xl mb-2">⚠️</div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Invasive Impact</h4>
+                    <p class="text-sm text-gray-600">In Florida, disrupts native ecosystems by consuming endemic species and competing with native predators</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDropdown(id) {
+            const content = document.getElementById(id + '-content');
+            const arrow = document.getElementById(id + '-arrow');
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                arrow.classList.remove('rotate-180');
+            } else {
+                content.classList.add('open');
+                arrow.classList.add('rotate-180');
+            }
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97dd4ddb84cdfee8',t:'MTc1NzY1ODA4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
