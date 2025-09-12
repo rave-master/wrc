@@ -6,6 +6,7 @@
   <title>Wildlife Rescue Center Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     .modal {
@@ -64,6 +65,11 @@
     <div class="max-w-7xl mx-auto px-4 py-6">
       <h1 class="text-4xl font-bold text-gray-800 text-center">🐒 Wildlife Rescue Center Dashboard</h1>
       <p class="text-center text-gray-600 mt-2">Comprehensive Wildlife Management & Analytics</p>
+      <div class="text-center mt-4">
+        <button onclick="generatePDFReport()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-colors duration-200">
+          📄 Generate PDF Report
+        </button>
+      </div>
     </div>
   </div>
 
@@ -267,6 +273,188 @@
   <script>
     let globalData = [];
     const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTtbl6w2Cu44Sj3NocFki0q43pIkSIYKNpDMHpLy_IzqeAv3MEZzioXuZsarU7tmFvbtq-qIsBmVq4L/pub?gid=0&single=true&output=csv";
+
+    // PDF Report Generation
+    function generatePDFReport() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      const analysis = analyzeData(globalData);
+      
+      // Header
+      doc.setFontSize(20);
+      doc.setTextColor(40, 40, 40);
+      doc.text('Wildlife Rescue Center Report', 20, 30);
+      
+      doc.setFontSize(12);
+      doc.setTextColor(100, 100, 100);
+      const reportDate = new Date().toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+      doc.text(`Generated on: ${reportDate}`, 20, 40);
+      
+      // Executive Summary
+      doc.setFontSize(16);
+      doc.setTextColor(40, 40, 40);
+      doc.text('Executive Summary', 20, 60);
+      
+      doc.setFontSize(11);
+      doc.setTextColor(60, 60, 60);
+      let yPos = 75;
+      
+      const summaryText = [
+        `Total Animals in Database: ${analysis.totalAnimals}`,
+        `Currently Alive: ${analysis.aliveCount} (${((analysis.aliveCount / analysis.totalAnimals) * 100).toFixed(1)}%)`,
+        `Successfully Released: ${analysis.releasedCount} (${((analysis.releasedCount / analysis.totalAnimals) * 100).toFixed(1)}%)`,
+        `Mortality Cases: ${analysis.mortalityCount} (${((analysis.mortalityCount / analysis.totalAnimals) * 100).toFixed(1)}%)`,
+        `Ready for Release: ${analysis.aliveBreakdown.forRelease}`,
+        `Ongoing Rehabilitation: ${analysis.aliveBreakdown.ongoingRehab}`,
+        `Permanent Care: ${analysis.aliveBreakdown.keepIncapacity}`
+      ];
+      
+      summaryText.forEach(text => {
+        doc.text(text, 20, yPos);
+        yPos += 8;
+      });
+      
+      // Species Breakdown
+      yPos += 10;
+      doc.setFontSize(16);
+      doc.setTextColor(40, 40, 40);
+      doc.text('Species Distribution', 20, yPos);
+      yPos += 15;
+      
+      doc.setFontSize(11);
+      doc.setTextColor(60, 60, 60);
+      
+      const topSpecies = Object.entries(analysis.speciesCounts)
+        .sort(([,a], [,b]) => b - a)
+        .slice(0, 10);
+      
+      topSpecies.forEach(([species, count]) => {
+        const percentage = ((count / analysis.totalAnimals) * 100).toFixed(1);
+        doc.text(`${species}: ${count} animals (${percentage}%)`, 25, yPos);
+        yPos += 7;
+        
+        if (yPos > 270) {
+          doc.addPage();
+          yPos = 30;
+        }
+      });
+      
+      // Health Status Analysis
+      if (yPos > 200) {
+        doc.addPage();
+        yPos = 30;
+      } else {
+        yPos += 15;
+      }
+      
+      doc.setFontSize(16);
+      doc.setTextColor(40, 40, 40);
+      doc.text('Health Status Analysis', 20, yPos);
+      yPos += 15;
+      
+      doc.setFontSize(11);
+      doc.setTextColor(60, 60, 60);
+      
+      Object.entries(analysis.healthCounts)
+        .sort(([,a], [,b]) => b - a)
+        .forEach(([status, count]) => {
+          const percentage = ((count / analysis.totalAnimals) * 100).toFixed(1);
+          doc.text(`${status}: ${count} animals (${percentage}%)`, 25, yPos);
+          yPos += 7;
+          
+          if (yPos > 270) {
+            doc.addPage();
+            yPos = 30;
+          }
+        });
+      
+      // Monthly Intake Trends
+      if (yPos > 200) {
+        doc.addPage();
+        yPos = 30;
+      } else {
+        yPos += 15;
+      }
+      
+      doc.setFontSize(16);
+      doc.setTextColor(40, 40, 40);
+      doc.text('Monthly Intake Trends', 20, yPos);
+      yPos += 15;
+      
+      doc.setFontSize(11);
+      doc.setTextColor(60, 60, 60);
+      
+      const sortedMonths = Object.keys(analysis.intakeByMonth).sort().slice(-12);
+      sortedMonths.forEach(month => {
+        const count = analysis.intakeByMonth[month];
+        const monthName = new Date(month + '-01').toLocaleDateString('en-US', { 
+          year: 'numeric', 
+          month: 'long' 
+        });
+        doc.text(`${monthName}: ${count} animals`, 25, yPos);
+        yPos += 7;
+        
+        if (yPos > 270) {
+          doc.addPage();
+          yPos = 30;
+        }
+      });
+      
+      // Recommendations
+      if (yPos > 200) {
+        doc.addPage();
+        yPos = 30;
+      } else {
+        yPos += 15;
+      }
+      
+      doc.setFontSize(16);
+      doc.setTextColor(40, 40, 40);
+      doc.text('Key Insights & Recommendations', 20, yPos);
+      yPos += 15;
+      
+      doc.setFontSize(11);
+      doc.setTextColor(60, 60, 60);
+      
+      const recommendations = [
+        `• Success Rate: ${((analysis.releasedCount / (analysis.releasedCount + analysis.mortalityCount)) * 100).toFixed(1)}% of concluded cases resulted in successful release`,
+        `• ${analysis.aliveBreakdown.forRelease} animals are currently ready for release`,
+        `• ${analysis.aliveBreakdown.ongoingRehab} animals are in active rehabilitation`,
+        `• Most common species: ${topSpecies[0] ? topSpecies[0][0] : 'N/A'} (${topSpecies[0] ? topSpecies[0][1] : 0} cases)`,
+        `• Current capacity utilization: ${analysis.aliveCount} animals in care`,
+        `• Average monthly intake: ${Math.round(Object.values(analysis.intakeByMonth).reduce((a, b) => a + b, 0) / Object.keys(analysis.intakeByMonth).length)} animals`
+      ];
+      
+      recommendations.forEach(rec => {
+        const lines = doc.splitTextToSize(rec, 170);
+        lines.forEach(line => {
+          doc.text(line, 25, yPos);
+          yPos += 7;
+          
+          if (yPos > 270) {
+            doc.addPage();
+            yPos = 30;
+          }
+        });
+      });
+      
+      // Footer
+      const pageCount = doc.internal.getNumberOfPages();
+      for (let i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
+        doc.setFontSize(8);
+        doc.setTextColor(150, 150, 150);
+        doc.text(`Wildlife Rescue Center - Confidential Report - Page ${i} of ${pageCount}`, 20, 285);
+      }
+      
+      // Save the PDF
+      const fileName = `Wildlife_Rescue_Report_${new Date().toISOString().split('T')[0]}.pdf`;
+      doc.save(fileName);
+    }
 
     // Modal functions
     function openModal(modalId) {
@@ -762,5 +950,5 @@
       }
     });
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97dde4eed5f74045',t:'MTc1NzY2NDI2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ddf931d13cccbf',t:'MTc1NzY2NTA5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
