@@ -57,6 +57,23 @@
       height: 300px;
       width: 100%;
     }
+    .tooltip {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      max-width: 300px;
+      z-index: 2000;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .tooltip.show {
+      opacity: 1;
+    }
   </style>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
@@ -134,6 +151,14 @@
             <p class="text-2xl font-bold text-gray-900" id="totalAlive">-</p>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Taxonomic Class Distribution -->
+    <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+      <h3 class="text-xl font-semibold text-gray-800 mb-6">Distribution by Taxonomic Class</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4" id="taxonomicCards">
+        <!-- Cards will be populated by JavaScript -->
       </div>
     </div>
 
@@ -270,6 +295,18 @@
     </div>
   </div>
 
+  <!-- Taxonomic Class Modal -->
+  <div id="taxonomicModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('taxonomicModal')">&times;</span>
+      <h2 class="text-2xl font-bold mb-4" id="taxonomicModalTitle">Taxonomic Class Details</h2>
+      <div id="taxonomicModalContent"></div>
+    </div>
+  </div>
+
+  <!-- Tooltip -->
+  <div id="tooltip" class="tooltip"></div>
+
   <script>
     let globalData = [];
     const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTtbl6w2Cu44Sj3NocFki0q43pIkSIYKNpDMHpLy_IzqeAv3MEZzioXuZsarU7tmFvbtq-qIsBmVq4L/pub?gid=0&single=true&output=csv";
@@ -318,6 +355,29 @@
         yPos += 8;
       });
       
+      // Taxonomic Class Breakdown
+      yPos += 10;
+      doc.setFontSize(16);
+      doc.setTextColor(40, 40, 40);
+      doc.text('Taxonomic Class Distribution', 20, yPos);
+      yPos += 15;
+      
+      doc.setFontSize(11);
+      doc.setTextColor(60, 60, 60);
+      
+      Object.entries(analysis.taxonomicCounts)
+        .sort(([,a], [,b]) => b - a)
+        .forEach(([taxonomicClass, count]) => {
+          const percentage = ((count / analysis.totalAnimals) * 100).toFixed(1);
+          doc.text(`${taxonomicClass}: ${count} animals (${percentage}%)`, 25, yPos);
+          yPos += 7;
+          
+          if (yPos > 270) {
+            doc.addPage();
+            yPos = 30;
+          }
+        });
+
       // Species Breakdown
       yPos += 10;
       doc.setFontSize(16);
@@ -500,11 +560,89 @@
       }
     }
 
+    // Tooltip functions
+    function showTooltip(event, content) {
+      const tooltip = document.getElementById('tooltip');
+      tooltip.innerHTML = content;
+      tooltip.style.left = event.pageX + 10 + 'px';
+      tooltip.style.top = event.pageY + 10 + 'px';
+      tooltip.classList.add('show');
+    }
+
+    function hideTooltip() {
+      const tooltip = document.getElementById('tooltip');
+      tooltip.classList.remove('show');
+    }
+
+    // Taxonomic class modal functions
+    function openTaxonomicModal(taxonomicClass) {
+      const modal = document.getElementById('taxonomicModal');
+      const title = document.getElementById('taxonomicModalTitle');
+      const content = document.getElementById('taxonomicModalContent');
+      
+      // Get animals for this taxonomic class
+      const animals = globalData.filter(row => {
+        const rowClass = row["Class"]?.trim() || 
+                        row["class"]?.trim() || 
+                        row["Taxonomic Class"]?.trim() || 
+                        row["taxonomic_class"]?.trim() || 
+                        "Unknown";
+        return rowClass === taxonomicClass;
+      });
+
+      title.textContent = `${taxonomicClass} Animals (${animals.length})`;
+      
+      let html = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">';
+      
+      animals.forEach(animal => {
+        const name = animal["Common Name"] || "Unknown";
+        const cageNo = animal["Cage No."] || "";
+        const health = animal["Health Status"] || "Unknown";
+        const intakeDate = animal["Intake Date"] || "";
+        const candidate = animal["Candidate for Release"] || "Not Specified";
+        
+        // Format intake date
+        let formattedDate = "Unknown";
+        if (intakeDate) {
+          const date = new Date(intakeDate);
+          if (!isNaN(date)) {
+            formattedDate = date.toLocaleDateString();
+          }
+        }
+
+        // Health status color
+        const healthColors = {
+          'Critical I': 'bg-red-100 border-red-300 text-red-800',
+          'Critical II': 'bg-red-200 border-red-400 text-red-900',
+          'Recovering': 'bg-yellow-100 border-yellow-300 text-yellow-800',
+          'Stable I': 'bg-blue-100 border-blue-300 text-blue-800',
+          'Stable II': 'bg-green-100 border-green-300 text-green-800'
+        };
+        
+        const healthColor = healthColors[health] || 'bg-gray-100 border-gray-300 text-gray-800';
+        
+        html += `
+          <div class="border-2 rounded-lg p-4 ${healthColor}">
+            <h4 class="font-bold text-lg mb-2">${name}</h4>
+            ${cageNo ? `<p class="text-sm"><strong>Cage:</strong> ${cageNo}</p>` : ''}
+            <p class="text-sm"><strong>Health:</strong> ${health}</p>
+            <p class="text-sm"><strong>Intake:</strong> ${formattedDate}</p>
+            <p class="text-sm"><strong>Release Candidate:</strong> ${candidate}</p>
+          </div>
+        `;
+      });
+      
+      html += '</div>';
+      content.innerHTML = html;
+      modal.classList.add('show');
+    }
+
     // Data analysis functions
     function analyzeData(data) {
       const analysis = {
         totalAnimals: data.length,
         speciesCounts: {},
+        taxonomicCounts: {},
         healthCounts: {},
         releaseCounts: {},
         mortalityCount: 0,
@@ -518,10 +656,27 @@
         intakeByMonth: {}
       };
 
+      // Debug: Log first few rows to check column names
+      console.log("First row keys:", Object.keys(data[0] || {}));
+      console.log("Sample data:", data.slice(0, 3));
+
       data.forEach(row => {
         // Species analysis
         const species = row["Common Name"] || "Unknown";
         analysis.speciesCounts[species] = (analysis.speciesCounts[species] || 0) + 1;
+
+        // Taxonomic class analysis - try multiple possible column names
+        const taxonomicClass = row["Class"]?.trim() || 
+                              row["class"]?.trim() || 
+                              row["Taxonomic Class"]?.trim() || 
+                              row["taxonomic_class"]?.trim() || 
+                              "Unknown";
+        
+        if (taxonomicClass && taxonomicClass !== "" && taxonomicClass !== "Unknown") {
+          analysis.taxonomicCounts[taxonomicClass] = (analysis.taxonomicCounts[taxonomicClass] || 0) + 1;
+        } else {
+          analysis.taxonomicCounts["Unknown"] = (analysis.taxonomicCounts["Unknown"] || 0) + 1;
+        }
 
         // Health status analysis
         const health = row["Health Status"] || "Unknown";
@@ -584,6 +739,9 @@
         }
       });
 
+      // Debug: Log taxonomic counts
+      console.log("Taxonomic counts:", analysis.taxonomicCounts);
+
       // Calculate ongoing rehabilitation as total minus other categories
       analysis.aliveBreakdown.ongoingRehab = analysis.totalAnimals - 
                                             analysis.aliveBreakdown.forRelease - 
@@ -598,6 +756,84 @@
       document.getElementById('totalMortality').textContent = analysis.mortalityCount;
       document.getElementById('totalReleased').textContent = analysis.releasedCount;
       document.getElementById('totalAlive').textContent = analysis.aliveCount;
+    }
+
+    function updateTaxonomicCards(analysis) {
+      const container = document.getElementById('taxonomicCards');
+      const classIcons = {
+        'Mammalia': '🐾',
+        'Aves': '🦅',
+        'Reptilia': '🦎',
+        'Amphibia': '🐸',
+        'Actinopterygii': '🐟',
+        'Insecta': '🦋',
+        'Unknown': '❓'
+      };
+      
+      const classColors = {
+        'Mammalia': 'bg-amber-100 text-amber-800 border-amber-200',
+        'Aves': 'bg-sky-100 text-sky-800 border-sky-200',
+        'Reptilia': 'bg-green-100 text-green-800 border-green-200',
+        'Amphibia': 'bg-teal-100 text-teal-800 border-teal-200',
+        'Actinopterygii': 'bg-blue-100 text-blue-800 border-blue-200',
+        'Insecta': 'bg-purple-100 text-purple-800 border-purple-200',
+        'Unknown': 'bg-gray-100 text-gray-800 border-gray-200'
+      };
+
+      // Get animals by taxonomic class
+      const animalsByClass = {};
+      globalData.forEach(row => {
+        const taxonomicClass = row["Class"]?.trim() || 
+                              row["class"]?.trim() || 
+                              row["Taxonomic Class"]?.trim() || 
+                              row["taxonomic_class"]?.trim() || 
+                              "Unknown";
+        const animalName = row["Common Name"] || "Unknown";
+        const cageNo = row["Cage No."] || "";
+        
+        // Create display name with cage number if available
+        let displayName = animalName;
+        if (cageNo) displayName += ` (Cage ${cageNo})`;
+        
+        if (!animalsByClass[taxonomicClass]) {
+          animalsByClass[taxonomicClass] = [];
+        }
+        animalsByClass[taxonomicClass].push(displayName);
+      });
+
+      let html = '';
+      
+      // Check if we have any taxonomic data
+      if (Object.keys(analysis.taxonomicCounts).length === 0) {
+        html = '<div class="col-span-full text-center text-gray-500">No taxonomic class data available</div>';
+      } else {
+        Object.entries(analysis.taxonomicCounts)
+          .sort(([,a], [,b]) => b - a)
+          .forEach(([taxonomicClass, count]) => {
+            const percentage = ((count / analysis.totalAnimals) * 100).toFixed(1);
+            const icon = classIcons[taxonomicClass] || '🔬';
+            const colorClass = classColors[taxonomicClass] || 'bg-gray-100 text-gray-800 border-gray-200';
+            const animals = animalsByClass[taxonomicClass] || [];
+            
+            // Create tooltip content (first 10 animals)
+            const tooltipAnimals = animals.slice(0, 10).join('<br>');
+            const moreText = animals.length > 10 ? `<br><em>... and ${animals.length - 10} more</em>` : '';
+            
+            html += `
+              <div class="border-2 rounded-lg p-4 text-center transition-transform hover:scale-105 cursor-pointer relative ${colorClass}"
+                   onclick="openTaxonomicModal('${taxonomicClass}')"
+                   onmouseenter="showTooltip(event, '${tooltipAnimals}${moreText}')"
+                   onmouseleave="hideTooltip()">
+                <div class="text-3xl mb-2">${icon}</div>
+                <div class="font-bold text-lg">${count}</div>
+                <div class="text-sm font-medium">${taxonomicClass}</div>
+                <div class="text-xs opacity-75">${percentage}%</div>
+              </div>
+            `;
+          });
+      }
+      
+      container.innerHTML = html;
     }
 
     function generateTotalBreakdown() {
@@ -797,6 +1033,35 @@
     function generateHealthDetail() {
       const analysis = analyzeData(globalData);
       
+      // Get detailed health data with animal names
+      const healthAnimals = {};
+      
+      // Initialize categories
+      Object.keys(analysis.healthCounts).forEach(status => {
+        healthAnimals[status] = [];
+      });
+
+      globalData.forEach(row => {
+        const health = row["Health Status"] || "Unknown";
+        const animalName = row["Common Name"] || "Unknown";
+        const cageNo = row["Cage No."] || "";
+        const intakeDate = row["Intake Date"] || "";
+        
+        // Create display name with cage number and intake date if available
+        let displayName = animalName;
+        if (cageNo) displayName += ` (Cage No. ${cageNo})`;
+        if (intakeDate) {
+          const date = new Date(intakeDate);
+          if (!isNaN(date)) {
+            displayName += ` - ${date.toLocaleDateString()}`;
+          }
+        }
+        
+        if (healthAnimals[health]) {
+          healthAnimals[health].push(displayName);
+        }
+      });
+      
       const ctx = document.getElementById('healthDetailChart').getContext('2d');
       new Chart(ctx, {
         type: 'doughnut',
@@ -804,18 +1069,143 @@
           labels: Object.keys(analysis.healthCounts),
           datasets: [{
             data: Object.values(analysis.healthCounts),
-            backgroundColor: ['#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4']
+            backgroundColor: ['#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4', '#f97316', '#84cc16', '#a855f7']
           }]
         },
         options: {
           responsive: true,
-          maintainAspectRatio: false
+          maintainAspectRatio: false,
+          plugins: {
+            tooltip: {
+              callbacks: {
+                afterLabel: function(context) {
+                  const label = context.label;
+                  const animals = healthAnimals[label] || [];
+                  if (animals.length > 0) {
+                    const displayAnimals = animals.slice(0, 10); // Show first 10
+                    let tooltip = displayAnimals.join('\n');
+                    if (animals.length > 10) {
+                      tooltip += `\n... and ${animals.length - 10} more`;
+                    }
+                    return tooltip;
+                  }
+                  return '';
+                }
+              }
+            }
+          }
         }
       });
+
+      // Create detailed table with definitions
+      const container = document.getElementById('healthTable');
+      
+      // Health status definitions
+      const healthDefinitions = {
+        'Critical I': 'exhibits signs of weakness, visible injuries, etc., under close observation',
+        'Critical II': 'severely debilitated or extremely weak; requires urgent veterinary intervention',
+        'Recovering': 'improving from previous injury, illness, or weakness; shows signs of healing but not yet fully stable; may still require moderate monitoring and care',
+        'Stable I': 'healthy but still under close observation; may need monitoring to ensure recovery/adaptation',
+        'Stable II': 'healthy and stable, and exhibiting normal activity and behavior; ready for release'
+      };
+      
+      let html = `
+        <div class="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <h4 class="text-lg font-semibold text-blue-800 mb-3">Health Status Definitions</h4>
+          <div class="space-y-2 text-sm">
+            ${Object.entries(healthDefinitions).map(([status, definition]) => 
+              `<div><strong>${status}:</strong> ${definition}</div>`
+            ).join('')}
+          </div>
+        </div>
+        <div class="space-y-6">
+      `;
+      
+      Object.entries(healthAnimals).forEach(([status, animals]) => {
+        if (animals.length > 0) {
+          const statusColors = {
+            'Alive': 'bg-green-50 border-green-200',
+            'Dead': 'bg-red-50 border-red-200',
+            'Released': 'bg-blue-50 border-blue-200',
+            'In Treatment': 'bg-yellow-50 border-yellow-200',
+            'Rehabilitation': 'bg-purple-50 border-purple-200',
+            'Unknown': 'bg-gray-50 border-gray-200'
+          };
+          
+          const statusTextColors = {
+            'Alive': 'text-green-800',
+            'Dead': 'text-red-800',
+            'Released': 'text-blue-800',
+            'In Treatment': 'text-yellow-800',
+            'Rehabilitation': 'text-purple-800',
+            'Unknown': 'text-gray-800'
+          };
+
+          // Default colors for statuses not in the predefined list
+          const defaultColor = 'bg-gray-50 border-gray-200';
+          const defaultTextColor = 'text-gray-800';
+
+          // Get definition for this status
+          const definition = healthDefinitions[status];
+          const titleText = definition ? `${status}: ${definition}` : status;
+          
+          html += `
+            <div class="border-2 rounded-lg p-4 ${statusColors[status] || defaultColor}">
+              <h4 class="text-lg font-semibold mb-3 ${statusTextColors[status] || defaultTextColor}">
+                ${titleText} (${animals.length})
+              </h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 max-h-60 overflow-y-auto">
+          `;
+          
+          animals.forEach(animal => {
+            html += `<div class="bg-white p-2 rounded text-sm">${animal}</div>`;
+          });
+          
+          html += '</div></div>';
+        }
+      });
+      
+      html += '</div>';
+      container.innerHTML = html;
     }
 
     function generateCandidateDetail() {
       const analysis = analyzeData(globalData);
+      
+      // Get detailed candidate data with animal names
+      const candidateAnimals = {
+        'Yes': [],
+        'No': [],
+        'Released': [],
+        'Not Specified': []
+      };
+
+      globalData.forEach(row => {
+        const candidate = row["Candidate for Release"]?.trim() || "Not Specified";
+        const animalName = row["Common Name"] || "Unknown";
+        const cageNo = row["Cage No."] || "";
+        const health = row["Health Status"] || "";
+        const releaseDate = row["Release Date"] || "";
+        
+        // Create display name with cage number if available
+        const displayName = cageNo ? `${animalName} (Cage No. ${cageNo})` : animalName;
+        
+        // Check if already released
+        if (health.toLowerCase().includes('released') || 
+            candidate.toLowerCase() === 'released' ||
+            releaseDate.trim() !== "") {
+          candidateAnimals['Released'].push(displayName);
+        } else if (candidate.toLowerCase() === 'yes') {
+          candidateAnimals['Yes'].push(displayName);
+        } else if (candidate.toLowerCase() === 'no' || 
+                   candidate.toLowerCase() === 'not yet' || 
+                   candidate.toLowerCase() === 'na' ||
+                   candidate.toLowerCase() === 'n/a') {
+          candidateAnimals['No'].push(displayName);
+        } else {
+          candidateAnimals['Not Specified'].push(displayName);
+        }
+      });
       
       const ctx = document.getElementById('candidateDetailChart').getContext('2d');
       new Chart(ctx, {
@@ -824,14 +1214,75 @@
           labels: Object.keys(analysis.releaseCounts),
           datasets: [{
             data: Object.values(analysis.releaseCounts),
-            backgroundColor: ['#059669', '#dc2626', '#d97706']
+            backgroundColor: ['#059669', '#dc2626', '#d97706', '#6b7280']
           }]
         },
         options: {
           responsive: true,
-          maintainAspectRatio: false
+          maintainAspectRatio: false,
+          plugins: {
+            tooltip: {
+              callbacks: {
+                afterLabel: function(context) {
+                  const label = context.label;
+                  const animals = candidateAnimals[label] || [];
+                  if (animals.length > 0) {
+                    const displayAnimals = animals.slice(0, 10); // Show first 10
+                    let tooltip = displayAnimals.join('\n');
+                    if (animals.length > 10) {
+                      tooltip += `\n... and ${animals.length - 10} more`;
+                    }
+                    return tooltip;
+                  }
+                  return '';
+                }
+              }
+            }
+          }
         }
       });
+
+      // Create detailed table
+      const container = document.getElementById('candidateTable');
+      let html = '<div class="space-y-6">';
+      
+      Object.entries(candidateAnimals).forEach(([status, animals]) => {
+        if (animals.length > 0) {
+          const statusColors = {
+            'Yes': 'bg-green-50 border-green-200',
+            'No': 'bg-red-50 border-red-200', 
+            'Released': 'bg-blue-50 border-blue-200',
+            'Not Specified': 'bg-gray-50 border-gray-200'
+          };
+          
+          const statusTextColors = {
+            'Yes': 'text-green-800',
+            'No': 'text-red-800',
+            'Released': 'text-blue-800', 
+            'Not Specified': 'text-gray-800'
+          };
+
+          html += `
+            <div class="border-2 rounded-lg p-4 ${statusColors[status]}">
+              <h4 class="text-lg font-semibold mb-3 ${statusTextColors[status]}">
+                ${status === 'Yes' ? 'Ready for Release' : 
+                  status === 'No' ? 'Not Ready for Release' : 
+                  status === 'Released' ? 'Already Released' : 'Status Not Specified'} 
+                (${animals.length})
+              </h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 max-h-60 overflow-y-auto">
+          `;
+          
+          animals.forEach(animal => {
+            html += `<div class="bg-white p-2 rounded text-sm">${animal}</div>`;
+          });
+          
+          html += '</div></div>';
+        }
+      });
+      
+      html += '</div>';
+      container.innerHTML = html;
     }
 
     function generateIntakeDetail() {
@@ -868,6 +1319,9 @@
         
         // Update summary statistics
         updateSummaryStats(analysis);
+        
+        // Update taxonomic class cards
+        updateTaxonomicCards(analysis);
 
         // Create main dashboard charts
         // Species Distribution
@@ -950,5 +1404,5 @@
       }
     });
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ddf931d13cccbf',t:'MTc1NzY2NTA5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ed92e7946c0a7c',t:'MTc1NzgyODY4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
