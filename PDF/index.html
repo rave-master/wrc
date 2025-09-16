@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wildlife Rehabilitation Report Generator</title>
+    <title>Wildlife Rehabilitation Document Report</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         * {
@@ -13,14 +13,15 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Times New Roman', serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
@@ -35,106 +36,88 @@
             text-align: center;
         }
 
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 300;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
         .content {
             padding: 40px;
+            background: white;
         }
 
-        .report-section {
-            margin-bottom: 40px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 25px;
-            border-left: 5px solid #667eea;
+        .document-section {
+            margin-bottom: 30px;
         }
 
         .section-title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: #2c3e50;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
         }
 
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+        .document-paragraph {
+            margin-bottom: 15px;
+            text-align: justify;
+            font-size: 1rem;
+            color: #2c3e50;
+        }
+
+        .case-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
             margin-bottom: 25px;
         }
 
-        .info-item {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
+        .case-info p {
+            margin-bottom: 8px;
         }
 
-        .info-label {
-            font-weight: 600;
-            color: #495057;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-        }
-
-        .info-value {
+        .case-info strong {
             color: #2c3e50;
-            font-size: 1.1rem;
-        }
-
-        .treatment-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .treatment-table th {
-            background: #667eea;
-            color: white;
-            padding: 15px 12px;
-            text-align: left;
             font-weight: 600;
-            font-size: 0.9rem;
         }
 
-        .treatment-table td {
-            padding: 12px;
+        .treatment-entry {
+            background: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .treatment-date {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
             border-bottom: 1px solid #e9ecef;
-            vertical-align: top;
+            padding-bottom: 5px;
         }
 
-        .treatment-table tr:hover {
-            background: #f8f9fa;
+        .treatment-details {
+            margin-bottom: 10px;
         }
 
-        .date-header {
-            background: #e3f2fd !important;
-            color: #1976d2 !important;
-            font-weight: 700;
-        }
-
-        .observation {
+        .observation-box {
             background: #fff3cd;
             border: 1px solid #ffeaa7;
             border-radius: 5px;
-            padding: 10px;
-            margin-top: 5px;
+            padding: 15px;
+            margin-top: 10px;
             font-style: italic;
             color: #856404;
+        }
+
+        .critical-note {
+            background: #fee;
+            border: 1px solid #fecaca;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #c53030;
+            font-weight: 600;
         }
 
         .generate-btn {
@@ -156,22 +139,12 @@
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
         }
 
-        .status-badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .status-critical {
-            background: #fee;
-            color: #c53030;
-        }
-
-        .icon {
-            font-size: 1.2rem;
+        .data-entry-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            border-left: 5px solid #667eea;
+            margin-bottom: 30px;
         }
 
         @media (max-width: 768px) {
@@ -186,19 +159,6 @@
             
             .header {
                 padding: 20px;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .treatment-table {
-                font-size: 0.8rem;
-            }
-            
-            .treatment-table th,
-            .treatment-table td {
-                padding: 8px 6px;
             }
         }
     </style>
@@ -215,174 +175,20 @@
                 </div>
             </div>
             <h1 style="font-size: 2rem; margin-bottom: 10px; font-weight: 300;">Wildlife Rehabilitation Report</h1>
-            <p style="font-size: 1rem; opacity: 0.9;">Comprehensive Medical Treatment Documentation</p>
+            <p style="font-size: 1rem; opacity: 0.9;">Medical Treatment Documentation</p>
         </div>
 
         <div class="content">
-            <!-- Patient Information -->
-            <div class="report-section">
-                <h2 class="section-title">
-                    <span class="icon">📋</span>
-                    Patient Information
-                </h2>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label">Case ID</div>
-                        <div class="info-value">WRC-D-008-2025-023</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Species (Common Name)</div>
-                        <div class="info-value">Roffous-bellied Eagle</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Species (Scientific Name)</div>
-                        <div class="info-value"><em>Lophotriorchis kienerii</em></div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Location Found</div>
-                        <div class="info-value">QF</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Initial Condition</div>
-                        <div class="info-value">Left wing injured</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Weight</div>
-                        <div class="info-value">0.740 kg</div>
-                    </div>
-                </div>
-                <div class="status-badge status-critical">Critical Care Required</div>
-            </div>
-
-            <!-- Treatment Timeline -->
-            <div class="report-section">
-                <h2 class="section-title">
-                    <span class="icon">💊</span>
-                    Treatment Timeline & Medical Interventions
-                </h2>
-                
-                <table class="treatment-table">
-                    <thead>
-                        <tr>
-                            <th>Date & Time</th>
-                            <th>Medication</th>
-                            <th>Dosage</th>
-                            <th>Classification</th>
-                            <th>Route</th>
-                            <th>Veterinarian</th>
-                            <th>Observations</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="date-header">
-                            <td colspan="7"><strong>27 August 2025 - Initial Treatment</strong></td>
-                        </tr>
-                        <tr>
-                            <td>27 Aug 2025<br>14:00</td>
-                            <td><strong>Dexamethasone</strong></td>
-                            <td>0.05 mL</td>
-                            <td>Anti-inflammatory</td>
-                            <td>Intramuscular (IM)</td>
-                            <td>Dr. Charmy, City Vet</td>
-                            <td>Initial assessment - left wing injury</td>
-                        </tr>
-                        <tr>
-                            <td>27 Aug 2025<br>14:00</td>
-                            <td><strong>Amoxicillin</strong></td>
-                            <td>0.05 mL</td>
-                            <td>Antibacterial</td>
-                            <td>Intramuscular (IM)</td>
-                            <td>Dr. Charmy, City Vet</td>
-                            <td>Prophylactic antibiotic treatment</td>
-                        </tr>
-                        <tr>
-                            <td>27 Aug 2025<br>14:00</td>
-                            <td><strong>Combinix Spray</strong></td>
-                            <td>-</td>
-                            <td>Anti-parasitic</td>
-                            <td>Topical (cutaneous)</td>
-                            <td>Dr. Charmy, City Vet</td>
-                            <td>External parasite prevention</td>
-                        </tr>
-                        <tr class="date-header">
-                            <td colspan="7"><strong>29 August 2025 - Follow-up Treatment</strong></td>
-                        </tr>
-                        <tr>
-                            <td>29 Aug 2025</td>
-                            <td><strong>Dexamethasone</strong></td>
-                            <td>0.05 mL</td>
-                            <td>Anti-inflammatory</td>
-                            <td>Intramuscular (IM)</td>
-                            <td>-</td>
-                            <td>
-                                <div class="observation">
-                                    ⚠️ Paralysis observed; unable to perch/stand
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>29 Aug 2025</td>
-                            <td><strong>Amoxicillin</strong></td>
-                            <td>0.05 mL</td>
-                            <td>Antibacterial</td>
-                            <td>Intramuscular (IM)</td>
-                            <td>-</td>
-                            <td>
-                                <div class="observation">
-                                    ⚠️ Paralysis observed; unable to perch/stand
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>29 Aug 2025</td>
-                            <td><strong>Combinix Spray</strong></td>
-                            <td>-</td>
-                            <td>Anti-parasitic</td>
-                            <td>Topical (cutaneous)</td>
-                            <td>-</td>
-                            <td>
-                                <div class="observation">
-                                    ⚠️ Paralysis observed; unable to perch/stand
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Clinical Summary -->
-            <div class="report-section">
-                <h2 class="section-title">
-                    <span class="icon">📊</span>
-                    Clinical Summary & Prognosis
-                </h2>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label">Primary Condition</div>
-                        <div class="info-value">Left wing injury with secondary complications</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Secondary Condition</div>
-                        <div class="info-value">Paralysis - unable to perch/stand</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Treatment Duration</div>
-                        <div class="info-value">2 days (ongoing)</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Current Status</div>
-                        <div class="info-value">Critical - requires intensive care</div>
-                    </div>
-                </div>
+            <!-- Report Content Will Appear Here -->
+            <div id="reportContent" style="text-align: center; padding: 40px; color: #6c757d;">
+                <h3 style="margin-bottom: 20px;">📋 Ready to Generate Report</h3>
+                <p>Please paste your wildlife acceptance form data below to generate a comprehensive rehabilitation report.</p>
             </div>
 
             <!-- Data Entry Section -->
-            <div class="report-section">
-                <h2 class="section-title">
-                    <span class="icon">📊</span>
-                    Wildlife Acceptance Form Data
-                </h2>
-                <p style="margin-bottom: 15px; color: #6c757d;">Paste your acceptance form data here:</p>
+            <div class="data-entry-section">
+                <h2 class="section-title">Wildlife Acceptance Form Data</h2>
+                <p style="margin-bottom: 15px; color: #6c757d;">Paste your acceptance form data here to update this report:</p>
                 <textarea 
                     id="dataInput" 
                     placeholder="Paste your wildlife acceptance form data here (tab-separated format)..."
@@ -390,7 +196,7 @@
                 ></textarea>
                 <div style="margin-top: 15px; display: flex; gap: 15px; flex-wrap: wrap;">
                     <button class="generate-btn" onclick="processNewData()" style="margin: 0; padding: 12px 25px; font-size: 1rem;">
-                        🔄 Add Treatment Data
+                        🔄 Update Report
                     </button>
                     <button class="generate-btn" onclick="startNewCase()" style="margin: 0; padding: 12px 25px; font-size: 1rem; background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">
                         🆕 New Case
@@ -410,74 +216,13 @@
     <script>
         // Global variable to store current data
         let currentReportData = {
-            caseId: 'WRC-D-008-2025-023',
-            commonName: 'Roffous-bellied Eagle',
-            scientificName: 'Lophotriorchis kienerii',
-            location: 'QF',
-            condition: 'Left wing injured',
-            weight: '0.740 kg',
-            treatments: [
-                {
-                    date: '27 August 2025',
-                    time: '14:00',
-                    medication: 'Dexamethasone',
-                    dosage: '0.05 mL',
-                    classification: 'Anti-inflammatory',
-                    route: 'Intramuscular (IM)',
-                    veterinarian: 'Dr. Charmy, City Vet',
-                    observations: 'Initial assessment - left wing injury'
-                },
-                {
-                    date: '27 August 2025',
-                    time: '14:00',
-                    medication: 'Amoxicillin',
-                    dosage: '0.05 mL',
-                    classification: 'Antibacterial',
-                    route: 'Intramuscular (IM)',
-                    veterinarian: 'Dr. Charmy, City Vet',
-                    observations: 'Prophylactic antibiotic treatment'
-                },
-                {
-                    date: '27 August 2025',
-                    time: '14:00',
-                    medication: 'Combinix Spray',
-                    dosage: '-',
-                    classification: 'Anti-parasitic',
-                    route: 'Topical (cutaneous)',
-                    veterinarian: 'Dr. Charmy, City Vet',
-                    observations: 'External parasite prevention'
-                },
-                {
-                    date: '29 August 2025',
-                    time: '',
-                    medication: 'Dexamethasone',
-                    dosage: '0.05 mL',
-                    classification: 'Anti-inflammatory',
-                    route: 'Intramuscular (IM)',
-                    veterinarian: '-',
-                    observations: 'Paralysis observed; unable to perch/stand'
-                },
-                {
-                    date: '29 August 2025',
-                    time: '',
-                    medication: 'Amoxicillin',
-                    dosage: '0.05 mL',
-                    classification: 'Antibacterial',
-                    route: 'Intramuscular (IM)',
-                    veterinarian: '-',
-                    observations: 'Paralysis observed; unable to perch/stand'
-                },
-                {
-                    date: '29 August 2025',
-                    time: '',
-                    medication: 'Combinix Spray',
-                    dosage: '-',
-                    classification: 'Anti-parasitic',
-                    route: 'Topical (cutaneous)',
-                    veterinarian: '-',
-                    observations: 'Paralysis observed; unable to perch/stand'
-                }
-            ]
+            caseId: '',
+            commonName: '',
+            scientificName: '',
+            location: '',
+            condition: '',
+            weight: '',
+            treatments: []
         };
 
         function processNewData() {
@@ -489,24 +234,19 @@
             }
 
             try {
-                // Parse the tab-separated data
                 const lines = dataInput.split('\n').filter(line => line.trim());
                 const newData = parseWildlifeData(lines);
                 
                 if (newData) {
-                    // Check if this is a new case or additional treatments for existing case
                     if (newData.caseId !== currentReportData.caseId) {
-                        // New case - replace all data
                         currentReportData = newData;
                         alert('New case data processed successfully! The report has been updated with the new patient information.');
                     } else {
-                        // Same case - add new treatments to existing ones
-                        const existingTreatmentCount = currentReportData.treatments.length;
                         currentReportData.treatments = [...currentReportData.treatments, ...newData.treatments];
-                        alert(`Added ${newData.treatments.length} new treatment entries to existing case ${currentReportData.caseId}. Total treatments: ${currentReportData.treatments.length}`);
+                        alert(`Added ${newData.treatments.length} new treatment entries to existing case ${currentReportData.caseId}.`);
                     }
                     updateReportDisplay();
-                    document.getElementById('dataInput').value = ''; // Clear input after processing
+                    document.getElementById('dataInput').value = '';
                 } else {
                     alert('Unable to parse the data. Please check the format and try again.');
                 }
@@ -516,17 +256,13 @@
         }
 
         function parseWildlifeData(lines) {
-            // This function parses tab-separated wildlife data
-            // Expected format: CaseID, CommonName, ScientificName, Location, Date, Time, Condition, Medication, Dosage, Classification, Route, Veterinarian, Observations...
-            
             const treatments = [];
             let caseInfo = {};
             
             lines.forEach(line => {
                 const fields = line.split('\t').map(field => field.trim()).filter(field => field !== '');
                 
-                if (fields.length >= 12) { // Need at least 12 fields for complete treatment data
-                    // Extract case information from first line
+                if (fields.length >= 12) {
                     if (!caseInfo.caseId && fields[0]) {
                         caseInfo = {
                             caseId: fields[0] || 'N/A',
@@ -534,12 +270,11 @@
                             scientificName: fields[2] || 'N/A',
                             location: fields[3] || 'N/A',
                             condition: fields[6] || 'N/A',
-                            weight: 'N/A' // Weight not in this format, will be updated manually if needed
+                            weight: 'N/A'
                         };
                     }
                     
-                    // Extract treatment information
-                    if (fields[7]) { // If medication field exists
+                    if (fields[7]) {
                         treatments.push({
                             date: fields[4] || 'N/A',
                             time: fields[5] || '',
@@ -550,18 +285,6 @@
                             veterinarian: fields[11] || 'N/A',
                             observations: fields[12] || 'No observations recorded'
                         });
-                    }
-                } else if (fields.length >= 7) {
-                    // Handle shorter format - might be just case info without treatment
-                    if (!caseInfo.caseId && fields[0]) {
-                        caseInfo = {
-                            caseId: fields[0] || 'N/A',
-                            commonName: fields[1] || 'N/A',
-                            scientificName: fields[2] || 'N/A',
-                            location: fields[3] || 'N/A',
-                            condition: fields[6] || 'N/A',
-                            weight: 'N/A'
-                        };
                     }
                 }
             });
@@ -577,24 +300,96 @@
         }
 
         function updateReportDisplay() {
-            // Update patient information
-            const patientInfo = document.querySelectorAll('.info-item .info-value');
-            if (patientInfo.length >= 6) {
-                patientInfo[0].textContent = currentReportData.caseId;
-                patientInfo[1].textContent = currentReportData.commonName;
-                patientInfo[2].innerHTML = `<em>${currentReportData.scientificName}</em>`;
-                patientInfo[3].textContent = currentReportData.location;
-                patientInfo[4].textContent = currentReportData.condition;
-                patientInfo[5].textContent = currentReportData.weight;
+            const reportContent = document.getElementById('reportContent');
+            
+            if (!currentReportData.caseId || currentReportData.treatments.length === 0) {
+                reportContent.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #6c757d;">
+                        <h3 style="margin-bottom: 20px;">📋 Ready to Generate Report</h3>
+                        <p>Please paste your wildlife acceptance form data below to generate a comprehensive rehabilitation report.</p>
+                    </div>
+                `;
+                return;
             }
             
-            // Update treatment table
-            updateTreatmentTable();
+            // Generate full report content
+            reportContent.innerHTML = `
+                <!-- Case Summary -->
+                <div class="document-section">
+                    <h2 class="section-title">Case Summary</h2>
+                    <div class="case-info">
+                        <p><strong>Case ID:</strong> ${currentReportData.caseId}</p>
+                        <p><strong>Species:</strong> ${currentReportData.commonName} (<em>${currentReportData.scientificName}</em>)</p>
+                        <p><strong>Location Found:</strong> ${currentReportData.location}</p>
+                        <p><strong>Initial Condition:</strong> ${currentReportData.condition}</p>
+                        <p><strong>Weight:</strong> ${currentReportData.weight}</p>
+                    </div>
+                    
+                    <p class="document-paragraph">
+                        This report documents the medical treatment and rehabilitation progress of a ${currentReportData.commonName} 
+                        (<em>${currentReportData.scientificName}</em>) admitted to the Wildlife Rescue Center under case number 
+                        ${currentReportData.caseId}. The specimen was found in ${currentReportData.location} presenting with 
+                        ${currentReportData.condition} requiring immediate medical intervention and ongoing rehabilitation care.
+                    </p>
+                </div>
+
+                <!-- Medical Treatment History -->
+                <div class="document-section">
+                    <h2 class="section-title">Medical Treatment History</h2>
+                    <div id="treatmentEntries"></div>
+                </div>
+
+                <!-- Clinical Assessment -->
+                <div class="document-section">
+                    <h2 class="section-title">Clinical Assessment & Prognosis</h2>
+                    <p class="document-paragraph">
+                        The patient's condition requires ongoing medical management and monitoring. Treatment response and clinical progression 
+                        will determine the rehabilitation potential and prognosis for successful release back to the wild.
+                    </p>
+                    
+                    <p class="document-paragraph">
+                        <strong>Primary Diagnosis:</strong> ${currentReportData.condition}
+                    </p>
+                    
+                    <p class="document-paragraph">
+                        <strong>Treatment Duration:</strong> ${getTreatmentDuration()} days
+                    </p>
+                    
+                    <p class="document-paragraph">
+                        <strong>Current Status:</strong> Under medical care and observation
+                    </p>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="document-section">
+                    <h2 class="section-title">Recommendations</h2>
+                    <p class="document-paragraph">
+                        Based on the current clinical presentation and treatment response, continued monitoring and care are recommended:
+                    </p>
+                    <ul style="margin-left: 20px; margin-bottom: 15px;">
+                        <li>Continue prescribed medication regimen as directed</li>
+                        <li>Daily monitoring of patient condition and behavior</li>
+                        <li>Regular veterinary assessments</li>
+                        <li>Maintain appropriate housing and environmental conditions</li>
+                        <li>Document any changes in condition or treatment response</li>
+                    </ul>
+                </div>
+            `;
+            
+            // Update treatment entries
+            updateTreatmentEntries();
         }
 
-        function updateTreatmentTable() {
-            const tbody = document.querySelector('.treatment-table tbody');
-            tbody.innerHTML = '';
+        function getTreatmentDuration() {
+            if (currentReportData.treatments.length === 0) return 0;
+            
+            const dates = [...new Set(currentReportData.treatments.map(t => t.date))];
+            return dates.length;
+        }
+
+        function updateTreatmentEntries() {
+            const treatmentContainer = document.getElementById('treatmentEntries');
+            treatmentContainer.innerHTML = '';
             
             // Group treatments by date
             const treatmentsByDate = {};
@@ -605,45 +400,59 @@
                 treatmentsByDate[treatment.date].push(treatment);
             });
             
-            // Generate table rows
-            Object.keys(treatmentsByDate).forEach(date => {
-                // Add date header
-                const dateRow = document.createElement('tr');
-                dateRow.className = 'date-header';
-                dateRow.innerHTML = `<td colspan="7"><strong>${date} - Treatment</strong></td>`;
-                tbody.appendChild(dateRow);
+            // Generate treatment entries
+            Object.keys(treatmentsByDate).forEach((date, index) => {
+                const treatments = treatmentsByDate[date];
+                const hasCritical = treatments.some(t => 
+                    t.observations.includes('Paralysis') || t.observations.includes('unable')
+                );
                 
-                // Add treatment rows for this date
-                treatmentsByDate[date].forEach(treatment => {
-                    const row = document.createElement('tr');
-                    const observationHtml = treatment.observations.includes('Paralysis') || treatment.observations.includes('unable') 
-                        ? `<div class="observation">⚠️ ${treatment.observations}</div>`
-                        : treatment.observations;
-                    
-                    row.innerHTML = `
-                        <td>${treatment.date}${treatment.time ? '<br>' + treatment.time : ''}</td>
-                        <td><strong>${treatment.medication}</strong></td>
-                        <td>${treatment.dosage}</td>
-                        <td>${treatment.classification}</td>
-                        <td>${treatment.route}</td>
-                        <td>${treatment.veterinarian}</td>
-                        <td>${observationHtml}</td>
-                    `;
-                    tbody.appendChild(row);
-                });
+                const treatmentEntry = document.createElement('div');
+                treatmentEntry.className = 'treatment-entry';
+                
+                const timeStr = treatments[0].time ? ` (${treatments[0].time})` : '';
+                const treatmentType = index === 0 ? 'Initial Treatment' : 'Follow-up Treatment';
+                
+                let medicationsList = treatments.map(t => 
+                    `<li><strong>${t.medication}</strong> - ${t.dosage} administered ${t.route.toLowerCase()} as ${t.classification.toLowerCase()} treatment</li>`
+                ).join('');
+                
+                let observationText = treatments[0].observations;
+                let observationClass = hasCritical ? 'critical-note' : 'observation-box';
+                let observationIcon = hasCritical ? '⚠️ CRITICAL DEVELOPMENT:' : 'Clinical Observations:';
+                
+                treatmentEntry.innerHTML = `
+                    <div class="treatment-date">${date} - ${treatmentType}${timeStr}</div>
+                    <div class="treatment-details">
+                        <p>${index === 0 ? 
+                            `Upon admission, the patient underwent comprehensive medical assessment by ${treatments[0].veterinarian}. Initial treatment protocol was established to address the primary wing injury and prevent secondary complications.` :
+                            `Continued medical management with the same therapeutic protocol. Patient's condition was reassessed, revealing ${hasCritical ? 'concerning neurological symptoms that required immediate attention and modified care approach.' : 'stable condition with continued treatment.'}`
+                        }</p>
+                        
+                        <p><strong>Medications Administered:</strong></p>
+                        <ul style="margin-left: 20px; margin-bottom: 10px;">
+                            ${medicationsList}
+                        </ul>
+                        
+                        <div class="${observationClass}">
+                            <strong>${observationIcon}</strong> ${observationText}${hasCritical ? ' This represents a significant deterioration in neurological function requiring intensive monitoring and potential modification of treatment protocol.' : ''}
+                        </div>
+                    </div>
+                `;
+                
+                treatmentContainer.appendChild(treatmentEntry);
             });
         }
 
         function startNewCase() {
             if (confirm('Are you sure you want to start a new case? This will clear all current data.')) {
-                // Reset to empty state
                 currentReportData = {
-                    caseId: 'N/A',
-                    commonName: 'N/A',
-                    scientificName: 'N/A',
-                    location: 'N/A',
-                    condition: 'N/A',
-                    weight: 'N/A',
+                    caseId: '',
+                    commonName: '',
+                    scientificName: '',
+                    location: '',
+                    condition: '',
+                    weight: '',
                     treatments: []
                 };
                 updateReportDisplay();
@@ -661,7 +470,7 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             
-            // Set up the document header
+            // Header
             doc.setFontSize(12);
             doc.setTextColor(44, 62, 80);
             doc.setFont(undefined, 'bold');
@@ -679,7 +488,6 @@
             doc.setFont(undefined, 'normal');
             doc.text('So. Mandaapan, Brgy. New Balamban, Tagum City, Davao del Norte', 105, 48, { align: 'center' });
             
-            // Add separator line
             doc.setLineWidth(0.5);
             doc.line(20, 55, 190, 55);
             
@@ -691,43 +499,47 @@
             doc.setFontSize(10);
             doc.setTextColor(100, 100, 100);
             doc.setFont(undefined, 'normal');
-            doc.text('Comprehensive Medical Treatment Documentation', 20, 76);
+            doc.text('Medical Treatment Documentation', 20, 76);
             
-            // Patient Information
-            doc.setFontSize(16);
+            let yPos = 88;
+            
+            // Case Summary
+            doc.setFontSize(14);
             doc.setTextColor(44, 62, 80);
             doc.setFont(undefined, 'bold');
-            doc.text('Patient Information', 20, 88);
+            doc.text('Case Summary', 20, yPos);
+            yPos += 15;
             
             doc.setFontSize(10);
             doc.setTextColor(0, 0, 0);
-            let yPos = 98;
+            doc.setFont(undefined, 'normal');
             
-            const patientInfo = [
-                ['Case ID:', currentReportData.caseId],
-                ['Species (Common):', currentReportData.commonName],
-                ['Species (Scientific):', currentReportData.scientificName],
-                ['Location Found:', currentReportData.location],
-                ['Initial Condition:', currentReportData.condition],
-                ['Weight:', currentReportData.weight]
+            const caseInfo = [
+                `Case ID: ${currentReportData.caseId}`,
+                `Species: ${currentReportData.commonName} (${currentReportData.scientificName})`,
+                `Location Found: ${currentReportData.location}`,
+                `Initial Condition: ${currentReportData.condition}`,
+                `Weight: ${currentReportData.weight}`
             ];
             
-            patientInfo.forEach(([label, value]) => {
-                doc.setFont(undefined, 'bold');
-                doc.text(label, 20, yPos);
-                doc.setFont(undefined, 'normal');
-                doc.text(value, 70, yPos);
+            caseInfo.forEach(info => {
+                doc.text(info, 20, yPos);
                 yPos += 8;
             });
             
-            // Treatment Timeline
             yPos += 10;
-            doc.setFontSize(16);
+            
+            // Treatment summary
+            doc.setFontSize(14);
             doc.setTextColor(44, 62, 80);
-            doc.text('Treatment Timeline', 20, yPos);
+            doc.setFont(undefined, 'bold');
+            doc.text('Treatment Summary', 20, yPos);
             yPos += 15;
             
-            // Group treatments by date for PDF
+            doc.setFontSize(10);
+            doc.setTextColor(0, 0, 0);
+            doc.setFont(undefined, 'normal');
+            
             const treatmentsByDate = {};
             currentReportData.treatments.forEach(treatment => {
                 if (!treatmentsByDate[treatment.date]) {
@@ -736,63 +548,18 @@
                 treatmentsByDate[treatment.date].push(treatment);
             });
             
-            // Generate PDF content for each date
             Object.keys(treatmentsByDate).forEach(date => {
-                doc.setFontSize(12);
                 doc.setFont(undefined, 'bold');
-                doc.setTextColor(44, 62, 80);
-                doc.text(`${date} - Treatment`, 20, yPos);
-                yPos += 10;
+                doc.text(`${date}:`, 20, yPos);
+                yPos += 8;
                 
-                doc.setFontSize(9);
                 doc.setFont(undefined, 'normal');
-                doc.setTextColor(0, 0, 0);
-                
-                // Check if any treatment has critical observations
-                const hasCritical = treatmentsByDate[date].some(t => 
-                    t.observations.includes('Paralysis') || t.observations.includes('unable')
-                );
-                
-                if (hasCritical) {
-                    doc.setTextColor(200, 0, 0);
-                    doc.text('CRITICAL: Paralysis observed - unable to perch/stand', 25, yPos);
-                    yPos += 8;
-                    doc.setTextColor(0, 0, 0);
-                }
-                
                 treatmentsByDate[date].forEach(treatment => {
-                    const timeStr = treatment.time ? `${treatment.time} - ` : '';
-                    const treatmentLine = `${timeStr}${treatment.medication} ${treatment.dosage} (${treatment.route}) - ${treatment.classification} - ${treatment.veterinarian}`;
-                    doc.text('• ' + treatmentLine, 25, yPos);
+                    const treatmentLine = `• ${treatment.medication} ${treatment.dosage} (${treatment.route}) - ${treatment.veterinarian}`;
+                    doc.text(treatmentLine, 25, yPos);
                     yPos += 6;
                 });
-                
                 yPos += 5;
-            });
-            
-            // Clinical Summary
-            yPos += 10;
-            doc.setFontSize(16);
-            doc.setTextColor(44, 62, 80);
-            doc.text('Clinical Summary', 20, yPos);
-            yPos += 15;
-            
-            doc.setFontSize(10);
-            doc.setTextColor(0, 0, 0);
-            
-            const summary = [
-                ['Primary Condition:', 'Left wing injury with secondary complications'],
-                ['Secondary Condition:', 'Paralysis - unable to perch/stand'],
-                ['Treatment Duration:', '2 days (ongoing)'],
-                ['Current Status:', 'Critical - requires intensive care']
-            ];
-            
-            summary.forEach(([label, value]) => {
-                doc.setFont(undefined, 'bold');
-                doc.text(label, 20, yPos);
-                doc.setFont(undefined, 'normal');
-                doc.text(value, 70, yPos);
-                yPos += 8;
             });
             
             // Footer
@@ -801,11 +568,9 @@
             doc.text('Report generated on: ' + new Date().toLocaleDateString(), 20, 280);
             doc.text('Wildlife Rehabilitation Center', 20, 285);
             
-            // Save the PDF
-            const filename = `Wildlife_Rehabilitation_Report_${currentReportData.caseId.replace(/[^a-zA-Z0-9-]/g, '_')}.pdf`;
+            const filename = `Wildlife_Document_Report_${currentReportData.caseId.replace(/[^a-zA-Z0-9-]/g, '_')}.pdf`;
             doc.save(filename);
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97edc1051556a9a2',t:'MTc1NzgzMDU3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97edd87a84800a88',t:'MTc1NzgzMTUzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
