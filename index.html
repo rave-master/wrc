@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WRC Login Portal</title>
+<link rel="icon" href="https://ia601205.us.archive.org/12/items/icon_20250717/icon.png" type="image/png">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+/* ORIGINAL CSS UNCHANGED */
+:root{
+  --accent1:#00b4ff;
+  --accent2:#0077b6;
+  --card-w:380px;
+}
+html,body{height:100%;margin:0;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+body{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: linear-gradient(135deg,#06283D 0%, #0E6BA8 50%, #1E90FF 100%);
+  padding:24px;
+  box-sizing:border-box;
+}
+
+.wrap{
+  display:flex;
+  gap:28px;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  width:100%;
+  max-width:1200px;
+}
+
+.card{
+  width:var(--card-w);
+  border-radius:16px;
+  padding:18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border:2px solid rgba(255,255,255,0.12);
+  box-shadow: 0 18px 40px rgba(2,6,23,0.6);
+  transition: transform .26s cubic-bezier(.2,.9,.2,1), box-shadow .26s;
+  transform-style: preserve-3d;
+  backdrop-filter: blur(6px);
+}
+
+.tilt:hover{ transform: perspective(1000px) rotateY(6deg) rotateX(2deg) translateY(-6px); box-shadow:0 30px 60px rgba(2,6,23,0.65); }
+
+.image-card img{ width:100%; height:100%; object-fit:cover; border-radius:12px; cursor:pointer; display:block; transition:transform .25s; }
+.image-card img:hover{ transform:scale(1.03); }
+
+h1{ text-align:center; color:#e6f5ff; margin:6px 0 14px; font-weight:600; letter-spacing:.2px; }
+
+.btn{
+  width:100%; margin-top:12px; padding:12px; border-radius:10px; border:none; cursor:pointer; font-weight:600;
+  transition: box-shadow .18s, transform .12s;
+}
+.btn.social{ background:rgba(255,255,255,0.9); color:#123; }
+
+.glow:hover{ box-shadow:0 0 25px rgba(0,180,255,0.18); }
+
+.spinner{ display:none; margin:14px auto 0; width:34px; height:34px; border-radius:50%; border:4px solid rgba(255,255,255,0.12); border-top-color:var(--accent1); animation: spin .9s linear infinite; }
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+.status{ text-align:center; margin-top:12px; font-weight:600; color:#eaf6ff; display:none; }
+.status.success{ color:#8dffca; animation:pop .5s ease; box-shadow:0 8px 28px rgba(141,255,202,0.12); border-radius:8px; padding:8px; display:block; }
+
+@keyframes pop{ from{ transform:scale(.9); opacity:0 } to{ transform:scale(1); opacity:1 } }
+
+@media (max-width:920px){
+  :root{ --card-w:92vw; }
+  .wrap{ gap:18px; padding:8px; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="card image-card tilt" id="imageCard" title="Click for About">
+      <img src="WRC.png" alt="WRC Logo">
+  </div>
+
+  <div class="card tilt" id="authCard">
+      <h1>Wildlife Rescue Center<br>Login Portal</h1>
+      <button class="btn social glow" id="btnGoogle">Continue with Google</button>
+      <button class="btn social glow" id="btnFacebook">Continue with Facebook</button>
+
+      <div class="spinner" id="spinnerLogin" aria-hidden="true"></div>
+      <div class="status" id="statusMsg"></div>
+  </div>
+
+</div>
+
+<!-- EXTERNAL JS FILES -->
+<script type="module" src="firebase-config.js"></script>
+<script type="module" src="auth.js"></script>
+
+</body>
+</html>
